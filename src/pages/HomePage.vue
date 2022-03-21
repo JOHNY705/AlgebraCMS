@@ -15,6 +15,6 @@
 
 .algebra-logo {
   width: 20%;
-  margin-left: min(30rem, 20%);
+  margin-left: 30rem;
 }
 </style>

@@ -3,13 +3,13 @@
     <div class="sidebar-title">Upravljanje sadržajem</div>
     <ul>
       <li>
-        <a @click.prevent="showTabletiDDL" href="#"
+        <a @click.prevent="toggleSlikeTabletiDDL" href="#"
           ><img class="fas fa-tablet-alt tablet-icon" />Slike za tablete
-          <div class="span tableti">
+          <div class="span tableti" :class="{ rotate: isSlikeTabletiDDLActive }">
             <span class="fas fa-caret-down"></span>
           </div>
         </a>
-        <ul class="slike-tableti-show">
+        <ul class="slike-tableti-show" :class="{ showTableti: isSlikeTabletiDDLActive}">
           <li>
             <a
               class="tableti-slike-ddl-item"
@@ -38,15 +38,12 @@
 </template>
 
 <script>
-import "clickout-event";
-import jQuery from "jquery";
-const $ = jQuery;
-
 export default {
   props: ["id", "classroomName"],
   data() {
     return {
       isActive: false,
+      isSlikeTabletiDDLActive: false,
     };
   },
   computed: {
@@ -55,16 +52,8 @@ export default {
     },
   },
   methods: {
-    showTabletiDDL() {
-      $(".slike-tableti-show").toggleClass("showTableti");
-      $(".tableti").toggleClass("rotate");
-      this.toggleActive();
-    },
-    toggleActive() {
-      $("nav ul li").click(function () {
-        $(this).addClass("active").siblings().removeClass("active");
-        $("nav ul li ul li").removeClass("active");
-      });
+    toggleSlikeTabletiDDL() {
+      this.isSlikeTabletiDDLActive = !this.isSlikeTabletiDDLActive;
     },
     toggleSlikeTabletiMenu() {
       this.isActive = !this.isActive;
@@ -86,8 +75,7 @@ export default {
 
 .sidebar {
   position: fixed;
-  width: 20%;
-  min-width: 30rem;
+  width: 30rem;
   height: 100%;
   left: 0;
   background: rgb(29, 32, 41);
@@ -95,7 +83,7 @@ export default {
 }
 
 .sidebar-title {
-  margin-top: 28%;
+  margin-top: 9rem;
   padding: 1.5rem 0rem;
   color: white;
   font-weight: 400;
@@ -202,9 +190,8 @@ nav ul li a .span.rotate {
   z-index: 98;
   left: 100%;
   height: 100%;
-  min-width: 30rem;
-  width: 100%;
-  padding-top: 28%;
+  width: 30rem;
+  padding-top: 9rem;
   background: rgb(40, 45, 59);
   overflow-y: auto;
   transition: 0.5s;
