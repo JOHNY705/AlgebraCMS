@@ -338,12 +338,13 @@ export default {
 
 .container {
   height: 100%;
-  margin-left: 30rem;
+  margin-left: max(30rem, 20%);
   display: flex;
   justify-content: center;
   background: rgb(223, 224, 231);
   padding: 2rem;
   padding-top: 10rem;
+  padding-top: max(10rem, 6%);
 }
 
 .content-container {
