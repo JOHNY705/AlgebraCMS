@@ -44,11 +44,9 @@ export default {
   },
   methods: {
     menuToggle() {
-      //document.querySelector('.user-menu').classList.toggle('active');
       this.showUserMenu = !this.showUserMenu;
     },
     closeUserMenu() {
-      //document.querySelector('.user-menu').classList.remove('active');
       this.showUserMenu = false;
     },
   },
@@ -58,7 +56,8 @@ export default {
 <style scoped>
 header {
   width: 100%;
-  height: 8rem;
+  height: 10%;
+  min-height: 8rem;
   z-index: 100;
   background-color: black;
   position: fixed;
@@ -71,7 +70,8 @@ header a {
   text-decoration: none;
   color: white;
   display: inline-block;
-  width: 30rem;
+  min-width: 30rem;
+  width: 20%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -79,7 +79,8 @@ header a {
 
 header nav {
   width: 100%;
-  height: 8rem;
+  min-height: 8rem;
+  height: 100%;
   margin: auto;
   display: flex;
   justify-content: space-between;
@@ -88,7 +89,7 @@ header nav {
 
 .algebra-logo {
   margin: 0;
-  height: 5.5rem;
+  width: 55%;
 }
 
 .action {
@@ -135,7 +136,7 @@ header nav {
 
 .action .user-menu {
   position: absolute;
-  top: 8rem;
+  top: 100%;
   right: -30rem;
   background: rgb(40, 45, 59);
   width: 30rem;
@@ -145,7 +146,7 @@ header nav {
 }
 
 .user-menu.active {
-  top: 8rem;
+  top: 100%;
   right: 0;
   visibility: visible;
   opacity: 0.99;

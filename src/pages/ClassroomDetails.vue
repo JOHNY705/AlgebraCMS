@@ -247,7 +247,7 @@
               :style="{ 'background-image': `url(${previewImage})` }"
             ></div>
             <button class="add-image-btn">
-              <img class="fas fa-plus-square" />Dodaj sliku
+              <img class="fa-solid fa-circle-plus" />Dodaj sliku
             </button>
           </div>
         </div>
@@ -509,7 +509,7 @@ ul li {
   transform: scale(1.05);
 }
 
-.fa-plus-square {
+.fa-circle-plus {
   margin-right: 0.6rem;
 }
 
