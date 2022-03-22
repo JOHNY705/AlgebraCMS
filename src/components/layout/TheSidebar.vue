@@ -82,15 +82,17 @@ export default {
 
 .sidebar {
   position: fixed;
-  width: 30rem;
-  height: 100%;
+  min-width: 30rem;
+  width: 19.5%;
+  height: 90%;
   left: 0;
+  bottom: 0;
   background: rgb(29, 32, 41);
   z-index: 99;
 }
 
 .sidebar-title {
-  margin-top: 9rem;
+  margin-top: 5%;
   padding: 1.5rem 0rem;
   color: white;
   font-weight: 400;
@@ -197,8 +199,9 @@ nav ul li a .span.rotate {
   z-index: 98;
   left: 100%;
   height: 100%;
-  width: 30rem;
-  padding-top: 9rem;
+  min-width: 30rem;
+  width: 100%;
+  padding-top: 5%;
   background: rgb(40, 45, 59);
   overflow-y: auto;
   transition: 0.5s;

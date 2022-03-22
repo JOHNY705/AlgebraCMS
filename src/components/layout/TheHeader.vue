@@ -56,7 +56,8 @@ export default {
 <style scoped>
 header {
   width: 100%;
-  height: 8rem;
+  min-height: 8rem;
+  height: 10%;
   z-index: 100;
   background-color: black;
   position: fixed;
@@ -69,7 +70,8 @@ header a {
   text-decoration: none;
   color: white;
   display: inline-block;
-  width: 30rem;
+  min-width: 30rem;
+  width: 19.5%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -87,7 +89,9 @@ header nav {
 
 .algebra-logo {
   margin: 0;
-  height: 5.5rem;
+  /* height: 5.5rem; */
+  width: 60%;
+  max-width: 21rem;
 }
 
 .action {

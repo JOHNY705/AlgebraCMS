@@ -345,20 +345,24 @@ export default {
 }
 
 .page-container {
-  height: 100vh;
+  height: 90vh;
+  width: 100vw;
+  position: absolute;
+  bottom: 0;
 }
 
 .container {
   height: 100%;
-  margin-left: 30rem;
+  /* margin-left: 19.5%; */
+  margin-left: max(30rem, 19.5%);
   display: flex;
   justify-content: center;
   background: rgb(223, 224, 231);
   padding: 2rem;
-  padding-top: 10rem;
 }
 
 .content-container {
+  /* margin-top: max(8rem, 7%); */
   padding: 0.6rem;
   display: flex;
   align-items: center;
