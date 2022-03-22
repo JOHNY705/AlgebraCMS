@@ -1,15 +1,22 @@
 <template>
   <nav class="sidebar">
-    <div class="sidebar-title">Upravljanje sadržajem</div>
+    <div class="sidebar-title">{{ $t("sidebarTitle") }}</div>
     <ul>
       <li>
-        <a @click.prevent="toggleSlikeTabletiDDL" href="#"
-          ><img class="fas fa-tablet-alt tablet-icon" />Slike za tablete
-          <div class="span tableti" :class="{ rotate: isSlikeTabletiDDLActive }">
+        <a @click.prevent="toggleSlikeTabletiDDL" href="#">
+          <img class="fas fa-tablet-alt tablet-icon" />
+          {{ $t("contentForTablets") }}
+          <div
+            class="span tableti"
+            :class="{ rotate: isSlikeTabletiDDLActive }"
+          >
             <span class="fas fa-caret-down"></span>
           </div>
         </a>
-        <ul class="slike-tableti-show" :class="{ showTableti: isSlikeTabletiDDLActive}">
+        <ul
+          class="slike-tableti-show"
+          :class="{ showTableti: isSlikeTabletiDDLActive }"
+        >
           <li>
             <a
               class="tableti-slike-ddl-item"
@@ -26,14 +33,14 @@
     <div class="slike-tableti-menu" :class="{ active: isActive }">
       <ul class="slike-tableti-menu-ul">
         <li v-for="classroom in classrooms" :key="classroom.id">
-          <router-link :to="'/Media/Classroom/' + classroom.id">{{
-            classroom.classroomName
-          }}</router-link>
+          <router-link :to="'/Media/Classroom/' + classroom.id">
+            {{ classroom.classroomName }}
+          </router-link>
         </li>
       </ul>
     </div>
     <div class="dev-info">Algebra Dev Team&copy; 2022</div>
-    <div class="app-info">Verzija 0.1.0</div>
+    <div class="app-info">{{ $t("version") }} 0.1.0</div>
   </nav>
 </template>
 

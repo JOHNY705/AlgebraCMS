@@ -12,16 +12,18 @@ import { dom } from "@fortawesome/fontawesome-svg-core";
 
 import axios from 'axios';
 import VueAxios from 'vue-axios';
+import i18n from './i18n'
 
 library.add(fas);
 library.add(far);
 dom.watch();
 
-const app = createApp(App)
+const app = createApp(App);
 
 app.use(router);
 app.use(store);
 app.use(VueAxios, axios);
+app.use(i18n);
 app.component('font-awesome-icon', FontAwesomeIcon);
 
 app.mount('#app');

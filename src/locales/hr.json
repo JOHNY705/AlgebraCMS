@@ -1,0 +1,18 @@
+{
+  "logout": "Odjava",
+  "sidebarTitle": "Upravljanje sadržajem",
+  "contentForTablets": "Slike za tablete",
+  "selectedClassroom": "Odabrana učiona:",
+  "currentImagesOnTablet": "Trenutne slike koje se prikazuju na tabletu:",
+  "pictureName": "Naziv slike",
+  "changeDate": "Datum izmjene",
+  "addingNewImages": "Dodavanje novih slika:",
+  "tooltipAddingNewImage": "Slika treba biti rezolucije 800x1240!",
+  "chooseImage": "Odabir slike",
+  "addImage": "Dodaj sliku",
+  "version": "Verzija",
+  "deleteImage": "Brisanje slike",
+  "confirmDeleteImage": "Jeste li sigurni da želite izbrisati sliku?",
+  "confirm": "Potvrdi",
+  "cancel": "Odustani"
+}

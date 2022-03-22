@@ -3,21 +3,25 @@
     <div class="container">
       <div class="content-container">
         <div class="titles-container">
-          <h2 class="classroom-title">Odabrana učiona: Nikola Tesla</h2>
+          <h2 class="classroom-title">
+            {{ $t("selectedClassroom") }} Nikola Tesla
+          </h2>
           <h2 class="classroom-location-title">Zagreb, Gradišćanska</h2>
         </div>
         <div class="title-images-separator"></div>
         <div class="images-and-upload-container">
           <div class="images-container">
             <h3 class="images-title">
-              Trenutne slike koje se prikazuju na tabletu:
+              {{ $t("currentImagesOnTablet") }}
             </h3>
             <div class="images-table">
               <div class="images-header">
                 <div class="image-header-number"></div>
                 <div class="image-header-image"></div>
-                <h2 class="image-header-image-title">Naziv slike</h2>
-                <h2 class="image-header-image-date">Datum izmjene</h2>
+                <h2 class="image-header-image-title">
+                  {{ $t("pictureName") }}
+                </h2>
+                <h2 class="image-header-image-date">{{ $t("changeDate") }}</h2>
                 <div class="image-header-image-delete"></div>
               </div>
               <div class="image-cards">
@@ -227,10 +231,14 @@
           <div class="image-upload-container">
             <div class="image-upload-tooltip-label">
               <div class="tooltip-container">
-                <img class="fas fa-exclamation-circle tooltip">
-                <span class="tooltiptext">Slika treba biti rezolucije 800x1240!</span>
+                <img class="fas fa-exclamation-circle tooltip" />
+                <span class="tooltiptext">
+                  {{ $t("tooltipAddingNewImage") }}
+                </span>
               </div>
-              <label class="odabir-slike-lbl">Dodavanje novih slika:</label>
+              <label class="odabir-slike-lbl">
+                {{ $t("addingNewImages") }}
+              </label>
             </div>
             <label class="image-upload"
               ><input
@@ -239,7 +247,7 @@
                 type="file"
                 accept="image/*"
                 @input="pickFile"
-              /><img class="fas fa-image" />Odabir slike</label
+              /><img class="fas fa-image" />{{ $t("chooseImage") }}</label
             >
             <div
               id="image-preview"
@@ -247,7 +255,7 @@
               :style="{ 'background-image': `url(${previewImage})` }"
             ></div>
             <button class="add-image-btn">
-              <img class="fa-solid fa-circle-plus" />Dodaj sliku
+              <img class="fa-solid fa-circle-plus" />{{ $t("addImage") }}
             </button>
           </div>
         </div>
@@ -255,22 +263,26 @@
       <DeleteDialog v-show="isDeleteDialogShown" @close="closeDeleteDialog()">
         <template v-slot:footer>
           <button class="confirm-delete-btn" @click.prevent="closeDeleteDialog">
-            Potvrdi</button
-          ><button class="cancel-delete-btn" @click.prevent="closeDeleteDialog">
-            Odustani
-          </button></template
-        >
+            {{ $t("confirm") }}
+          </button>
+          <button class="cancel-delete-btn" @click.prevent="closeDeleteDialog">
+            {{ $t("cancel") }}
+          </button>
+        </template>
       </DeleteDialog>
     </div>
   </div>
 </template>
 
 <script>
-import DeleteDialog from '../components/ui/DeleteDialog.vue';
+import DeleteDialog from "../components/ui/DeleteDialog.vue";
 
-window.addEventListener('resize', function () {
-  var imageImagePreview = document.getElementById('image-preview');
-  imageImagePreview.style.height = imageImagePreview.offsetWidth * 1.55 + 'px';
+window.addEventListener("resize", function () {
+  var imageImagePreview = document.getElementById("image-preview");
+  if (imageImagePreview !== null) {
+    imageImagePreview.style.height =
+      imageImagePreview.offsetWidth * 1.55 + "px";
+  }
 });
 
 export default {
@@ -304,7 +316,7 @@ export default {
           this.previewImage = e.target.result;
         };
         reader.readAsDataURL(file[0]);
-        this.$emit('input', file[0]);
+        this.$emit("input", file[0]);
       }
     },
     showDeleteModal(id) {
@@ -320,9 +332,9 @@ export default {
     },
   },
   mounted() {
-    var imageImagePreview = document.getElementById('image-preview');
+    var imageImagePreview = document.getElementById("image-preview");
     imageImagePreview.style.height =
-      imageImagePreview.offsetWidth * 1.55 + 'px';
+      imageImagePreview.offsetWidth * 1.55 + "px";
   },
 };
 </script>
@@ -490,7 +502,7 @@ ul li {
 }
 
 .add-image-btn {
-  font-family: 'Stolzl-Book';
+  font-family: "Stolzl-Book";
   font-size: 1.6rem;
   color: white;
   width: 77.61%;
@@ -552,7 +564,7 @@ ul li {
   color: rgb(104, 101, 101);
 }
 
-input[type='file'] {
+input[type="file"] {
   display: none;
 }
 
@@ -717,7 +729,7 @@ input[type='file'] {
 .tooltiptext {
   visibility: hidden;
   background: black;
-  width: 30rem;
+  width: 29rem;
   height: auto;
   padding-bottom: 0.5rem;
   padding-top: 0.5rem;
@@ -727,10 +739,13 @@ input[type='file'] {
   font-size: 1.3rem;
   text-align: center;
   position: absolute;
+  transition: 0.2s ease-in-out;
+  opacity: 0;
 }
 
 .tooltip-container:hover .tooltiptext {
   visibility: visible;
+  opacity: 1;
 }
 
 .image-upload-tooltip-label {

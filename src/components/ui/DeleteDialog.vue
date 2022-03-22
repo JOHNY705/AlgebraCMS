@@ -9,9 +9,9 @@
             </div>
           </header>
           <section class="modal-body">
-            <h2 class="body-title">Brisanje slike</h2>
+            <h2 class="body-title">{{ $t("deleteImage") }}</h2>
             <h3 class="body-description">
-              Jeste li sigurni da želite izbrisati sliku?
+              {{ $t("confirmDeleteImage") }}
             </h3>
           </section>
           <footer class="modal-footer">
@@ -34,7 +34,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .modal-backdrop {
   position: fixed;
   z-index: 9998;
@@ -56,7 +56,7 @@ export default {
   display: flex;
   flex-direction: column;
   width: 45rem;
-  height: 27rem;
+  height: 30rem;
   margin: 0rem auto;
   padding: 3rem 2rem;
   background-color: #fff;

@@ -1,9 +1,9 @@
 <template>
   <header>
     <nav>
-      <router-link to="/"
-        ><img class="algebra-logo" src="@/assets/Algebra_logo.png"
-      /></router-link>
+      <router-link to="/">
+        <img class="algebra-logo" src="@/assets/Algebra_logo.png" />
+      </router-link>
       <div @clickout="closeUserMenu" class="action">
         <div class="profile" @click="menuToggle">
           <img class="fas fa-user user-icon" />
@@ -22,8 +22,8 @@
               >
             </li> -->
             <li>
-              <a href="#"
-                ><img class="fas fa-sign-out-alt menu-logout-icon" />Odjava
+              <a href="#">
+                <img class="fas fa-sign-out-alt menu-logout-icon" />{{ $t("logout") }}
               </a>
             </li>
           </ul>
@@ -34,13 +34,13 @@
 </template>
 
 <script>
-import 'clickout-event';
+import "clickout-event";
 
 export default {
   data() {
     return {
       showUserMenu: false,
-    }
+    };
   },
   methods: {
     menuToggle() {

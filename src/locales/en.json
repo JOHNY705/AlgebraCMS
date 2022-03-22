@@ -1,0 +1,18 @@
+{
+  "logout": "Log out",
+  "sidebarTitle": "Content management",
+  "contentForTablets": "Images for tablets",
+  "selectedClassroom": "Selected classroom:",
+  "currentImagesOnTablet": "Images that are currently shown on tablet:",
+  "pictureName": "Picture name",
+  "changeDate": "Change date",
+  "addingNewImages": "Adding new images:",
+  "tooltipAddingNewImage": "Image should be of resolution 800x1240!",
+  "chooseImage": "Choose image",
+  "addImage": "Add image",
+  "version": "Version",
+  "deleteImage": "Delete image",
+  "confirmDeleteImage": "Are you sure you want to delete the image?",
+  "confirm": "Confirm",
+  "cancel": "Cancel"
+}
