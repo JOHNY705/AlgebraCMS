@@ -1,6 +1,6 @@
 <template>
-  <the-header></the-header>
-  <the-sidebar></the-sidebar>
+  <the-header v-if="$route.meta.header === 1"></the-header>
+  <the-sidebar v-if="$route.meta.sidebar === 1"></the-sidebar>
   <router-view v-slot="slotProps">
     <transition name="route" mode="out-in">
       <component :is="slotProps.Component"></component>
