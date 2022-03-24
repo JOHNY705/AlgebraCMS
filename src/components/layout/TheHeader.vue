@@ -11,16 +11,6 @@
         </div>
         <div class="user-menu" :class="{ active: showUserMenu }">
           <ul>
-            <!-- <li>
-              <a href="#"
-                ><img class="fas fa-user-circle menu-user-icon" />Profil</a
-              >
-            </li>
-            <li>
-              <a href="#"
-                ><img class="fas fa-cog menu-settings-icon" />Postavke</a
-              >
-            </li> -->
             <li>
               <a href="#">
                 <img class="fas fa-sign-out-alt menu-logout-icon" />{{ $t("logout") }}
@@ -89,7 +79,6 @@ header nav {
 
 .algebra-logo {
   margin: 0;
-  /* height: 5.5rem; */
   width: 60%;
   max-width: 21rem;
 }
@@ -164,16 +153,6 @@ header nav {
   list-style: none;
 }
 
-.action .user-menu ul li:hover .menu-user-icon {
-  opacity: 1;
-  color: white;
-}
-
-.action .user-menu ul li:hover .menu-settings-icon {
-  opacity: 1;
-  color: white;
-}
-
 .action .user-menu ul li:hover .menu-logout-icon {
   opacity: 1;
   color: white;
@@ -204,32 +183,6 @@ header nav {
   color: white;
 }
 
-.close {
-  width: 100%;
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: center;
-}
-
-.close-icon {
-  color: white;
-  width: 2.3rem;
-  height: 2.3rem;
-  margin-top: 0.5rem;
-  margin-right: 0.5rem;
-  transition: 0.3s;
-  opacity: 0.8;
-}
-
-.close-icon:hover {
-  cursor: pointer;
-  background: red;
-  border-radius: 0.4rem;
-  opacity: 1;
-}
-
-.menu-user-icon,
-.menu-settings-icon,
 .menu-logout-icon {
   border-radius: 50%;
   width: 2.5rem;

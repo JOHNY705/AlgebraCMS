@@ -6,11 +6,11 @@ import ClassroomDetails from "./pages/ClassroomDetails.vue";
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    { path: "/", component: HomePage, meta: {header: 1, sidebar: 1} },
+    { path: "/", component: HomePage, meta: { componentsEnabled: true } },
     {
       path: "/Media/Classroom/:id",
       component: ClassroomDetails,
-      meta: { header: 1, sidebar: 1 },
+      meta: { componentsEnabled: true },
     },
   ],
   linkActiveClass: "active",

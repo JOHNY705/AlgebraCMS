@@ -6,17 +6,11 @@
         <a @click.prevent="toggleSlikeTabletiDDL" href="#">
           <img class="fas fa-tablet-alt tablet-icon" />
           {{ $t("contentForTablets") }}
-          <div
-            class="span tableti"
-            :class="{ rotate: isSlikeTabletiDDLActive }"
-          >
+          <div class="span tableti" :class="{ rotate: isSlikeTabletiDDLActive }">
             <span class="fas fa-caret-down"></span>
           </div>
         </a>
-        <ul
-          class="slike-tableti-show"
-          :class="{ showTableti: isSlikeTabletiDDLActive }"
-        >
+        <ul class="slike-tableti-show" :class="{ showTableti: isSlikeTabletiDDLActive }">
           <li>
             <a
               class="tableti-slike-ddl-item"
