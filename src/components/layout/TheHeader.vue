@@ -32,6 +32,9 @@ export default {
       showUserMenu: false,
     };
   },
+  created() {
+    this.loadLocations();
+  },
   methods: {
     menuToggle() {
       this.showUserMenu = !this.showUserMenu;
@@ -39,6 +42,13 @@ export default {
     closeUserMenu() {
       this.showUserMenu = false;
     },
+    async loadLocations() {
+      try {
+        await this.$store.dispatch('locations/loadLocations');
+      } catch (error) {
+        console.log(error);
+      }
+    }
   },
 };
 </script>

@@ -21,7 +21,7 @@ export default {
         },
         {
           id: '4',
-          classroomName: 'Faust Vrančić',
+          classroomName: 'Lecture room A7 Ivan Lupis',
         },
         {
           id: '5',
