@@ -6,29 +6,42 @@
         <a @click.prevent="toggleSlikeTabletiDDL" href="#">
           <img class="fas fa-tablet-alt tablet-icon" />
           {{ $t("contentForTablets") }}
-          <div class="span tableti" :class="{ rotate: isSlikeTabletiDDLActive }">
+          <div
+            class="span tableti"
+            :class="{ rotate: isSlikeTabletiDDLActive }"
+          >
             <span class="fas fa-caret-down"></span>
           </div>
         </a>
-        <ul class="slike-tableti-show" :class="{ showTableti: isSlikeTabletiDDLActive }">
-          <li>
+        <ul
+          class="slike-tableti-show"
+          :class="{ showTableti: isSlikeTabletiDDLActive }"
+        >
+          <li v-for="location in locations" :key="location.id">
             <a
               class="tableti-slike-ddl-item"
-              :class="{ active: isActive }"
+              :class="{ active: location.isActive }"
               href="#"
               @clickout="closeSlikeTabletiMenu"
-              @click.prevent="toggleSlikeTabletiMenu"
-              >Zagreb, Gradišćanska
+              @click.prevent="toggleSlikeTabletiMenu(location.id)"
+              >{{ location.city + ", " + location.name }}
             </a>
           </li>
         </ul>
       </li>
     </ul>
-    <div class="slike-tableti-menu" :class="{ active: isActive }">
+    <div
+      v-for="location in locations"
+      :key="location.id"
+      class="slike-tableti-menu"
+      :class="{ active: location.isActive }"
+    >
       <ul class="slike-tableti-menu-ul">
-        <li v-for="classroom in classrooms" :key="classroom.id">
-          <router-link :to="'/Media/Classroom/' + classroom.id">
-            {{ classroom.classroomName }}
+        <li v-for="classroom in location.classrooms" :key="classroom.id">
+          <router-link
+            :to="'/Media/' + location.id + '/Classroom/' + classroom.id"
+          >
+            {{ classroom.name }}
           </router-link>
         </li>
       </ul>
@@ -39,29 +52,46 @@
 </template>
 
 <script>
+
 export default {
-  props: ["id", "classroomName"],
   data() {
     return {
-      isActive: false,
       isSlikeTabletiDDLActive: false,
     };
   },
   computed: {
-    classrooms() {
-      return this.$store.getters["classrooms/classrooms"];
+    locations() {
+      return this.$store.getters["locations/locations"];
     },
   },
   methods: {
     toggleSlikeTabletiDDL() {
       this.isSlikeTabletiDDLActive = !this.isSlikeTabletiDDLActive;
     },
-    toggleSlikeTabletiMenu() {
-      this.isActive = !this.isActive;
+    toggleSlikeTabletiMenu(id) {
+      this.locations.forEach((location) => {
+        if (location.id !== id) {
+          location.isActive = false;
+        }
+      });
+      this.locations.find((location) => location.id === id).isActive =
+        !this.locations.find((location) => location.id === id).isActive;
     },
     closeSlikeTabletiMenu() {
-      this.isActive = false;
+      this.locations.forEach((location) => {
+        location.isActive = false;
+      });
     },
+    async loadLocations() {
+      try {
+        await this.$store.dispatch("locations/loadLocations");
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  },
+  created() {
+    this.loadLocations();
   },
 };
 </script>

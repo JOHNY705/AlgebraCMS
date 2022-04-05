@@ -8,7 +8,7 @@ const router = createRouter({
   routes: [
     { path: "/", component: HomePage, meta: { componentsEnabled: true } },
     {
-      path: "/Media/Classroom/:id",
+      path: "/Media/:locationID/Classroom/:classroomID",
       component: ClassroomDetails,
       meta: { componentsEnabled: true },
     },

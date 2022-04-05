@@ -4,9 +4,9 @@
       <div class="content-container">
         <div class="titles-container">
           <h2 class="classroom-title">
-            {{ $t("selectedClassroom") }} Nikola Tesla
+            {{ $t("selectedClassroom") }} {{ selectedClassroom }}
           </h2>
-          <h2 class="classroom-location-title">Zagreb, Gradišćanska</h2>
+          <h2 class="classroom-location-title">{{ selectedCityAndAddress }}</h2>
         </div>
         <div class="title-images-separator"></div>
         <div class="images-and-upload-container">
@@ -286,24 +286,48 @@ window.addEventListener("resize", function () {
 });
 
 export default {
-  data: function () {
-    {
-      return {
-        previewImage: null,
-        isModalShown: false,
-        isDeleteDialogShown: false,
-        selectedImageId: null,
-        currentPage: 1,
-        total: 100,
-        perPage: 5,
-        data: [],
-      };
-    }
+  data() { 
+    return {
+      previewImage: null,
+      isModalShown: false,
+      isDeleteDialogShown: false,
+      selectedImageId: null,
+    };
+  },
+  computed: {
+    locations() {
+      return this.$store.getters["locations/locations"];
+    },
+    selectedClassroomID() {
+      return parseInt(this.$route.params.classroomID);
+    },
+    selectedLocationID() {
+      return parseInt(this.$route.params.locationID);
+    },
+    selectedLocation() {
+      return this.locations.find(l => l.id === this.selectedLocationID);
+    },
+    selectedClassroom() {
+      return this.selectedLocation.classrooms.find(c => c.id === this.selectedClassroomID).name;
+    },  
+    selectedCityAndAddress() {
+      return this.selectedLocation.city + ', ' + this.selectedLocation.name;
+    }  
+  },
+  created() {
+    this.loadPicturesForClassroom()
   },
   components: {
     DeleteDialog,
   },
   methods: {
+    async loadPicturesForClassroom() {
+      try {
+        await this.$store.dispatch('pictures/loadPictures');
+      } catch (error) {
+        console.log(error);
+      }
+    },
     selectImage() {
       this.$refs.fileInput.click();
     },
@@ -353,7 +377,6 @@ export default {
 
 .container {
   height: 100%;
-  /* margin-left: 19.5%; */
   margin-left: max(30rem, 19.5%);
   display: flex;
   justify-content: center;
@@ -362,7 +385,6 @@ export default {
 }
 
 .content-container {
-  /* margin-top: max(8rem, 7%); */
   padding: 0.6rem;
   display: flex;
   align-items: center;
@@ -460,8 +482,6 @@ ul li {
 }
 
 .tablet-image {
-  /* width: 4.53rem;
-  height: 7rem; */
   width: 5.1rem;
   height: 7.9rem;
   object-fit: contain;

@@ -1,13 +1,13 @@
-import { createStore } from 'vuex';
+import { createStore } from "vuex";
 
-import classroomsModule from './modules/classrooms/index.js';
-import locationsModule from './modules/locations/index.js';
+import locationsModule from "./modules/locations/index.js";
+import picturesModule from "./modules/pictures/index.js";
 
 const store = createStore({
-    modules: {
-        classrooms: classroomsModule,
-        locations: locationsModule
-    }
+  modules: {
+    pictures: picturesModule,
+    locations: locationsModule
+  },
 });
 
 export default store;

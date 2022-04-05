@@ -1,5 +1,5 @@
 export default {
     locations(state) {
-        return state.classrooms;
+        return state.locations;
     }
 }
