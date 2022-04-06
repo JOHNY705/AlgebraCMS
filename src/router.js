@@ -10,7 +10,7 @@ const router = createRouter({
     {
       path: "/Media/:locationID/Classroom/:classroomID",
       component: ClassroomDetails,
-      meta: { componentsEnabled: true },
+      meta: { componentsEnabled: true }
     },
   ],
   linkActiveClass: "active",

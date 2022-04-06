@@ -1,17 +1,24 @@
 import axios from "axios";
 
-const picturesBaseUrl = "https://cmsapi.algebra.hr:50073/api/pictures/4595";
+const picturesBaseUrl = "https://cmsapi.algebra.hr:50073/api/pictures";
 
 export default {
-  async loadPictures(context) {
+  async loadPictures(context, payload) {
 
     const pictures = [];
 
-    axios
-      .get(picturesBaseUrl)
-      .then((response) => console.log(response.data))
+    const fullURL = payload.classroomID === 0 ? picturesBaseUrl + '/shared' : picturesBaseUrl + `/${payload.classroomID}`;
+
+    await axios
+      .get(fullURL)
+      .then((response) => {
+        if (response.data.isSuccessful) {
+          pictures.push(...response.data.pictures);
+          console.log(pictures);
+        }
+      })
       .catch((error) => console.log(error));
 
-  context.commit('setPictures', pictures);
+    context.commit("setPictures", pictures);
   },
 };

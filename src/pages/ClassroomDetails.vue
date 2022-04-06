@@ -1,5 +1,5 @@
 <template>
-  <div class="page-container">
+  <div class="page-container" v-if="!isLoading">
     <div class="container">
       <div class="content-container">
         <div class="titles-container">
@@ -27,186 +27,6 @@
               <div class="image-cards">
                 <div class="image-card">
                   <div class="image-card-number">1</div>
-                  <div class="image-card-image">
-                    <img
-                      class="tablet-image"
-                      src="@/assets/NikolaTesla-2-01.jpg"
-                    />
-                  </div>
-                  <div class="image-card-image-title">Nikola_Tesla.jpg</div>
-                  <div class="image-card-image-date">28.12.2021. 12:00:00</div>
-                  <div class="image-card-image-delete">
-                    <a
-                      href="#"
-                      class="delete-image-btn"
-                      @click.prevent="showDeleteDialog(12)"
-                    >
-                      <img class="far fa-trash-alt delete-icon" />
-                    </a>
-                  </div>
-                </div>
-                <div class="image-card">
-                  <div class="image-card-number">2</div>
-                  <div class="image-card-image">
-                    <img
-                      class="tablet-image"
-                      src="@/assets/NikolaTesla-2-01.jpg"
-                    />
-                  </div>
-                  <div class="image-card-image-title">Nikola_Tesla.jpg</div>
-                  <div class="image-card-image-date">28.12.2021. 12:00:00</div>
-                  <div class="image-card-image-delete">
-                    <a
-                      href="#"
-                      class="delete-image-btn"
-                      @click.prevent="showDeleteDialog(12)"
-                    >
-                      <img class="far fa-trash-alt delete-icon" />
-                    </a>
-                  </div>
-                </div>
-                <div class="image-card">
-                  <div class="image-card-number">3</div>
-                  <div class="image-card-image">
-                    <img
-                      class="tablet-image"
-                      src="@/assets/NikolaTesla-2-01.jpg"
-                    />
-                  </div>
-                  <div class="image-card-image-title">Nikola_Tesla.jpg</div>
-                  <div class="image-card-image-date">28.12.2021. 12:00:00</div>
-                  <div class="image-card-image-delete">
-                    <a
-                      href="#"
-                      class="delete-image-btn"
-                      @click.prevent="showDeleteDialog(12)"
-                    >
-                      <img class="far fa-trash-alt delete-icon" />
-                    </a>
-                  </div>
-                </div>
-                <div class="image-card">
-                  <div class="image-card-number">4</div>
-                  <div class="image-card-image">
-                    <img
-                      class="tablet-image"
-                      src="@/assets/NikolaTesla-2-01.jpg"
-                    />
-                  </div>
-                  <div class="image-card-image-title">Nikola_Tesla.jpg</div>
-                  <div class="image-card-image-date">28.12.2021. 12:00:00</div>
-                  <div class="image-card-image-delete">
-                    <a
-                      href="#"
-                      class="delete-image-btn"
-                      @click.prevent="showDeleteDialog(12)"
-                    >
-                      <img class="far fa-trash-alt delete-icon" />
-                    </a>
-                  </div>
-                </div>
-                <div class="image-card">
-                  <div class="image-card-number">5</div>
-                  <div class="image-card-image">
-                    <img
-                      class="tablet-image"
-                      src="@/assets/NikolaTesla-2-01.jpg"
-                    />
-                  </div>
-                  <div class="image-card-image-title">Nikola_Tesla.jpg</div>
-                  <div class="image-card-image-date">28.12.2021. 12:00:00</div>
-                  <div class="image-card-image-delete">
-                    <a
-                      href="#"
-                      class="delete-image-btn"
-                      @click.prevent="showDeleteDialog(12)"
-                    >
-                      <img class="far fa-trash-alt delete-icon" />
-                    </a>
-                  </div>
-                </div>
-                <div class="image-card">
-                  <div class="image-card-number">6</div>
-                  <div class="image-card-image">
-                    <img
-                      class="tablet-image"
-                      src="@/assets/NikolaTesla-2-01.jpg"
-                    />
-                  </div>
-                  <div class="image-card-image-title">Nikola_Tesla.jpg</div>
-                  <div class="image-card-image-date">28.12.2021. 12:00:00</div>
-                  <div class="image-card-image-delete">
-                    <a
-                      href="#"
-                      class="delete-image-btn"
-                      @click.prevent="showDeleteDialog(12)"
-                    >
-                      <img class="far fa-trash-alt delete-icon" />
-                    </a>
-                  </div>
-                </div>
-                <div class="image-card">
-                  <div class="image-card-number">7</div>
-                  <div class="image-card-image">
-                    <img
-                      class="tablet-image"
-                      src="@/assets/NikolaTesla-2-01.jpg"
-                    />
-                  </div>
-                  <div class="image-card-image-title">Nikola_Tesla.jpg</div>
-                  <div class="image-card-image-date">28.12.2021. 12:00:00</div>
-                  <div class="image-card-image-delete">
-                    <a
-                      href="#"
-                      class="delete-image-btn"
-                      @click.prevent="showDeleteDialog(12)"
-                    >
-                      <img class="far fa-trash-alt delete-icon" />
-                    </a>
-                  </div>
-                </div>
-                <div class="image-card">
-                  <div class="image-card-number">8</div>
-                  <div class="image-card-image">
-                    <img
-                      class="tablet-image"
-                      src="@/assets/NikolaTesla-2-01.jpg"
-                    />
-                  </div>
-                  <div class="image-card-image-title">Nikola_Tesla.jpg</div>
-                  <div class="image-card-image-date">28.12.2021. 12:00:00</div>
-                  <div class="image-card-image-delete">
-                    <a
-                      href="#"
-                      class="delete-image-btn"
-                      @click.prevent="showDeleteDialog(12)"
-                    >
-                      <img class="far fa-trash-alt delete-icon" />
-                    </a>
-                  </div>
-                </div>
-                <div class="image-card">
-                  <div class="image-card-number">9</div>
-                  <div class="image-card-image">
-                    <img
-                      class="tablet-image"
-                      src="@/assets/NikolaTesla-2-01.jpg"
-                    />
-                  </div>
-                  <div class="image-card-image-title">Nikola_Tesla.jpg</div>
-                  <div class="image-card-image-date">28.12.2021. 12:00:00</div>
-                  <div class="image-card-image-delete">
-                    <a
-                      href="#"
-                      class="delete-image-btn"
-                      @click.prevent="showDeleteDialog(12)"
-                    >
-                      <img class="far fa-trash-alt delete-icon" />
-                    </a>
-                  </div>
-                </div>
-                <div class="image-card">
-                  <div class="image-card-number">10</div>
                   <div class="image-card-image">
                     <img
                       class="tablet-image"
@@ -277,21 +97,22 @@
 <script>
 import DeleteDialog from "../components/ui/DeleteDialog.vue";
 
-window.addEventListener("resize", function () {
-  var imageImagePreview = document.getElementById("image-preview");
-  if (imageImagePreview !== null) {
-    imageImagePreview.style.height =
-      imageImagePreview.offsetWidth * 1.55 + "px";
-  }
-});
+// window.addEventListener("resize", function () {
+//   var imageImagePreview = document.getElementById("image-preview");
+//   if (imageImagePreview !== null) {
+//     imageImagePreview.style.height =
+//       imageImagePreview.offsetWidth * 1.55 + "px";
+//   }
+// });
 
 export default {
-  data() { 
+  data() {
     return {
       previewImage: null,
       isModalShown: false,
       isDeleteDialogShown: false,
       selectedImageId: null,
+      loading: false,
     };
   },
   computed: {
@@ -305,28 +126,47 @@ export default {
       return parseInt(this.$route.params.locationID);
     },
     selectedLocation() {
-      return this.locations.find(l => l.id === this.selectedLocationID);
+      return this.locations.find((l) => l.id === this.selectedLocationID);
     },
     selectedClassroom() {
-      return this.selectedLocation.classrooms.find(c => c.id === this.selectedClassroomID).name;
-    },  
+      return this.selectedLocation.classrooms.find(
+        (c) => c.id === this.selectedClassroomID).name;
+    },
     selectedCityAndAddress() {
-      return this.selectedLocation.city + ', ' + this.selectedLocation.name;
-    }  
+      return this.selectedLocation.city + ", " + this.selectedLocation.name;
+    },
   },
   created() {
-    this.loadPicturesForClassroom()
+    this.loadPicturesForClassroom();
+  },
+  mounted() {
+    var imageImagePreview = document.getElementById("image-preview");
+    if (imageImagePreview !== null) {
+      imageImagePreview.style.height =
+        imageImagePreview.offsetWidth * 1.55 + "px";
+    }
+
+    window.addEventListener("resize", function () {
+      if (imageImagePreview !== null) {
+        imageImagePreview.style.height =
+          imageImagePreview.offsetWidth * 1.55 + "px";
+      }
+    });
   },
   components: {
     DeleteDialog,
   },
   methods: {
     async loadPicturesForClassroom() {
+      this.loading = true;
       try {
-        await this.$store.dispatch('pictures/loadPictures');
+        await this.$store.dispatch("pictures/loadPictures", {
+          classroomID: this.selectedClassroomID,
+        });
       } catch (error) {
         console.log(error);
       }
+      this.loading = false;
     },
     selectImage() {
       this.$refs.fileInput.click();
@@ -355,11 +195,6 @@ export default {
       this.isDeleteDialogShown = false;
     },
   },
-  mounted() {
-    var imageImagePreview = document.getElementById("image-preview");
-    imageImagePreview.style.height =
-      imageImagePreview.offsetWidth * 1.55 + "px";
-  },
 };
 </script>
 
@@ -373,6 +208,7 @@ export default {
   width: 100vw;
   position: absolute;
   bottom: 0;
+  background: rgb(223, 224, 231);
 }
 
 .container {
@@ -380,7 +216,6 @@ export default {
   margin-left: max(30rem, 19.5%);
   display: flex;
   justify-content: center;
-  background: rgb(223, 224, 231);
   padding: 2rem;
 }
 
