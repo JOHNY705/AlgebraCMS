@@ -1,6 +1,9 @@
 <template>
-  <div class="page-container" v-if="!isLoading">
-    <div class="container">
+  <div class="page-container">
+    <div class="loading-spinner-container" v-if="isLoading">
+      <base-spinner></base-spinner>
+    </div>
+    <div class="container" v-else>
       <div class="content-container">
         <div class="titles-container">
           <h2 class="classroom-title">
@@ -72,9 +75,13 @@
             <div
               id="image-preview"
               class="image-preview"
-              :style="{ 'background-image': `url(${previewImage})` }"
+              :style="{
+                'background-image': previewImage
+                  ? `url(${previewImage})`
+                  : `url(${require('@/assets/image-icon.png')})`,
+              }"
             ></div>
-            <button class="add-image-btn">
+            <button class="add-image-btn" @click="uploadPicture">
               <img class="fa-solid fa-circle-plus" />{{ $t("addImage") }}
             </button>
           </div>
@@ -97,25 +104,22 @@
 <script>
 import DeleteDialog from "../components/ui/DeleteDialog.vue";
 
-// window.addEventListener("resize", function () {
-//   var imageImagePreview = document.getElementById("image-preview");
-//   if (imageImagePreview !== null) {
-//     imageImagePreview.style.height =
-//       imageImagePreview.offsetWidth * 1.55 + "px";
-//   }
-// });
-
 export default {
   data() {
     return {
+      placeholderImage: "@/assets/NikolaTesla-2-01.jpg",
       previewImage: null,
       isModalShown: false,
       isDeleteDialogShown: false,
       selectedImageId: null,
-      loading: false,
+      isLoading: true,
+      isImageSelected: false,
     };
   },
   computed: {
+    pictures() {
+      return this.$store.getters["pictures/pictures"];
+    },
     locations() {
       return this.$store.getters["locations/locations"];
     },
@@ -130,35 +134,29 @@ export default {
     },
     selectedClassroom() {
       return this.selectedLocation.classrooms.find(
-        (c) => c.id === this.selectedClassroomID).name;
+        (c) => c.id === this.selectedClassroomID
+      ).name;
     },
     selectedCityAndAddress() {
       return this.selectedLocation.city + ", " + this.selectedLocation.name;
     },
   },
+  watch: {
+    isLoading(value) {
+      if (!value) {
+        this.addWindowListener();
+      }
+    },
+  },
   created() {
     this.loadPicturesForClassroom();
-  },
-  mounted() {
-    var imageImagePreview = document.getElementById("image-preview");
-    if (imageImagePreview !== null) {
-      imageImagePreview.style.height =
-        imageImagePreview.offsetWidth * 1.55 + "px";
-    }
-
-    window.addEventListener("resize", function () {
-      if (imageImagePreview !== null) {
-        imageImagePreview.style.height =
-          imageImagePreview.offsetWidth * 1.55 + "px";
-      }
-    });
   },
   components: {
     DeleteDialog,
   },
   methods: {
     async loadPicturesForClassroom() {
-      this.loading = true;
+      this.isLoading = true;
       try {
         await this.$store.dispatch("pictures/loadPictures", {
           classroomID: this.selectedClassroomID,
@@ -166,7 +164,24 @@ export default {
       } catch (error) {
         console.log(error);
       }
-      this.loading = false;
+      this.isLoading = false;
+    },
+    addWindowListener() {
+      this.$nextTick(() => {
+        var imageImagePreview = document.getElementById("image-preview");
+        if (imageImagePreview !== null) {
+          imageImagePreview.style.height =
+            imageImagePreview.offsetWidth * 1.55 + "px";
+        }
+      });
+
+      window.addEventListener("resize", function () {
+        let imageImagePreview = this.document.getElementById("image-preview");
+        if (imageImagePreview !== null) {
+          imageImagePreview.style.height =
+            imageImagePreview.offsetWidth * 1.55 + "px";
+        }
+      });
     },
     selectImage() {
       this.$refs.fileInput.click();
@@ -194,6 +209,14 @@ export default {
     closeDeleteDialog() {
       this.isDeleteDialogShown = false;
     },
+    uploadPicture() {
+      if (!this.previewImage) {
+        console.log("Nema slike");
+      } else {
+        console.log(this.previewImage);
+        console.log("Ima slike");
+      }
+    },
   },
 };
 </script>
@@ -209,6 +232,13 @@ export default {
   position: absolute;
   bottom: 0;
   background: rgb(223, 224, 231);
+}
+
+.loading-spinner-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  padding-left: max(30rem, 19.5%);
 }
 
 .container {
@@ -404,7 +434,6 @@ ul li {
 }
 
 .image-preview {
-  background: rgb(223, 224, 231);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;

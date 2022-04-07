@@ -2,9 +2,7 @@
   <the-header v-if="$route.meta.componentsEnabled"></the-header>
   <the-sidebar v-if="$route.meta.componentsEnabled"></the-sidebar>
   <router-view v-slot="slotProps" :key="$route.fullPath">
-    <transition name="route" mode="out-in">
       <component :is="slotProps.Component"></component>
-    </transition>
   </router-view>
 </template>
 
