@@ -17,7 +17,30 @@
             <h3 class="images-title">
               {{ $t("currentImagesOnTablet") }}
             </h3>
-            <div class="images-table">
+            <div class="images">
+              <div
+                class="image-card"
+                v-for="picture in pictures"
+                :key="picture.id"
+              >
+                <div class="image-card-image">
+                  <img
+                    class="tablet-image"
+                    :src="`data:image/png;base64,${picture.base64Encoded}`"
+                  />
+                </div>
+                <div class="image-card-image-delete">
+                  <a
+                    href="#"
+                    class="delete-image-btn"
+                    @click.prevent="showDeleteDialog(picture.id)"
+                  >
+                    <img class="far fa-trash-alt delete-icon" />
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="images-table">
               <div class="images-header">
                 <div class="image-header-number"></div>
                 <div class="image-header-image"></div>
@@ -28,6 +51,19 @@
                 <div class="image-header-image-delete"></div>
               </div>
               <div class="image-cards">
+                <div
+                  class="image-card"
+                  v-for="picture in pictures"
+                  :key="picture.id"
+                >
+                  <div class="image-card-number">{{ picture.id }}</div>
+                  <div class="image-card-image">
+                    <img
+                      class="tablet-image"
+                      :src="`data:image/png;base64,${picture.base64Encoded}`"
+                    />
+                  </div>
+                </div>
                 <div class="image-card">
                   <div class="image-card-number">1</div>
                   <div class="image-card-image">
@@ -49,7 +85,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
           <div class="image-upload-container">
             <div class="image-upload-tooltip-label">
@@ -89,7 +125,7 @@
       </div>
       <DeleteDialog v-show="isDeleteDialogShown" @close="closeDeleteDialog()">
         <template v-slot:footer>
-          <button class="confirm-delete-btn" @click.prevent="closeDeleteDialog">
+          <button class="confirm-delete-btn" @click.prevent="deletePicture()">
             {{ $t("confirm") }}
           </button>
           <button class="cancel-delete-btn" @click.prevent="closeDeleteDialog">
@@ -107,11 +143,10 @@ import DeleteDialog from "../components/ui/DeleteDialog.vue";
 export default {
   data() {
     return {
-      placeholderImage: "@/assets/NikolaTesla-2-01.jpg",
       previewImage: null,
-      isModalShown: false,
+      previewImageType: null,
       isDeleteDialogShown: false,
-      selectedImageId: null,
+      selectedPictureID: null,
       isLoading: true,
       isImageSelected: false,
     };
@@ -157,6 +192,7 @@ export default {
   methods: {
     async loadPicturesForClassroom() {
       this.isLoading = true;
+      console.log(this.selectedPictureID);
       try {
         await this.$store.dispatch("pictures/loadPictures", {
           classroomID: this.selectedClassroomID,
@@ -189,32 +225,54 @@ export default {
     pickFile() {
       let input = this.$refs.fileInput;
       let file = input.files;
+      const allowedFileTypes = ["image/jpeg", "image/jpg", "image/png"];
       if (file && file[0]) {
-        let reader = new FileReader();
-        reader.onload = (e) => {
-          this.previewImage = e.target.result;
-        };
-        reader.readAsDataURL(file[0]);
-        this.$emit("input", file[0]);
+        if (allowedFileTypes.includes(file[0].type)) {
+          console.log("Allowed");
+          let reader = new FileReader();
+          reader.onload = (e) => {
+            this.previewImage = e.target.result;
+            this.previewImageType = e.target.result.type;
+          };
+          reader.readAsDataURL(file[0]);
+          this.$emit("input", file[0]);
+        }
       }
     },
-    showDeleteModal(id) {
-      this.selectedImageId = id;
-      this.isModalShown = !this.isModalShown;
-      console.log(this.selectedImageId);
-    },
-    showDeleteDialog() {
+    showDeleteDialog(pictureID) {
+      this.selectedPictureID = pictureID;
       this.isDeleteDialogShown = true;
     },
     closeDeleteDialog() {
       this.isDeleteDialogShown = false;
     },
-    uploadPicture() {
-      if (!this.previewImage) {
-        console.log("Nema slike");
-      } else {
-        console.log(this.previewImage);
-        console.log("Ima slike");
+    async deletePicture() {
+      this.closeDeleteDialog();
+      this.previewImage = null;
+      this.isLoading = true;
+      try {
+        await this.$store.dispatch("pictures/deletePicture", {
+          classroomID: this.selectedClassroomID,
+          pictureID: this.selectedPictureID
+        });
+      } catch (error) {
+        console.log(error);
+      }
+      this.loadPicturesForClassroom();
+    },
+    async uploadPicture() {
+      if (this.previewImage) {
+        this.isLoading = true;
+        try {
+          await this.$store.dispatch("pictures/addPicture", {
+            classroomID: this.selectedClassroomID,
+            picture: this.previewImage
+          });
+        } catch (error) {
+          console.log(error);
+        }
+        this.previewImage = null;
+        this.loadPicturesForClassroom();
       }
     },
   },
@@ -584,6 +642,9 @@ input[type="file"] {
   width: 10%;
   display: flex;
   justify-content: center;
+
+  /*TEST*/
+  margin-top: 10rem;
 }
 
 ::-webkit-scrollbar {

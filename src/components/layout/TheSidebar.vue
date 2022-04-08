@@ -242,7 +242,7 @@ nav ul li a .span.rotate {
   background: linear-gradient(45deg, rgb(227, 118, 38, 1), rgb(195, 14, 96, 1));
   background: -webkit-linear-gradient(left bottom, #e37526 0%, #c30e5f 100%);
   background: -moz-linear-gradient(left bottom, #e37526 0%, #c30e5f 100%);
-  border-radius: 0.5rem;
+  /* border-radius: 0.5rem; */
 }
 
 .slike-tableti-menu ul {
