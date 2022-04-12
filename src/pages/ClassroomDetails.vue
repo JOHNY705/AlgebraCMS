@@ -40,52 +40,6 @@
                 </div>
               </div>
             </div>
-            <!-- <div class="images-table">
-              <div class="images-header">
-                <div class="image-header-number"></div>
-                <div class="image-header-image"></div>
-                <h2 class="image-header-image-title">
-                  {{ $t("pictureName") }}
-                </h2>
-                <h2 class="image-header-image-date">{{ $t("changeDate") }}</h2>
-                <div class="image-header-image-delete"></div>
-              </div>
-              <div class="image-cards">
-                <div
-                  class="image-card"
-                  v-for="picture in pictures"
-                  :key="picture.id"
-                >
-                  <div class="image-card-number">{{ picture.id }}</div>
-                  <div class="image-card-image">
-                    <img
-                      class="tablet-image"
-                      :src="`data:image/png;base64,${picture.base64Encoded}`"
-                    />
-                  </div>
-                </div>
-                <div class="image-card">
-                  <div class="image-card-number">1</div>
-                  <div class="image-card-image">
-                    <img
-                      class="tablet-image"
-                      src="@/assets/NikolaTesla-2-01.jpg"
-                    />
-                  </div>
-                  <div class="image-card-image-title">Nikola_Tesla.jpg</div>
-                  <div class="image-card-image-date">28.12.2021. 12:00:00</div>
-                  <div class="image-card-image-delete">
-                    <a
-                      href="#"
-                      class="delete-image-btn"
-                      @click.prevent="showDeleteDialog(12)"
-                    >
-                      <img class="far fa-trash-alt delete-icon" />
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div> -->
           </div>
           <div class="image-upload-container">
             <div class="image-upload-tooltip-label">
@@ -95,7 +49,7 @@
                   {{ $t("tooltipAddingNewImage") }}
                 </span>
               </div>
-              <label class="odabir-slike-lbl">
+              <label class="choose-image-lbl">
                 {{ $t("addingNewImages") }}
               </label>
             </div>
@@ -192,7 +146,6 @@ export default {
   methods: {
     async loadPicturesForClassroom() {
       this.isLoading = true;
-      console.log(this.selectedPictureID);
       try {
         await this.$store.dispatch("pictures/loadPictures", {
           classroomID: this.selectedClassroomID,
@@ -228,7 +181,6 @@ export default {
       const allowedFileTypes = ["image/jpeg", "image/jpg", "image/png"];
       if (file && file[0]) {
         if (allowedFileTypes.includes(file[0].type)) {
-          console.log("Allowed");
           let reader = new FileReader();
           reader.onload = (e) => {
             this.previewImage = e.target.result;
@@ -286,10 +238,11 @@ export default {
 
 .page-container {
   height: 90vh;
-  width: 100vw;
+  width: 100%;
   position: absolute;
   bottom: 0;
   background: rgb(223, 224, 231);
+  overflow: scroll;
 }
 
 .loading-spinner-container {
@@ -305,6 +258,7 @@ export default {
   display: flex;
   justify-content: center;
   padding: 2rem;
+  padding-top: max(2rem, 1%);
 }
 
 .content-container {
@@ -404,46 +358,6 @@ ul li {
   border-radius: 0.5rem;
 }
 
-.tablet-image {
-  width: 5.1rem;
-  height: 7.9rem;
-  object-fit: contain;
-  border-radius: 0.5rem;
-  transition: 0.3s;
-}
-
-.tablet-image:hover {
-  transform: scale(3);
-  z-index: 99999;
-}
-
-.tablet-image-name {
-  text-align: center;
-  margin-top: 1.2rem;
-  margin-bottom: 1.2rem;
-}
-
-.image-number {
-  margin-right: 1rem;
-}
-
-.tablet-image-btn-delete {
-  font-size: 1.6rem;
-  color: white;
-  padding: 0.5rem;
-  margin-top: 0.5rem;
-  width: 9.7rem;
-  border-radius: 0.5rem;
-  border: 0;
-  background: rgb(189, 17, 17);
-  transition: 0.3s;
-}
-
-.tablet-image-btn-delete:hover {
-  transform: scale(0.95);
-  cursor: pointer;
-}
-
 .fa-trash {
   margin-right: 0.6rem;
 }
@@ -502,7 +416,7 @@ ul li {
   margin-bottom: 1.5rem;
 }
 
-.odabir-slike-lbl {
+.choose-image-lbl {
   font-size: 1.6rem;
   font-weight: 400;
   width: auto;
@@ -545,106 +459,51 @@ input[type="file"] {
   padding-top: 0.2rem;
 }
 
-.images-table {
-  width: 100%;
+.images {
   height: 100%;
   display: flex;
-  flex-direction: column;
-}
-
-.images-header {
-  width: 100%;
-  height: 2.9rem;
-  background: rgb(221, 111, 38);
-  border-radius: 0.5rem 0.5rem 0 0rem;
-  display: flex;
   flex-direction: row;
-}
-
-.image-header-number {
-  width: 8%;
-}
-
-.image-header-image {
-  width: 14%;
-  text-align: left;
-}
-
-.image-header-image-title {
-  width: 34%;
-  display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  color: white;
-  font-size: 1.6rem;
-  font-weight: 400;
-}
-
-.image-header-image-date {
-  width: 34%;
-  display: flex;
-  align-items: center;
-  color: white;
-  font-size: 1.6rem;
-  font-weight: 400;
-}
-
-.image-header-image-delete {
-  width: 10%;
-}
-
-.image-cards {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 90%;
-  overflow: scroll;
+  justify-content: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .image-card {
   display: flex;
-  width: 100%;
-  height: 10rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.3rem;
-  background: white;
+  flex-direction: column;
+  justify-content: center;
+  width: 18%;
+  min-width: 8rem;
+  padding: 1rem;
+  background: rgb(223, 224, 231);
+  border-radius: 0.5rem;
   align-items: center;
+  margin-right: 2%;
 }
 
-.image-card:nth-child(odd) {
-  background: rgb(232, 233, 238);
+.tablet-image {
+  width: 100%;
+  /* width: 5.1rem;
+  height: 7.9rem; */
+  object-fit: contain;
+  border-radius: 0.5rem;
+  transition: 0.3s;
+  margin-bottom: 0.5rem;
 }
 
 .image-card:last-child {
-  border-radius: 0 0 0.5rem 0.5rem;
+  margin-right: 0;
 }
 
-.image-card-number {
-  width: 8%;
-  text-align: center;
-  font-size: 1.3rem;
+.image-card:nth-child(5) {
+  margin-right: 0;
 }
 
-.image-card-image {
-  width: 14%;
-}
-
-.image-card-image-title {
-  width: 34%;
-  font-size: 1.3rem;
-}
-
-.image-card-image-date {
-  width: 34%;
-  font-size: 1.3rem;
-}
-
-.image-card-image-delete {
-  width: 10%;
-  display: flex;
-  justify-content: center;
-
-  /*TEST*/
-  margin-top: 10rem;
+.tablet-image:hover {
+  transform: scale(1.8);
+  border-radius: 0;
 }
 
 ::-webkit-scrollbar {
@@ -659,7 +518,6 @@ input[type="file"] {
   background: linear-gradient(45deg, rgb(227, 118, 38, 1), rgb(195, 14, 96, 1));
   background: -webkit-linear-gradient(left bottom, #e37526 0%, #c30e5f 100%);
   background: -moz-linear-gradient(left bottom, #e37526 0%, #c30e5f 100%);
-  border-radius: 0.5rem;
 }
 
 .tooltip-container {
@@ -717,6 +575,16 @@ input[type="file"] {
   .images-container {
     width: 100%;
     margin: 0;
+    height: auto;
+  }
+
+  .images {
+    padding: 0;
+  }
+
+  .image-card {
+    margin: 1%;
+    margin: max(0.5rem, 1%);
   }
 
   .image-upload-container {
@@ -728,7 +596,7 @@ input[type="file"] {
     justify-content: center;
   }
 
-  .odabir-slike-lbl {
+  .choose-image-lbl {
     width: auto;
   }
 

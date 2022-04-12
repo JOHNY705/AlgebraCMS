@@ -48,9 +48,7 @@ export default {
         },
       })
       .then((response) => {
-        console.log("DELETE");
         console.log(response);
-        console.log("END");
       })
       .catch((error) => {
         console.log(error);

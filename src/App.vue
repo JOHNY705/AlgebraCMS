@@ -48,6 +48,7 @@ html {
 
 body {
   margin: 0;
+  background: rgb(223, 224, 231);
 }
 
 ::-webkit-scrollbar {

@@ -6,6 +6,7 @@
 
 <style scoped>
 .image-container {
+  background: white;
   height: 100vh;
   width: 100%;
   display: flex;
