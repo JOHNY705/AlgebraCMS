@@ -261,7 +261,7 @@ export default {
   display: flex;
   justify-content: center;
   padding: 2rem;
-  padding-top: max(2rem, 1%);
+  padding-top: max(2.2rem, 1%);
 }
 
 .content-container {
@@ -503,7 +503,7 @@ input[type="file"] {
 }
 
 .tablet-image:hover {
-  transform: scale(1.8);
+  transform: scale(1.9);
   border-radius: 0;
 }
 

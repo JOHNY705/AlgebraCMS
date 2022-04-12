@@ -29,9 +29,6 @@ export default {
         classroomId: payload.classroomID,
         isShared: payload.classroomID === 0 ? true : false,
       })
-      .then((response) => {
-        console.log(response);
-      })
       .catch((error) => {
         console.log(error);
       });
@@ -45,9 +42,6 @@ export default {
           classroomId: payload.classroomID,
           isShared: payload.classroomID === 0 ? true : false,
         },
-      })
-      .then((response) => {
-        console.log(response);
       })
       .catch((error) => {
         console.log(error);
