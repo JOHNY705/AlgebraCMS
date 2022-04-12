@@ -14,5 +14,6 @@
   "deleteImage": "Brisanje slike",
   "confirmDeleteImage": "Jeste li sigurni da želite izbrisati sliku?",
   "confirm": "Potvrdi",
-  "cancel": "Odustani"
+  "cancel": "Odustani",
+  "noImagesForClassroom": "Trenutno nema postavljenih slika za odabranu učionu."
 }

@@ -16,7 +16,6 @@ export default {
       .then((response) => {
         if (response.data.isSuccessful) {
           pictures.push(...response.data.pictures);
-          console.log(pictures);
         }
       })
       .catch((error) => console.log(error));

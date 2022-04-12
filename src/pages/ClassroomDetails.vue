@@ -17,7 +17,7 @@
             <h3 class="images-title">
               {{ $t("currentImagesOnTablet") }}
             </h3>
-            <div class="images">
+            <div v-if="pictures.length > 0" class="images">
               <div
                 class="image-card"
                 v-for="picture in pictures"
@@ -39,6 +39,9 @@
                   </a>
                 </div>
               </div>
+            </div>
+            <div v-else class="title-no-images">
+              <h2>{{ $t("noImagesForClassroom") }}</h2>
             </div>
           </div>
           <div class="image-upload-container">
@@ -205,7 +208,7 @@ export default {
       try {
         await this.$store.dispatch("pictures/deletePicture", {
           classroomID: this.selectedClassroomID,
-          pictureID: this.selectedPictureID
+          pictureID: this.selectedPictureID,
         });
       } catch (error) {
         console.log(error);
@@ -218,7 +221,7 @@ export default {
         try {
           await this.$store.dispatch("pictures/addPicture", {
             classroomID: this.selectedClassroomID,
-            picture: this.previewImage
+            picture: this.previewImage,
           });
         } catch (error) {
           console.log(error);
@@ -485,8 +488,6 @@ input[type="file"] {
 
 .tablet-image {
   width: 100%;
-  /* width: 5.1rem;
-  height: 7.9rem; */
   object-fit: contain;
   border-radius: 0.5rem;
   transition: 0.3s;
@@ -504,6 +505,21 @@ input[type="file"] {
 .tablet-image:hover {
   transform: scale(1.8);
   border-radius: 0;
+}
+
+.title-no-images {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 5rem;
+}
+
+.title-no-images h2 {
+  font-size: 1.6rem;
+  text-align: center;
+  font-weight: 400;
 }
 
 ::-webkit-scrollbar {
