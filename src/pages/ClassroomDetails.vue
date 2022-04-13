@@ -74,9 +74,17 @@
                   : `url(${require('@/assets/image-icon.png')})`,
               }"
             ></div>
-            <button class="add-image-btn" @click="uploadPicture">
+            <div class="add-image-btn-container">
+              <button
+              class="add-image-btn"
+              :class="{ active: previewImage && pictures.length < 5 }"
+              @click="uploadPicture"       
+              :disabled="!previewImage || pictures.length === 5"
+            >
+              <span v-if="pictures.length === 5" class="add-image-btn-tooltiptext">{{ $t("tooltipMaxNumberOfImages") }}</span>
               <img class="fa-solid fa-circle-plus" />{{ $t("addImage") }}
             </button>
+            </div>
           </div>
         </div>
       </div>
@@ -181,10 +189,16 @@ export default {
     pickFile() {
       let input = this.$refs.fileInput;
       let file = input.files;
-      const allowedFileTypes = ["image/jpeg", "image/jpg", "image/png"];
+      const allowedFileTypes = [
+        "image/jpeg",
+        "image/jpg",
+        "image/png",
+        "image/gif",
+      ];
       if (file && file[0]) {
         if (allowedFileTypes.includes(file[0].type)) {
           let reader = new FileReader();
+          this.isImageSelected = true;
           reader.onload = (e) => {
             this.previewImage = e.target.result;
             this.previewImageType = e.target.result.type;
@@ -216,6 +230,7 @@ export default {
       this.loadPicturesForClassroom();
     },
     async uploadPicture() {
+      console.log("Klik");
       if (this.previewImage) {
         this.isLoading = true;
         try {
@@ -365,24 +380,60 @@ ul li {
   margin-right: 0.6rem;
 }
 
+.add-image-btn-container {
+  width: 77.61%;
+}
+
 .add-image-btn {
   font-family: "Stolzl-Book";
+  position: relative;
   font-size: 1.6rem;
   color: white;
-  width: 77.61%;
+  width: 100%;
   height: 2.9rem;
   border: 0;
+  background: rgb(223, 224, 231);
   text-align: center;
   border-radius: 0.5rem;
-  background: linear-gradient(45deg, rgb(227, 118, 38, 1), rgb(195, 14, 96, 1));
-  background: -webkit-linear-gradient(left bottom, #e37526 0%, #c30e5f 100%);
-  background: -moz-linear-gradient(left bottom, #e37526 0%, #c30e5f 100%);
   transition: 0.3s;
 }
 
-.add-image-btn:hover {
+.add-image-btn-tooltiptext {
+  visibility: hidden;
+  background: black;
+  width: inherit;
+  bottom: 3.5rem;
+  left: 0;
+  padding-bottom: 0.5rem;
+  padding-top: 0.5rem;
+  border-radius: 0.5rem;
+  color: white;
+  font-size: 1.3rem;
+  text-align: center;
+  position: absolute;
+  transition: 0.2s ease-in-out;
+  opacity: 0;
+}
+
+.add-image-btn:hover .add-image-btn-tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.add-image-btn.active {
+  background: linear-gradient(45deg, rgb(227, 118, 38, 1), rgb(195, 14, 96, 1));
+  background: -webkit-linear-gradient(left bottom, #e37526 0%, #c30e5f 100%);
+  background: -moz-linear-gradient(left bottom, #e37526 0%, #c30e5f 100%);
+}
+
+.add-image-btn.active:hover {
   cursor: pointer;
   transform: scale(1.05);
+}
+
+.add-image-btn.active:hover .add-image-btn-tooltiptext {
+  visibility: hidden;
+  opacity: 0;
 }
 
 .fa-circle-plus {
@@ -625,8 +676,12 @@ input[type="file"] {
     margin: 0 2rem;
   }
 
-  .add-image-btn {
+  .add-image-btn-container {
     width: 30%;
+  }
+
+  .add-image-btn {
+    width: 100%;
   }
 }
 </style>

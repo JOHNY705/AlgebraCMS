@@ -15,5 +15,6 @@
   "confirmDeleteImage": "Are you sure you want to delete the image?",
   "confirm": "Confirm",
   "cancel": "Cancel",
-  "noImagesForClassroom": "There are currently no pictures for selected classroom."
+  "noImagesForClassroom": "There are currently no pictures for selected classroom.",
+  "tooltipMaxNumberOfImages": "One classroom cannot have more than 5 pictures."
 }

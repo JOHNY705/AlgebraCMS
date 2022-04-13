@@ -1,7 +1,7 @@
 <template>
   <nav class="sidebar">
     <div class="sidebar-title">{{ $t("sidebarTitle") }}</div>
-    <ul>
+    <ul v-if="locations">
       <li>
         <a @click.prevent="toggleSlikeTabletiDDL" href="#">
           <img class="fas fa-tablet-alt tablet-icon" />
@@ -30,6 +30,9 @@
         </ul>
       </li>
     </ul>
+    <div v-else>
+      <base-spinner></base-spinner>
+    </div>
     <div
       v-for="location in locations"
       :key="location.id"

@@ -4,7 +4,7 @@
       <router-link to="/">
         <img class="algebra-logo" src="@/assets/Algebra_logo.png" />
       </router-link>
-      <div @clickout="closeUserMenu" class="action">
+      <!-- <div @clickout="closeUserMenu" class="action">
         <div class="profile" @click="menuToggle">
           <img class="fas fa-user user-icon" />
           <p class="user-name">Pero Peric</p>
@@ -18,7 +18,7 @@
             </li>
           </ul>
         </div>
-      </div>
+      </div> -->
     </nav>
   </header>
 </template>
@@ -90,7 +90,7 @@ header nav {
   height: 100%;
   margin: 0;
   padding: 0;
-  min-width: 30rem;
+  width: 32rem;
   background: black;
   transition: 0.3s;
 }
@@ -109,6 +109,7 @@ header nav {
   margin: 0;
   margin-left: 0.6rem;
   font-size: 1.7rem;
+  text-align: center;
   color: white;
   transition: 0.3s;
   padding-top: 0.2rem;
@@ -128,9 +129,9 @@ header nav {
 .action .user-menu {
   position: absolute;
   top: 100%;
-  right: -30rem;
+  right: -32rem;
   background: rgb(40, 45, 59);
-  width: 30rem;
+  width: 32rem;
   transition: 0.5s;
   visibility: hidden;
   opacity: 0;
@@ -160,11 +161,12 @@ header nav {
 
 .action .user-menu ul li a {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   text-align: left;
   text-decoration: none;
   color: white;
+  width: 100%;
   font-size: 1.7rem;
   padding: 0.8rem 10rem;
   transition: 0.3s;
