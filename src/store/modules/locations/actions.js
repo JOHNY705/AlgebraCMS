@@ -3,11 +3,6 @@ import axios from "axios";
 export default {
   async loadLocations(context) {
 
-    // if (sessionStorage.locations) {
-    //   context.commit("setLocations", JSON.parse(sessionStorage.locations));
-    //   return;
-    // }
-
     const locations = [];
 
     await axios
@@ -23,8 +18,7 @@ export default {
               isActive: false,
             }
             locations.push(location);
-          }   
-          //sessionStorage.locations = JSON.stringify(locations);
+          }
         } else {
           console.log("Error: " + response.data.exceptionMessage);
         }

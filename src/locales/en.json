@@ -14,5 +14,6 @@
   "deleteImage": "Delete image",
   "confirmDeleteImage": "Are you sure you want to delete the image?",
   "confirm": "Confirm",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "noImagesForClassroom": "There are currently no pictures for selected classroom."
 }
