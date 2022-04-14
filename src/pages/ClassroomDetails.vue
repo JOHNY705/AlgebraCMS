@@ -61,7 +61,7 @@
                 class="image-select"
                 ref="fileInput"
                 type="file"
-                accept="image/*"
+                accept="image/jpeg, image/png, image/gif"
                 @input="pickFile"
               /><img class="fas fa-image" />{{ $t("chooseImage") }}</label
             >
@@ -108,6 +108,7 @@ import DeleteDialog from "../components/ui/DeleteDialog.vue";
 export default {
   data() {
     return {
+      error: null,
       previewImage: null,
       previewImageType: null,
       isDeleteDialogShown: false,
@@ -183,6 +184,9 @@ export default {
         }
       });
     },
+    handleError() {
+      this.error = null;
+    },
     selectImage() {
       this.$refs.fileInput.click();
     },
@@ -191,7 +195,6 @@ export default {
       let file = input.files;
       const allowedFileTypes = [
         "image/jpeg",
-        "image/jpg",
         "image/png",
         "image/gif",
       ];
