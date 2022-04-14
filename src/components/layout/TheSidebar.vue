@@ -1,7 +1,7 @@
 <template>
   <nav class="sidebar">
     <div class="sidebar-title">{{ $t("sidebarTitle") }}</div>
-    <ul v-if="locations">
+    <ul v-if="locations.length > 0">
       <li>
         <a @click.prevent="toggleSlikeTabletiDDL" href="#">
           <img class="fas fa-tablet-alt tablet-icon" />

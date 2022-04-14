@@ -1,4 +1,5 @@
 import axios from "axios";
+//import i18n from "@/i18n";
 
 const picturesBaseUrl = "https://cmsapi.algebra.hr:50073/api/pictures";
 
@@ -20,6 +21,8 @@ export default {
       })
       .catch((error) => console.log(error));
 
+      // console.log(i18n.global.t('cancel'));
+
     context.commit("setPictures", pictures);
   },
   async addPicture(_, payload) {
@@ -30,6 +33,7 @@ export default {
         isShared: payload.classroomID === 0 ? true : false,
       })
       .catch((error) => {
+        this.$t("cancel");
         console.log(error);
       });
   },

@@ -230,7 +230,6 @@ export default {
       this.loadPicturesForClassroom();
     },
     async uploadPicture() {
-      console.log("Klik");
       if (this.previewImage) {
         this.isLoading = true;
         try {
@@ -254,8 +253,14 @@ export default {
   margin: 0;
 }
 
+.header-buffer {
+  min-height: 8rem;
+  height: 10%;
+}
+
 .page-container {
-  height: 90vh;
+  height: 100%;
+  height: min(calc(100vh - 80px), 90%);
   width: 100%;
   position: absolute;
   bottom: 0;
@@ -276,7 +281,6 @@ export default {
   display: flex;
   justify-content: center;
   padding: 2rem;
-  padding-top: max(2.2rem, 1%);
 }
 
 .content-container {
@@ -286,6 +290,7 @@ export default {
   flex-direction: column;
   border-radius: 0.5rem;
   width: 100%;
+  height: 100%;
 }
 
 .titles-container {
@@ -327,7 +332,7 @@ export default {
   width: 100%;
   display: flex;
   flex-direction: row;
-  height: 90%;
+  height: 100%;
   padding-top: 1rem;
 }
 
