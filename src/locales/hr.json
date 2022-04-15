@@ -16,5 +16,7 @@
   "confirm": "Potvrdi",
   "cancel": "Odustani",
   "noImagesForClassroom": "Trenutno nema postavljenih slika za odabranu učionu.",
-  "tooltipMaxNumberOfImages": "Broj slika za jednu učionu ne smije biti veći od 5."
+  "tooltipMaxNumberOfImages": "Broj slika za jednu učionu ne smije biti veći od 5.",
+  "error": "Greška",
+  "errorWrongFileFormat": "Odabrana datoteka nije dobrog formata!"
 }

@@ -16,5 +16,7 @@
   "confirm": "Confirm",
   "cancel": "Cancel",
   "noImagesForClassroom": "There are currently no pictures for selected classroom.",
-  "tooltipMaxNumberOfImages": "One classroom cannot have more than 5 pictures."
+  "tooltipMaxNumberOfImages": "One classroom cannot have more than 5 pictures.",
+  "error": "Error",
+  "errorWrongFileFormat": "Selected file format is not supported."
 }

@@ -90,25 +90,33 @@
       </div>
       <DeleteDialog v-show="isDeleteDialogShown" @close="closeDeleteDialog()">
         <template v-slot:footer>
-          <button class="confirm-delete-btn" @click.prevent="deletePicture()">
+          <button class="confirm-delete-btn" @click="deletePicture()">
             {{ $t("confirm") }}
           </button>
-          <button class="cancel-delete-btn" @click.prevent="closeDeleteDialog">
+          <button class="cancel-delete-btn" @click="closeDeleteDialog">
             {{ $t("cancel") }}
           </button>
         </template>
       </DeleteDialog>
+      <base-dialog :show="!!error" :title="dialogTitle" :message="dialogMessage" :dialogError="!!error" @close="handleError">
+        <template v-slot:footer v-if="!!error">
+          <button class="confirm-delete-btn" @click="handleError">Zatvori</button>
+        </template>
+      </base-dialog>
     </div>
   </div>
 </template>
 
 <script>
 import DeleteDialog from "../components/ui/DeleteDialog.vue";
+import i18n from "@/i18n";
 
 export default {
   data() {
     return {
       error: null,
+      dialogTitle: null,
+      dialogMessage: null,
       previewImage: null,
       previewImageType: null,
       isDeleteDialogShown: false,
@@ -186,6 +194,8 @@ export default {
     },
     handleError() {
       this.error = null;
+      this.dialogTitle = null;
+      this.dialogMessage = null;
     },
     selectImage() {
       this.$refs.fileInput.click();
@@ -208,6 +218,11 @@ export default {
           };
           reader.readAsDataURL(file[0]);
           this.$emit("input", file[0]);
+        }
+        else {
+          this.error = true;
+          this.dialogTitle = i18n.global.t('error');
+          this.dialogMessage = i18n.global.t('errorWrongFileFormat');
         }
       }
     },
