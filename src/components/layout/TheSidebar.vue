@@ -52,13 +52,29 @@
     <div class="dev-info">Algebra Dev Team&copy; 2022</div>
     <div class="app-info">{{ $t("version") }} 0.1.0</div>
   </nav>
+  <base-dialog
+    :show="error"
+    :title="dialogTitle"
+    :message="dialogMessage"
+    :dialogWarning="error"
+    @close="handleDialog"
+  >
+    <template v-slot:footer v-if="error">
+      <button class="close-dialog-btn" @click="handleDialog">Zatvori</button>
+    </template>
+  </base-dialog>
 </template>
 
 <script>
+import i18n from "@/i18n";
+
 export default {
   data() {
     return {
       isSlikeTabletiDDLActive: false,
+      error: false,
+      dialogTitle: null,
+      dialogMessage: null,
     };
   },
   computed: {
@@ -88,8 +104,15 @@ export default {
       try {
         await this.$store.dispatch("locations/loadLocations");
       } catch (error) {
-        console.log(error);
+        this.error = true;
+        this.dialogTitle = i18n.global.t("error");
+        this.dialogMessage = error.message;
       }
+    },
+    handleDialog() {
+      this.error = false;
+      this.dialogTitle = null;
+      this.dialogMessage = null;
     },
   },
   created() {

@@ -1,5 +1,5 @@
 import axios from "axios";
-//import i18n from "@/i18n";
+import i18n from "@/i18n";
 
 const picturesBaseUrl = "https://cmsapi.algebra.hr:50073/api/pictures";
 
@@ -19,9 +19,10 @@ export default {
           pictures.push(...response.data.pictures);
         }
       })
-      .catch((error) => console.log(error));
-
-      // console.log(i18n.global.t('cancel'));
+      .catch(() => {
+        const error = new Error(i18n.global.t('errorWhileFetchingImagesForClassroom'));
+        throw error;
+      });
 
     context.commit("setPictures", pictures);
   },
@@ -32,13 +33,12 @@ export default {
         classroomId: payload.classroomID,
         isShared: payload.classroomID === 0 ? true : false,
       })
-      .catch((error) => {
-        this.$t("cancel");
-        console.log(error);
+      .catch(() => {
+        const error = new Error(i18n.global.t('errorWhileUploadingImageForClassroom'));
+        throw error;
       });
   },
   async deletePicture(_, payload) {
-
     await axios
       .delete(picturesBaseUrl, {
         data: {
@@ -47,8 +47,9 @@ export default {
           isShared: payload.classroomID === 0 ? true : false,
         },
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        const error = new Error(i18n.global.t("errorWhileDeletingImageForClassroom"));
+        throw error;
       });
   },
 };

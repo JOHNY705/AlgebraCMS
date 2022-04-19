@@ -18,5 +18,10 @@
   "noImagesForClassroom": "There are currently no pictures for selected classroom.",
   "tooltipMaxNumberOfImages": "One classroom cannot have more than 5 pictures.",
   "error": "Error",
-  "errorWrongFileFormat": "Selected file format is not supported."
+  "errorWrongFileFormat": "Selected file format is not supported.",
+  "errorWrongImageResolutionForTablet" : "Selected image does not have the required resolution(800x1240)!",
+  "errorWhileFetchingImagesForClassroom": "An error occurred while fetching images for classroom.",
+  "errorWhileUploadingImageForClassroom": "An error occurred while uploading the image for classroom.",
+  "errorWhileDeletingImageForClassroom": "An error occurred while deleting the image for classroom.",
+  "errorWhileFetchingLocations": "An error occurred while fetching locations containing classrooms."
 }

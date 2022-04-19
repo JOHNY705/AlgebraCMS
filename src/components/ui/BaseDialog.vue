@@ -9,7 +9,7 @@
           <header class="modal-header">
             <section class="header">
               <img
-                v-if="!!dialogError"
+                v-if="!!dialogWarning"
                 class="fas fa-exclamation-triangle danger-icon"
               />
             </section>
@@ -42,21 +42,20 @@ export default {
       type: String,
       required: false,
     },
-    dialogError: {
+    dialogWarning: {
       type: Boolean,
       required: false
     }
   },
   methods: {
     close() {
-      console.log("Klik");
       this.$emit("close");
     },
   },
 };
 </script>
 
-<style scoped>
+<style>
 .modal-backdrop {
   position: fixed;
   z-index: 9998;
@@ -79,7 +78,7 @@ export default {
   display: flex;
   flex-direction: column;
   width: 45rem;
-  height: 30rem;
+  height: auto;
   margin: 0rem auto;
   padding: 2rem;
   background-color: #fff;
@@ -148,6 +147,7 @@ export default {
   margin-top: 0.5rem;
   font-size: 1.9rem;
   font-weight: 400;
+  margin-bottom: 2rem;
 }
 
 .modal-footer {
@@ -155,7 +155,8 @@ export default {
 }
 
 .confirm-delete-btn,
-.cancel-delete-btn {
+.cancel-delete-btn,
+.close-dialog-btn {
   font-family: 'Stolzl-Book';
   border-radius: 0.5rem;
   color: white;
@@ -181,6 +182,15 @@ export default {
 
 .confirm-delete-btn {
   background: rgb(18, 70, 9);
+}
+
+.close-dialog-btn {
+  background: rgb(29, 32, 41);
+}
+
+.close-dialog-btn:hover {
+  cursor: pointer;
+  transform: scale(1.05);
 }
 
 .cancel-delete-btn {

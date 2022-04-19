@@ -88,19 +88,17 @@
           </div>
         </div>
       </div>
-      <DeleteDialog v-show="isDeleteDialogShown" @close="closeDeleteDialog()">
-        <template v-slot:footer>
-          <button class="confirm-delete-btn" @click="deletePicture()">
+      <base-dialog :show="error || isDeleteDialogShown" :title="dialogTitle" :message="dialogMessage" :dialogWarning="error || isDeleteDialogShown" @close="handleDialog">
+        <template v-slot:footer v-if="error">
+          <button class="close-dialog-btn" @click="handleDialog">Zatvori</button>
+        </template>
+        <template v-slot:footer v-else>
+          <button class="confirm-delete-btn" @click="deletePicture">
             {{ $t("confirm") }}
           </button>
-          <button class="cancel-delete-btn" @click="closeDeleteDialog">
+          <button class="cancel-delete-btn" @click="handleDialog">
             {{ $t("cancel") }}
           </button>
-        </template>
-      </DeleteDialog>
-      <base-dialog :show="!!error" :title="dialogTitle" :message="dialogMessage" :dialogError="!!error" @close="handleError">
-        <template v-slot:footer v-if="!!error">
-          <button class="confirm-delete-btn" @click="handleError">Zatvori</button>
         </template>
       </base-dialog>
     </div>
@@ -108,13 +106,12 @@
 </template>
 
 <script>
-import DeleteDialog from "../components/ui/DeleteDialog.vue";
 import i18n from "@/i18n";
 
 export default {
   data() {
     return {
-      error: null,
+      error: false,
       dialogTitle: null,
       dialogMessage: null,
       previewImage: null,
@@ -160,9 +157,6 @@ export default {
   created() {
     this.loadPicturesForClassroom();
   },
-  components: {
-    DeleteDialog,
-  },
   methods: {
     async loadPicturesForClassroom() {
       this.isLoading = true;
@@ -171,7 +165,9 @@ export default {
           classroomID: this.selectedClassroomID,
         });
       } catch (error) {
-        console.log(error);
+        this.error = true;
+        this.dialogTitle = i18n.global.t('error');
+        this.dialogMessage = error.message;
       }
       this.isLoading = false;
     },
@@ -192,8 +188,9 @@ export default {
         }
       });
     },
-    handleError() {
-      this.error = null;
+    handleDialog() {
+      this.error = false;
+      this.isDeleteDialogShown = false;
       this.dialogTitle = null;
       this.dialogMessage = null;
     },
@@ -213,8 +210,19 @@ export default {
           let reader = new FileReader();
           this.isImageSelected = true;
           reader.onload = (e) => {
-            this.previewImage = e.target.result;
-            this.previewImageType = e.target.result.type;
+            var img = new Image();
+            img.src = e.target.result;
+            img.onload = () => {
+              if (img.width === 800 && img.height === 1240) {
+                this.previewImage = e.target.result;
+                this.previewImageType = e.target.result.type;
+              }
+              else {
+                this.error = true;
+                this.dialogTitle = i18n.global.t('error');
+                this.dialogMessage = i18n.global.t('errorWrongImageResolutionForTablet');
+              }
+            }      
           };
           reader.readAsDataURL(file[0]);
           this.$emit("input", file[0]);
@@ -229,12 +237,11 @@ export default {
     showDeleteDialog(pictureID) {
       this.selectedPictureID = pictureID;
       this.isDeleteDialogShown = true;
-    },
-    closeDeleteDialog() {
-      this.isDeleteDialogShown = false;
+      this.dialogTitle = i18n.global.t('deleteImage');
+      this.dialogMessage = i18n.global.t('confirmDeleteImage');
     },
     async deletePicture() {
-      this.closeDeleteDialog();
+      this.handleDialog();
       this.previewImage = null;
       this.isLoading = true;
       try {
@@ -243,7 +250,9 @@ export default {
           pictureID: this.selectedPictureID,
         });
       } catch (error) {
-        console.log(error);
+        this.error = true;
+        this.dialogTitle = i18n.global.t('error');
+        this.dialogMessage = error.message;
       }
       this.loadPicturesForClassroom();
     },
@@ -256,12 +265,14 @@ export default {
             picture: this.previewImage,
           });
         } catch (error) {
-          console.log(error);
+          this.error = true;
+          this.dialogTitle = i18n.global.t('error');
+          this.dialogMessage = error.message;
         }
         this.previewImage = null;
         this.loadPicturesForClassroom();
       }
-    },
+    }
   },
 };
 </script>

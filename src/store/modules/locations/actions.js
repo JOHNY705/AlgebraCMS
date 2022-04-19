@@ -1,8 +1,8 @@
 import axios from "axios";
+import i18n from "@/i18n";
 
 export default {
   async loadLocations(context) {
-
     const locations = [];
 
     await axios
@@ -16,15 +16,16 @@ export default {
               city: response.data.locations[id].city,
               classrooms: response.data.locations[id].classrooms,
               isActive: false,
-            }
+            };
             locations.push(location);
           }
-        } else {
-          console.log("Error: " + response.data.exceptionMessage);
         }
       })
-      .catch((error) => console.log(error));
+      .catch(() => {
+        const error = new Error(i18n.global.t("errorWhileFetchingLocations"));
+        throw error;
+      });
 
     context.commit("setLocations", locations);
-  }
+  },
 };
