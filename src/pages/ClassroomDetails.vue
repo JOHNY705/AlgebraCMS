@@ -114,6 +114,7 @@ export default {
       error: false,
       dialogTitle: null,
       dialogMessage: null,
+      images: null,
       previewImage: null,
       previewImageType: null,
       isDeleteDialogShown: false,
@@ -248,13 +249,16 @@ export default {
         await this.$store.dispatch("pictures/deletePicture", {
           classroomID: this.selectedClassroomID,
           pictureID: this.selectedPictureID,
+          pictures: this.pictures
         });
       } catch (error) {
         this.error = true;
         this.dialogTitle = i18n.global.t('error');
         this.dialogMessage = error.message;
       }
-      this.loadPicturesForClassroom();
+      this.isLoading = false;
+      console.log(this.pictures);
+      //this.loadPicturesForClassroom();
     },
     async uploadPicture() {
       if (this.previewImage) {
@@ -438,8 +442,7 @@ ul li {
   width: inherit;
   bottom: 3.5rem;
   left: 0;
-  padding-bottom: 0.5rem;
-  padding-top: 0.5rem;
+  padding: 0.5rem;
   border-radius: 0.5rem;
   color: white;
   font-size: 1.3rem;

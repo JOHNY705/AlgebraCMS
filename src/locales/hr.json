@@ -18,10 +18,13 @@
   "noImagesForClassroom": "Trenutno nema postavljenih slika za odabranu učionu.",
   "tooltipMaxNumberOfImages": "Broj slika za jednu učionu ne smije biti veći od 5.",
   "error": "Greška",
-  "errorWrongFileFormat": "Odabrana datoteka nije dobrog formata!",
-  "errorWrongImageResolutionForTablet": "Odabrana slika nije ispravne rezolucije(800x1240)!",
+  "errorWrongFileFormat": "Odabrana datoteka nije dobrog formata! Molimo Vas odaberite datoteku formata .jpg, .png ili .gif.",
+  "errorWrongImageResolutionForTablet": "Odabrana slika nije ispravne rezolucije! Molimo Vas odaberite sliku rezolucije 800x1240.",
   "errorWhileFetchingImagesForClassroom": "Došlo je do greške prilikom dohvaćanja slika za učionu.",
   "errorWhileUploadingImageForClassroom": "Došlo je do greške prilikom objavljivanja slike za učionu.",
   "errorWhileDeletingImageForClassroom": "Došlo je do greške prilikom brisanja slike za učionu.",
-  "errorWhileFetchingLocations": "Došlo je do greške prilikom dohvaćanja lokacija s učionama."
+  "errorWhileFetchingLocations": "Došlo je do greške prilikom dohvaćanja lokacija s učionama.",
+  "picture_existing_shared": "Nije moguće dodati sliku za odabranu učionu jer već postoji ista slika u dijeljenim slikama.",
+  "picture_max_limit": "Nije moguće dodati sliku za odabranu učionu jer učiona već ima maksimalan broj slika(5).",
+  "pleaseTryAgainLater": "Molimo Vas pokušajte kasnije."
 }

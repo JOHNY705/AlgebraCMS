@@ -22,8 +22,7 @@ export default {
         }
       })
       .catch(() => {
-        const error = new Error(i18n.global.t("errorWhileFetchingLocations"));
-        throw error;
+        throw new Error(`${i18n.global.t("errorWhileFetchingLocations")} ${i18n.global.t("pleaseTryAgainLater")}`);
       });
 
     context.commit("setLocations", locations);

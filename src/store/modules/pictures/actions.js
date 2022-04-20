@@ -20,9 +20,10 @@ export default {
         }
       })
       .catch(() => {
-        const error = new Error(i18n.global.t('errorWhileFetchingImagesForClassroom'));
-        throw error;
+        throw new Error(`${i18n.global.t('errorWhileFetchingImagesForClassroom')} ${i18n.global.t('pleaseTryAgainLater')}`);
       });
+
+      console.log(pictures);
 
     context.commit("setPictures", pictures);
   },
@@ -33,12 +34,15 @@ export default {
         classroomId: payload.classroomID,
         isShared: payload.classroomID === 0 ? true : false,
       })
-      .catch(() => {
-        const error = new Error(i18n.global.t('errorWhileUploadingImageForClassroom'));
-        throw error;
+      .catch((error) => {
+        const baseError = `${i18n.global.t('errorWhileUploadingImageForClassroom')} ${i18n.global.t('pleaseTryAgainLater')}`;       
+        if (error.response) {
+          throw new Error(i18n.global.t(error.response.data.errorCode) || baseError);
+        }
+        throw new Error(baseError);
       });
   },
-  async deletePicture(_, payload) {
+  async deletePicture(context, payload) {
     await axios
       .delete(picturesBaseUrl, {
         data: {
@@ -47,9 +51,11 @@ export default {
           isShared: payload.classroomID === 0 ? true : false,
         },
       })
+      .then(() => {
+        context.commit("removePicture", payload);
+      })
       .catch(() => {
-        const error = new Error(i18n.global.t("errorWhileDeletingImageForClassroom"));
-        throw error;
+        throw new Error(`${i18n.global.t("errorWhileDeletingImageForClassroom")} ${i18n.global.t('pleaseTryAgainLater')}`);
       });
   },
 };

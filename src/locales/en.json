@@ -18,10 +18,13 @@
   "noImagesForClassroom": "There are currently no pictures for selected classroom.",
   "tooltipMaxNumberOfImages": "One classroom cannot have more than 5 pictures.",
   "error": "Error",
-  "errorWrongFileFormat": "Selected file format is not supported.",
-  "errorWrongImageResolutionForTablet" : "Selected image does not have the required resolution(800x1240)!",
+  "errorWrongFileFormat": "Selected file format is not supported. Please select a file with format .jpg, .png or .gif.",
+  "errorWrongImageResolutionForTablet" : "Selected image does not have the required resolution! Please select an image with resolution of 800x1240.",
   "errorWhileFetchingImagesForClassroom": "An error occurred while fetching images for classroom.",
   "errorWhileUploadingImageForClassroom": "An error occurred while uploading the image for classroom.",
   "errorWhileDeletingImageForClassroom": "An error occurred while deleting the image for classroom.",
-  "errorWhileFetchingLocations": "An error occurred while fetching locations containing classrooms."
+  "errorWhileFetchingLocations": "An error occurred while fetching locations containing classrooms.",
+  "picture_existing_shared": "The selected image already exists in shared images.",
+  "picture_max_limit": "It is not possible to upload image for selected classroom, because it already has maximum number of images(5)",
+  "pleaseTryAgainLater": "Please try again later."
 }
