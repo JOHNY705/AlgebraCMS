@@ -33,7 +33,6 @@ export default {
         isShared: payload.classroomID === 0 ? true : false,
       })
       .then((response) => {
-        console.log(response.data);
         context.commit("addPicture", response.data);
       })
       .catch((error) => {
