@@ -1,5 +1,21 @@
 <template>
-  <div class="spinner">
+  <div v-if="isLoadingAddDelete" class="base-spinner-backdrop">
+    <div class="base-dialog-container">
+      <div class="spinner">
+        <div class="lds-roller">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div v-else class="spinner">
     <div class="lds-roller">
       <div></div>
       <div></div>
@@ -13,7 +29,32 @@
   </div>
 </template>
 
+<script>
+export default {
+  props: {
+    isLoadingAddDelete: {
+      type: Boolean,
+      required: false,
+    },
+  },
+};
+</script>
+
 <style scoped>
+.base-spinner-backdrop {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.1s ease;
+}
+
 .spinner {
   display: flex;
   justify-content: center;

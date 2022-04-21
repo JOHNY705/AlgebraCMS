@@ -17,6 +17,7 @@
           <section class="modal-body">
             <h2 class="body-title">{{ title }}</h2>
             <h3 class="body-description"> {{ message }}</h3>
+            <slot name="body"></slot>
           </section>
           <footer class="modal-footer">
             <slot name="footer"></slot>

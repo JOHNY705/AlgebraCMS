@@ -23,16 +23,18 @@ export default {
         throw new Error(`${i18n.global.t('errorWhileFetchingImagesForClassroom')} ${i18n.global.t('pleaseTryAgainLater')}`);
       });
 
-      console.log(pictures);
-
     context.commit("setPictures", pictures);
   },
-  async addPicture(_, payload) {
+  async addPicture(context, payload) {
     await axios
       .post(picturesBaseUrl, {
         base64Picture: payload.picture.split(",")[1],
         classroomId: payload.classroomID,
         isShared: payload.classroomID === 0 ? true : false,
+      })
+      .then((response) => {
+        console.log(response.data);
+        context.commit("addPicture", response.data);
       })
       .catch((error) => {
         const baseError = `${i18n.global.t('errorWhileUploadingImageForClassroom')} ${i18n.global.t('pleaseTryAgainLater')}`;       

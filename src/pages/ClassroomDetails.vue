@@ -88,6 +88,7 @@
           </div>
         </div>
       </div>
+      <base-spinner v-if="isLoadingAddDelete" :isLoadingAddDelete="isLoadingAddDelete"></base-spinner>
       <base-dialog :show="error || isDeleteDialogShown" :title="dialogTitle" :message="dialogMessage" :dialogWarning="error || isDeleteDialogShown" @close="handleDialog">
         <template v-slot:footer v-if="error">
           <button class="close-dialog-btn" @click="handleDialog">Zatvori</button>
@@ -120,6 +121,7 @@ export default {
       isDeleteDialogShown: false,
       selectedPictureID: null,
       isLoading: true,
+      isLoadingAddDelete: false,
       isImageSelected: false,
     };
   },
@@ -244,7 +246,7 @@ export default {
     async deletePicture() {
       this.handleDialog();
       this.previewImage = null;
-      this.isLoading = true;
+      this.isLoadingAddDelete = true;
       try {
         await this.$store.dispatch("pictures/deletePicture", {
           classroomID: this.selectedClassroomID,
@@ -256,13 +258,11 @@ export default {
         this.dialogTitle = i18n.global.t('error');
         this.dialogMessage = error.message;
       }
-      this.isLoading = false;
-      console.log(this.pictures);
-      //this.loadPicturesForClassroom();
+      this.isLoadingAddDelete = false;
     },
     async uploadPicture() {
       if (this.previewImage) {
-        this.isLoading = true;
+        this.isLoadingAddDelete = true;
         try {
           await this.$store.dispatch("pictures/addPicture", {
             classroomID: this.selectedClassroomID,
@@ -274,7 +274,7 @@ export default {
           this.dialogMessage = error.message;
         }
         this.previewImage = null;
-        this.loadPicturesForClassroom();
+        this.isLoadingAddDelete = false;
       }
     }
   },
