@@ -52,7 +52,6 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: opacity 0.1s ease;
 }
 
 .spinner {

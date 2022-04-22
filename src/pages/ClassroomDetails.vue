@@ -63,6 +63,7 @@
                 type="file"
                 accept="image/jpeg, image/png, image/gif"
                 @input="pickFile"
+                @change="clearFileSelection"
               /><img class="fas fa-image" />{{ $t("chooseImage") }}</label
             >
             <div
@@ -197,9 +198,6 @@ export default {
       this.dialogTitle = null;
       this.dialogMessage = null;
     },
-    selectImage() {
-      this.$refs.fileInput.click();
-    },
     pickFile() {
       let input = this.$refs.fileInput;
       let file = input.files;
@@ -276,6 +274,9 @@ export default {
         this.previewImage = null;
         this.isLoadingAddDelete = false;
       }
+    },
+    clearFileSelection(event) {
+      event.target.value = null;
     }
   },
 };
@@ -665,6 +666,14 @@ input[type="file"] {
   text-align: center;
   justify-content: center;
   display: flex;
+}
+
+img {
+  -webkit-backface-visibility: hidden; 
+  -ms-transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+
 }
 
 @media screen and (max-width: 1279px) {
