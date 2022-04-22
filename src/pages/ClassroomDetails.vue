@@ -668,14 +668,6 @@ input[type="file"] {
   display: flex;
 }
 
-img {
-  -webkit-backface-visibility: hidden; 
-  -ms-transform: translateZ(0);
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-
-}
-
 @media screen and (max-width: 1279px) {
   .container {
     height: auto;
