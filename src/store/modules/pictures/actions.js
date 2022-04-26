@@ -1,7 +1,7 @@
 import axios from "axios";
 import i18n from "@/i18n";
 
-const picturesBaseUrl = "https://cmsapi.algebra.hr:50073/api/pictures";
+const picturesBaseUrl = "https://cmsapi.algebra.hr/api/pictures";
 
 export default {
   async loadPictures(context, payload) {

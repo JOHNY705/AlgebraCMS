@@ -15,18 +15,6 @@ export default {
     TheHeader,
     TheSidebar,
   },
-  // created() {
-  //   this.loadLocations();
-  // },
-  // methods: {
-  //   async loadLocations() {
-  //     try {
-  //       await this.$store.dispatch("locations/loadLocations");
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   },
-  // },
 };
 </script>
 

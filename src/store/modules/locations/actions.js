@@ -6,7 +6,7 @@ export default {
     const locations = [];
 
     await axios
-      .get("https://cmsapi.algebra.hr:50073/api/locations")
+      .get("https://cmsapi.algebra.hr/api/locations")
       .then((response) => {
         if (response.data.isSuccessful) {
           for (const id in response.data.locations) {
