@@ -1,5 +1,9 @@
 {
-  "logout": "Log out",
+  "login": "Log In",
+  "logout": "Log Out",
+  "username": "Username",
+  "password": "Password",
+  "contentManagementSystem": "Content Management System",
   "sidebarTitle": "Content management",
   "contentForTablets": "Images for tablets",
   "selectedClassroom": "Selected classroom:",

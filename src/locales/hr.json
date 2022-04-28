@@ -1,5 +1,9 @@
 {
+  "login": "Prijava",
   "logout": "Odjava",
+  "username": "Korisničko ime",
+  "password": "Lozinka",
+  "contentManagementSystem": "Sustav za upravljanje sadržajem",
   "sidebarTitle": "Upravljanje sadržajem",
   "contentForTablets": "Slike za tablete",
   "selectedClassroom": "Odabrana učiona:",
