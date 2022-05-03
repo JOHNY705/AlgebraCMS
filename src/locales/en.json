@@ -3,6 +3,7 @@
   "logout": "Log Out",
   "username": "Username",
   "password": "Password",
+  "wrong_credentials": "wrong username or password. Please check that you have entered the correct credentials.",
   "contentManagementSystem": "Content Management System",
   "sidebarTitle": "Content management",
   "contentForTablets": "Images for tablets",

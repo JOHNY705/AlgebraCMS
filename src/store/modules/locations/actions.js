@@ -6,7 +6,11 @@ export default {
     const locations = [];
 
     await axios
-      .get("https://cmsapi.algebra.hr/api/locations")
+      .get("https://cmsapi.algebra.hr/api/locations", {
+        headers: {
+          'api-key': process.env.VUE_APP_API_KEY
+        }
+      })
       .then((response) => {
         if (response.data.isSuccessful) {
           for (const id in response.data.locations) {

@@ -2,6 +2,9 @@ import axios from "axios";
 import i18n from "@/i18n";
 
 const picturesBaseUrl = "https://cmsapi.algebra.hr/api/pictures";
+const headers = {
+  'api-key': process.env.VUE_APP_API_KEY
+}
 
 export default {
   async loadPictures(context, payload) {
@@ -13,7 +16,11 @@ export default {
         : picturesBaseUrl + `/${payload.classroomID}`;
 
     await axios
-      .get(loadPicturesURL)
+      .get(loadPicturesURL, {
+        headers: {
+          'api-key': process.env.VUE_APP_API_KEY
+        }
+      })
       .then((response) => {
         if (response.data.isSuccessful) {
           pictures.push(...response.data.pictures);
@@ -26,12 +33,14 @@ export default {
     context.commit("setPictures", pictures);
   },
   async addPicture(context, payload) {
+    const data = {
+      base64Picture: payload.picture.split(",")[1],
+      classroomId: payload.classroomID,
+      username: payload.username,
+      password: payload.password
+    }
     await axios
-      .post(picturesBaseUrl, {
-        base64Picture: payload.picture.split(",")[1],
-        classroomId: payload.classroomID,
-        isShared: payload.classroomID === 0 ? true : false,
-      })
+      .post(picturesBaseUrl, data, {headers: headers})
       .then((response) => {
         context.commit("addPicture", response.data);
       })
@@ -51,6 +60,7 @@ export default {
           classroomId: payload.classroomID,
           isShared: payload.classroomID === 0 ? true : false,
         },
+        headers: headers
       })
       .then(() => {
         context.commit("removePicture", payload);

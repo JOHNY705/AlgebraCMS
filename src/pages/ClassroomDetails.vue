@@ -670,7 +670,7 @@ input[type="file"] {
 
 @media screen and (max-width: 1279px) {
   .container {
-    height: auto;
+    height: 100%;
   }
 
   .images-and-upload-container {
@@ -680,7 +680,7 @@ input[type="file"] {
   .images-container {
     width: 100%;
     margin: 0;
-    height: auto;
+    height: 50%;
   }
 
   .images {
@@ -699,6 +699,7 @@ input[type="file"] {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    height: 50%;
   }
 
   .choose-image-lbl {
@@ -722,4 +723,41 @@ input[type="file"] {
     width: 100%;
   }
 }
+
+@media screen and (max-width: 900px) {
+  .container {
+    height: auto;
+  }
+  
+  .image-upload-container {
+    width: 100%;
+    margin: 0;
+    margin-top: 1rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+  }
+
+  .image-card {
+    width: 32%;
+    min-width: 10rem;
+    margin: max(0.5rem, 1%);
+  }
+
+  .image-preview {
+    width: 31%;
+    margin: 1rem 0;
+  }
+
+  .image-upload, .add-image-btn {
+    min-width: 18rem;
+  }
+
+  .add-image-btn-container {
+    display: flex;
+    justify-content: center;
+  }
+}
+
 </style>
