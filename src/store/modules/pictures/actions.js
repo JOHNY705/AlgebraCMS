@@ -36,8 +36,7 @@ export default {
     const data = {
       base64Picture: payload.picture.split(",")[1],
       classroomId: payload.classroomID,
-      username: payload.username,
-      password: payload.password
+      isShared: payload.classroomID === 0 ? true : false,
     }
     await axios
       .post(picturesBaseUrl, data, {headers: headers})

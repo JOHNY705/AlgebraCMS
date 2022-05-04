@@ -4,21 +4,21 @@
       <router-link to="/">
         <img class="algebra-logo" src="@/assets/Algebra_logo.png" />
       </router-link>
-      <!-- <div @clickout="closeUserMenu" class="action">
+      <div @clickout="closeUserMenu" class="action">
         <div class="profile" @click="menuToggle">
           <img class="fas fa-user user-icon" />
-          <p class="user-name">Pero Peric</p>
+          <p class="user-name">{{username}}</p>
         </div>
         <div class="user-menu" :class="{ active: showUserMenu }">
           <ul>
             <li>
-              <a href="#">
+              <a @click.prevent="logout" href="#">
                 <img class="fas fa-sign-out-alt menu-logout-icon" />{{ $t("logout") }}
               </a>
             </li>
           </ul>
         </div>
-      </div> -->
+      </div>
     </nav>
   </header>
 </template>
@@ -30,6 +30,7 @@ export default {
   data() {
     return {
       showUserMenu: false,
+      username: null,
     };
   },
   methods: {
@@ -39,7 +40,14 @@ export default {
     closeUserMenu() {
       this.showUserMenu = false;
     },
+    logout() {
+      this.$store.dispatch("user/logout");
+      this.$router.push("/Login");
+    }
   },
+  created() {
+    this.username = this.$store.getters["user/user"].Username;
+  }
 };
 </script>
 

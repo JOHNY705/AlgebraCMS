@@ -1,60 +1,97 @@
 <template>
   <form @submit.prevent="login">
-  <div class="page-container">
-    <div class="login-container">
-      <img class="algebra-logo" src="@/assets/algebra_logo_color-black_v.png" />
-      <h2>{{ $t("contentManagementSystem") }}</h2>
-      <div class="login-username-container">
-        <input
-          type="text"
-          name="text"
-          ref="usernameInput"
-          autocomplete="off"
-          required
+    <div class="page-container">
+      <div class="login-container">
+        <img
+          class="algebra-logo"
+          src="@/assets/algebra_logo_color-black_v.png"
         />
-        <label for="text" class="label-name">
-          <span class="content-name"> {{ $t("username") }} </span>
-        </label>
+        <h2>{{ $t("contentManagementSystem") }}</h2>
+        <div class="login-username-container">
+          <input
+            type="text"
+            name="text"
+            ref="usernameInput"
+            autocomplete="off"
+            required
+          />
+          <label for="text" class="label-name">
+            <span class="content-name"> {{ $t("username") }} </span>
+          </label>
+        </div>
+        <div class="login-password-container">
+          <input
+            type="password"
+            name="password"
+            ref="passwordInput"
+            autocomplete="off"
+            required
+          />
+          <label for="password" class="label-name">
+            <span class="content-name"> {{ $t("password") }} </span>
+          </label>
+        </div>
+        <button type="submit" class="btn-login">{{ $t("login") }}</button>
       </div>
-      <div class="login-password-container">
-        <input
-          type="password"
-          name="password"
-          ref="passwordInput"
-          autocomplete="off"
-          required
-        />
-        <label for="password" class="label-name">
-          <span class="content-name"> {{ $t("password") }} </span>
-        </label>
-      </div>
-      <button type="submit" class="btn-login">{{ $t("login") }}</button>
     </div>
-  </div>
   </form>
+  <base-spinner v-if="isLoading" :spinnerWithBackground="isLoading"></base-spinner>
+  <base-dialog :show="error" :title="dialogTitle" :message="dialogMessage" :dialogWarning="error" @close="handleDialog">
+        <template v-slot:footer>
+          <button class="close-dialog-btn" @click="handleDialog">Zatvori</button>
+        </template>
+      </base-dialog>
 </template>
 
 <script>
+import i18n from "@/i18n";
+
 export default {
+  data() {
+    return {
+      isLoading: false,
+      error: false,
+      dialogTitle: null,
+      dialogMessage: null,
+    }
+  },
   methods: {
-    login() {
+    async login() {
       let username = this.$refs.usernameInput.value;
       let password = this.$refs.passwordInput.value;
       if (username.length !== 0 && password.length !== 0) {
-          this.$store.dispatch("user/login", {
-          username: username,
-          password: password
-        });
-        this.$router.push("/");
+        this.isLoading = true;
+        try {
+          await this.$store.dispatch("user/login", {
+            username: username,
+            password: password,
+          });
+          this.$router.push("/");
+        } catch (error) {
+          this.error = true;
+          this.dialogTitle = i18n.global.t('error');
+          this.dialogMessage = error.message;
+        }
       }
+      this.isLoading = false;
       this.$refs.usernameInput.value = null;
       this.$refs.passwordInput.value = null;
     },
+    handleDialog() {
+      this.error = false;
+    }
   },
 };
 </script>
 
 <style scoped>
+.loading-spinner-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  padding-left: max(30rem, 19.5%);
+}
+
 .page-container {
   background: rgb(236, 237, 241);
   display: flex;

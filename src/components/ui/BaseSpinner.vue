@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isLoadingAddDelete" class="base-spinner-backdrop">
+  <div v-if="spinnerWithBackground" class="base-spinner-backdrop">
     <div class="base-dialog-container">
       <div class="spinner">
         <div class="lds-roller">
@@ -32,7 +32,7 @@
 <script>
 export default {
   props: {
-    isLoadingAddDelete: {
+    spinnerWithBackground: {
       type: Boolean,
       required: false,
     },

@@ -89,7 +89,7 @@
           </div>
         </div>
       </div>
-      <base-spinner v-if="isLoadingAddDelete" :isLoadingAddDelete="isLoadingAddDelete"></base-spinner>
+      <base-spinner v-if="isLoadingAddDelete" :spinnerWithBackground="isLoadingAddDelete"></base-spinner>
       <base-dialog :show="error || isDeleteDialogShown" :title="dialogTitle" :message="dialogMessage" :dialogWarning="error || isDeleteDialogShown" @close="handleDialog">
         <template v-slot:footer v-if="error">
           <button class="close-dialog-btn" @click="handleDialog">Zatvori</button>
@@ -670,7 +670,7 @@ input[type="file"] {
 
 @media screen and (max-width: 1279px) {
   .container {
-    height: 100%;
+    height: auto;
   }
 
   .images-and-upload-container {
