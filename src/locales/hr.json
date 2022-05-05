@@ -33,5 +33,8 @@
   "picture_max_limit": "Nije moguće dodati sliku za odabranu učionu jer učiona već ima maksimalan broj slika(5).",
   "pleaseTryAgainLater": "Molimo Vas pokušajte kasnije.",
   "create_failed": "Došlo je do greške prilikom objavljivanja slike za učionu. Molimo Vas pokušajte kasnije.",
-  "errorWhileLoggingIn": "Došlo je do greške prilikom prijave u sustav."
+  "errorWhileLoggingIn": "Došlo je do greške prilikom prijave u sustav.",
+  "accessDenied": "Zabranjen pristup",
+  "accessDeniedDescription": "Nemate dopuštenje za pristup ovoj stranici.",
+  "returnToHomePage": "Povratak na početnu stranicu"
 }

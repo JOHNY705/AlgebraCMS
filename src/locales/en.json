@@ -33,5 +33,8 @@
   "picture_max_limit": "It is not possible to upload image for selected classroom, because it already has maximum number of images(5)",
   "pleaseTryAgainLater": "Please try again later.",
   "create_failed": "An error occurred while uploading the image for classroom. Please try again later.",
-  "errorWhileLoggingIn": "An error occured while trying to log in."
+  "errorWhileLoggingIn": "An error occured while trying to log in.",
+  "accessDenied": "Access Denied",
+  "accessDeniedDescription": "You do not have the permission to access this page.",
+  "returnToHomePage": "Return to home page"
 }

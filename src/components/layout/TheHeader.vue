@@ -7,7 +7,7 @@
       <div @clickout="closeUserMenu" class="action">
         <div class="profile" @click="menuToggle">
           <img class="fas fa-user user-icon" />
-          <p class="user-name">{{username}}</p>
+          <p class="user-name">{{ username }}</p>
         </div>
         <div class="user-menu" :class="{ active: showUserMenu }">
           <ul>
@@ -46,7 +46,7 @@ export default {
     }
   },
   created() {
-    this.username = this.$store.getters["user/user"].Username;
+    this.username = this.$store.getters["user/username"];
   }
 };
 </script>

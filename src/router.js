@@ -1,9 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import LoginPage from "./pages/LoginPage.vue";
+import AccessDeniedPage from "./pages/AccessDeniedPage.vue";
 import HomePage from "./pages/HomePage.vue";
 import ClassroomDetails from "./pages/ClassroomDetails.vue";
 import store from "./store/index.js";
+import { Role } from './utils/role.js';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -14,33 +16,41 @@ const router = createRouter({
       component: LoginPage,
     },
     {
+      path: "/AccessDenied",
+      name: "AccessDenied",
+      component: AccessDeniedPage,
+      meta: { authorize: [] }
+    },
+    {
       path: "/",
       name: "Home",
       component: HomePage,
-      meta: { componentsEnabled: true },
+      meta: { componentsEnabled: true, authorize: [] },
     },
     {
       path: "/Media/:locationID/Classroom/:classroomID",
-      beforeEnter: checkUserRole,
       component: ClassroomDetails,
-      meta: { componentsEnabled: true },
+      meta: { componentsEnabled: true, authorize: [Role.CMSAdmin] },
     },
   ],
   linkActiveClass: "active",
 });
 
-function checkUserRole(to, from, next) {
-  if(store.getters["user/user"].Role === "CMS.Admin1") {
-    next()
-  } else {
-    next()
-  }
-}
+router.beforeEach(async (to, from, next) => {
 
-router.beforeEach(async (to) => {
-  if(!store.getters["user/isAuthenticated"] && to.name !== "Login") {
-    return ({ name: "Login" });
+  const { authorize } = to.meta;
+
+  if (authorize) {
+    if (!store.getters["user/isAuthenticated"]) {
+      return next({ name: "Login" });
+    }
+
+    if (authorize.length && !authorize.includes(store.getters["user/userRole"])) {
+      return next({ name: "AccessDenied" });
+    }
   }
+
+  next();
 });
 
 export default router;

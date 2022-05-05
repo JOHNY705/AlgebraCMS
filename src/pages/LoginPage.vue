@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="login">
+  <form @submit.prevent="login" novalidate>
     <div class="page-container">
       <div class="login-container">
         <img

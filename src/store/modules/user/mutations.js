@@ -1,11 +1,12 @@
 export default {
-  setUser(state, payload) {
-    state.user = payload;
+  setUsername(state, payload) {
+    state.username = payload;
   },
   setToken(state, payload) {
     state.token = payload;
   },
-  removeUser(state) {
-    state.user = null;
+  removeUserCredentials(state) {
+    state.username = null;
+    state.token = null;
   }
 };

@@ -1,13 +1,21 @@
-//const CryptoJS = require("crypto-js");
-//const requiredUsername = "CMSAdmin";
+import { decryptToken } from "../../../utils/decription.js";
+import { Role } from '../../../utils/role.js';
 
 export default {
-  user(state) {
-    return state.user;
+  username(state) {
+    return state.username;
+  },
+  token(state) {
+    return state.token;
+  },
+  userRole(state) {
+    return JSON.parse(decryptToken(state.token)).Role;
   },
   isAuthenticated(state) {
-    if (state.user) {
-      return state.user.Username === process.env.VUE_APP_USERNAME && state.user.Role === process.env.VUE_APP_USER_ROLE;
+    if (state.token) {
+      const user = JSON.parse(decryptToken(state.token));
+      const roles = Object.values(Role);
+      return (!!user.Username  && roles.includes(user.Role));
     }
     return false;
   },
