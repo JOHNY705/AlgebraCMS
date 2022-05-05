@@ -31,28 +31,21 @@
             <span class="content-name"> {{ $t("password") }} </span>
           </label>
         </div>
+        <p v-show="!!error" class="login-error">{{ error }}</p>
         <button type="submit" class="btn-login">{{ $t("login") }}</button>
       </div>
     </div>
   </form>
   <base-spinner v-if="isLoading" :spinnerWithBackground="isLoading"></base-spinner>
-  <base-dialog :show="error" :title="dialogTitle" :message="dialogMessage" :dialogWarning="error" @close="handleDialog">
-        <template v-slot:footer>
-          <button class="close-dialog-btn" @click="handleDialog">Zatvori</button>
-        </template>
-      </base-dialog>
 </template>
 
 <script>
-import i18n from "@/i18n";
 
 export default {
   data() {
     return {
       isLoading: false,
-      error: false,
-      dialogTitle: null,
-      dialogMessage: null,
+      error: null,
     }
   },
   methods: {
@@ -68,18 +61,13 @@ export default {
           });
           this.$router.push("/");
         } catch (error) {
-          this.error = true;
-          this.dialogTitle = i18n.global.t('error');
-          this.dialogMessage = error.message;
+          this.error = error.message;
         }
       }
       this.isLoading = false;
       this.$refs.usernameInput.value = null;
       this.$refs.passwordInput.value = null;
     },
-    handleDialog() {
-      this.error = false;
-    }
   },
 };
 </script>
@@ -192,13 +180,19 @@ export default {
   transform: translateY(-120%);
   font-size: 1.4rem;
   left: 0px;
-  /* color: #005587; */
   color: #e37526;
 }
 
 .login-container input:focus + .label-name::after,
 .login-container input:valid + .label-name::after {
   transform: translateX(0%);
+}
+
+.login-error {
+  margin: 0;
+  font-size: 1.5rem;
+  color: red;
+  text-align: center;
 }
 
 .btn-login {
