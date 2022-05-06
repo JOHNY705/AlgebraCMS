@@ -1,5 +1,5 @@
 import { decryptToken } from "../../../utils/decription.js";
-import { Role } from '../../../utils/role.js';
+import { Role } from './role.js';
 
 export default {
   username(state) {

@@ -5,7 +5,7 @@ import AccessDeniedPage from "./pages/AccessDeniedPage.vue";
 import HomePage from "./pages/HomePage.vue";
 import ClassroomDetails from "./pages/ClassroomDetails.vue";
 import store from "./store/index.js";
-import { Role } from './utils/role.js';
+import { Role } from './store/modules/user/role.js';
 
 const router = createRouter({
   history: createWebHistory(),
