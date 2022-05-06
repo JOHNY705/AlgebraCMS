@@ -1,5 +1,5 @@
 import { decryptToken } from "../../../utils/decription.js";
-import { Role } from './role.js';
+import { Role } from '../../../enums/role.js';
 
 export default {
   username(state) {
@@ -15,7 +15,7 @@ export default {
     if (state.token) {
       const user = JSON.parse(decryptToken(state.token));
       const roles = Object.values(Role);
-      return (!!user.Username  && roles.includes(user.Role));
+      return (!!user.Username && roles.includes(user.Role));
     }
     return false;
   },
