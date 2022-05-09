@@ -69,12 +69,19 @@
             <div
               id="image-preview"
               class="image-preview"
+              @dragenter.prevent="toggleDropzone"
+              @dragleave.prevent="toggleDropzone"
+              @dragover.prevent
+              @drop.prevent="dragnDropFile"
+              :class="{ dropzone: isDropzoneActive }"
               :style="{
                 'background-image': previewImage
                   ? `url(${previewImage})`
                   : `url(${require('@/assets/image-icon.png')})`,
               }"
-            ></div>
+            >
+              <!-- <span class="drag-n-drop-tooltiptext">Drag and drop image</span> -->
+            </div>
             <div class="add-image-btn-container">
               <button
               class="add-image-btn"
@@ -124,6 +131,7 @@ export default {
       isLoading: true,
       isLoadingAddDelete: false,
       isImageSelected: false,
+      isDropzoneActive: false
     };
   },
   computed: {
@@ -200,40 +208,13 @@ export default {
     },
     pickFile() {
       let input = this.$refs.fileInput;
-      let file = input.files;
-      const allowedFileTypes = [
-        "image/jpeg",
-        "image/png",
-        "image/gif",
-      ];
-      if (file && file[0]) {
-        if (allowedFileTypes.includes(file[0].type)) {
-          let reader = new FileReader();
-          this.isImageSelected = true;
-          reader.onload = (e) => {
-            var img = new Image();
-            img.src = e.target.result;
-            img.onload = () => {
-              if (img.width === 800 && img.height === 1240) {
-                this.previewImage = e.target.result;
-                this.previewImageType = e.target.result.type;
-              }
-              else {
-                this.error = true;
-                this.dialogTitle = i18n.global.t('error');
-                this.dialogMessage = i18n.global.t('errorWrongImageResolutionForTablet');
-              }
-            }      
-          };
-          reader.readAsDataURL(file[0]);
-          this.$emit("input", file[0]);
-        }
-        else {
-          this.error = true;
-          this.dialogTitle = i18n.global.t('error');
-          this.dialogMessage = i18n.global.t('errorWrongFileFormat');
-        }
-      }
+      let file = input.files[0];
+      this.setBackgroundImage(file);
+    },
+    dragnDropFile(e) {
+      let file = e.dataTransfer.files[0];
+      this.setBackgroundImage(file);
+      this.toggleDropzone();
     },
     showDeleteDialog(pictureID) {
       this.selectedPictureID = pictureID;
@@ -277,6 +258,44 @@ export default {
     },
     clearFileSelection(event) {
       event.target.value = null;
+    },
+    setBackgroundImage(file) {
+      const allowedFileTypes = [
+        "image/jpeg",
+        "image/png",
+        "image/gif",
+      ];
+      if (file) {
+        if (allowedFileTypes.includes(file.type)) {
+          let reader = new FileReader();
+          this.isImageSelected = true;
+          reader.onload = (e) => {
+            var img = new Image();
+            img.src = e.target.result;
+            img.onload = () => {
+              if (img.width === 800 && img.height === 1240) {
+                this.previewImage = e.target.result;
+                this.previewImageType = e.target.result.type;
+              }
+              else {
+                this.error = true;
+                this.dialogTitle = i18n.global.t('error');
+                this.dialogMessage = i18n.global.t('errorWrongImageResolutionForTablet');
+              }
+            }      
+          };
+          reader.readAsDataURL(file);
+          this.$emit("input", file);
+        }
+        else {
+          this.error = true;
+          this.dialogTitle = i18n.global.t('error');
+          this.dialogMessage = i18n.global.t('errorWrongFileFormat');
+        }
+      }
+    },
+    toggleDropzone() {
+      this.isDropzoneActive = !this.isDropzoneActive;
     }
   },
 };
@@ -498,6 +517,7 @@ ul li {
 }
 
 .image-preview {
+  position: relative;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
@@ -507,6 +527,30 @@ ul li {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
 }
+
+.image-preview.dropzone {
+  border: 3px dashed rgb(203, 204, 214);
+  border-radius: 0.5rem;
+}
+
+/* .drag-n-drop-tooltiptext {
+  visibility: hidden;
+  background: black;
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  color: white;
+  font-size: 1.3rem;
+  text-align: center;
+  position: absolute;
+  transition: 0.2s ease-in-out;
+  opacity: 0;
+}
+
+.image-preview:hover .drag-n-drop-tooltiptext {
+  visibility: visible;
+  opacity: 1;
+} */
 
 .choose-image-lbl {
   font-size: 1.6rem;
