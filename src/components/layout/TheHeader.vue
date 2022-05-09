@@ -151,6 +151,7 @@ header nav {
   visibility: visible;
   opacity: 0.99;
   z-index: -100;
+  height: 6rem;
 }
 
 .action .user-menu ul {
@@ -178,7 +179,7 @@ header nav {
   font-size: 1.7rem;
   padding: 0.8rem 10rem;
   transition: 0.3s;
-  height: 5rem;
+  height: 6rem;
 }
 
 .action .user-menu ul li:hover a {
