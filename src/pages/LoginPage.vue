@@ -2,8 +2,7 @@
   <form @submit.prevent="login" novalidate>
     <div class="page-container">
       <div class="login-container">
-        <img
-          class="algebra-logo"
+        <img class="algebra-logo"
           src="@/assets/algebra_logo_color-black_v.png"
         />
         <h2>{{ $t("contentManagementSystem") }}</h2>
