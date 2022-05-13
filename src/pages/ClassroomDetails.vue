@@ -1,5 +1,5 @@
 <template>
-  <div class="page-container">
+  <base-page-container>
     <div class="loading-spinner-container" v-if="isLoading">
       <base-spinner></base-spinner>
     </div>
@@ -111,7 +111,7 @@
         </template>
       </base-dialog>
     </div>
-  </div>
+  </base-page-container>
 </template>
 
 <script>

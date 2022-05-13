@@ -12,6 +12,7 @@ import VueAxios from 'vue-axios';
 import i18n from './i18n'
 import BaseSpinner from './components/ui/BaseSpinner.vue';
 import BaseDialog from './components/ui/BaseDialog.vue';
+import BasePageContainer from './components/ui/BasePageContainer.vue';
 
 library.add(fas);
 library.add(far);
@@ -26,5 +27,6 @@ app.use(i18n);
 app.component('font-awesome-icon', FontAwesomeIcon);
 app.component('base-spinner', BaseSpinner);
 app.component('base-dialog', BaseDialog);
+app.component('base-page-container', BasePageContainer);
 
 app.mount('#app');
