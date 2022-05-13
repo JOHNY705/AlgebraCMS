@@ -10,14 +10,7 @@
           :locationTitle="selectedClassroom" 
           :cityLocationTitle="selectedCityAndAddress">
         </base-titles-container>
-        <!-- <div class="titles-container">
-          <h2 class="classroom-title">
-            {{ $t("selectedClassroom") }} {{ selectedClassroom }}
-          </h2>
-          <h2 class="classroom-location-title">{{ selectedCityAndAddress }}</h2>
-        </div> -->
-        <div class="title-images-separator"></div>
-        <div class="images-and-upload-container">
+        <base-media-container>
           <div class="images-container">
             <h3 class="images-title">
               {{ $t("currentImagesOnTablet") }}
@@ -85,7 +78,6 @@
                   : `url(${require('@/assets/image-icon.png')})`,
               }"
             >
-              <!-- <span class="drag-n-drop-tooltiptext">Drag and drop image</span> -->
             </div>
             <div class="add-image-btn-container">
               <button
@@ -99,7 +91,7 @@
             </button>
             </div>
           </div>
-        </div>
+        </base-media-container>
       </base-content-container>
       <base-spinner v-if="isLoadingAddDelete" :spinnerWithBackground="isLoadingAddDelete"></base-spinner>
       <base-dialog :show="error || isDeleteDialogShown" :title="dialogTitle" :message="dialogMessage" :dialogWarning="error || isDeleteDialogShown" @close="handleDialog">
@@ -333,19 +325,6 @@ export default {
   color: rgb(104, 101, 101);
 }
 
-.title-images-separator {
-  width: 100%;
-  background: rgb(223, 224, 231);
-}
-
-.images-and-upload-container {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  height: 100%;
-  padding-top: 1rem;
-}
-
 .images-container {
   border-radius: 0.5rem;
   display: flex;
@@ -490,25 +469,6 @@ ul li {
   border-radius: 0.5rem;
 }
 
-/* .drag-n-drop-tooltiptext {
-  visibility: hidden;
-  background: black;
-  width: 100%;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  color: white;
-  font-size: 1.3rem;
-  text-align: center;
-  position: absolute;
-  transition: 0.2s ease-in-out;
-  opacity: 0;
-}
-
-.image-preview:hover .drag-n-drop-tooltiptext {
-  visibility: visible;
-  opacity: 1;
-} */
-
 .choose-image-lbl {
   font-size: 1.6rem;
   font-weight: 400;
@@ -642,10 +602,9 @@ input[type="file"] {
 .tooltiptext {
   visibility: hidden;
   background: black;
-  width: 29rem;
+  width: auto;
   height: auto;
-  padding-bottom: 0.5rem;
-  padding-top: 0.5rem;
+  padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   margin-bottom: 10rem;
   color: white;
@@ -670,10 +629,6 @@ input[type="file"] {
 }
 
 @media screen and (max-width: 1279px) {
-  .images-and-upload-container {
-    flex-direction: column;
-  }
-
   .images-container {
     width: 100%;
     margin: 0;

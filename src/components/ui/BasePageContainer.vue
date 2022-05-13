@@ -10,7 +10,6 @@
 }
 
 .page-container {
-  height: 100%;
   height: min(calc(100vh - 80px), 90%);
   width: 100%;
   position: absolute;
