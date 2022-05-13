@@ -3,14 +3,19 @@
     <div class="loading-spinner-container" v-if="isLoading">
       <base-spinner></base-spinner>
     </div>
-    <div class="container" v-else>
-      <div class="content-container">
-        <div class="titles-container">
+    <base-container v-else>
+      <base-content-container>
+        <base-titles-container 
+          :locationType="locationType"
+          :locationTitle="selectedClassroom" 
+          :cityLocationTitle="selectedCityAndAddress">
+        </base-titles-container>
+        <!-- <div class="titles-container">
           <h2 class="classroom-title">
             {{ $t("selectedClassroom") }} {{ selectedClassroom }}
           </h2>
           <h2 class="classroom-location-title">{{ selectedCityAndAddress }}</h2>
-        </div>
+        </div> -->
         <div class="title-images-separator"></div>
         <div class="images-and-upload-container">
           <div class="images-container">
@@ -95,7 +100,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </base-content-container>
       <base-spinner v-if="isLoadingAddDelete" :spinnerWithBackground="isLoadingAddDelete"></base-spinner>
       <base-dialog :show="error || isDeleteDialogShown" :title="dialogTitle" :message="dialogMessage" :dialogWarning="error || isDeleteDialogShown" @close="handleDialog">
         <template v-slot:footer v-if="error">
@@ -110,16 +115,18 @@
           </button>
         </template>
       </base-dialog>
-    </div>
+    </base-container>
   </base-page-container>
 </template>
 
 <script>
 import i18n from "@/i18n";
+import { Location } from "./../enums/location.js";
 
 export default {
   data() {
     return {
+      locationType: Location.Classroom,
       error: false,
       dialogTitle: null,
       dialogMessage: null,
@@ -311,61 +318,11 @@ export default {
   height: 10%;
 }
 
-.page-container {
-  height: 100%;
-  height: min(calc(100vh - 80px), 90%);
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-  background: rgb(223, 224, 231);
-  overflow: scroll;
-}
-
 .loading-spinner-container {
   width: 100%;
   height: 100%;
   display: flex;
   padding-left: max(30rem, 19.5%);
-}
-
-.container {
-  height: 100%;
-  margin-left: max(30rem, 19.5%);
-  display: flex;
-  justify-content: center;
-  padding: 2rem;
-}
-
-.content-container {
-  padding: 0.6rem;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  border-radius: 0.5rem;
-  width: 100%;
-  height: 100%;
-}
-
-.titles-container {
-  width: 100%;
-  background: white;
-  border-radius: 0.5rem;
-  padding: 1rem 1.5rem;
-  box-shadow: 0 0 10px rgb(0 0 0 / 0.2);
-}
-
-.classroom-title {
-  width: 100%;
-  font-size: 2rem;
-  font-weight: 400;
-  color: black;
-}
-
-.classroom-location-title {
-  width: 100%;
-  font-size: 1.6rem;
-  font-weight: 400;
-  color: rgb(104, 101, 101);
 }
 
 .images-title {
@@ -713,10 +670,6 @@ input[type="file"] {
 }
 
 @media screen and (max-width: 1279px) {
-  .container {
-    height: auto;
-  }
-
   .images-and-upload-container {
     flex-direction: column;
   }
@@ -768,11 +721,7 @@ input[type="file"] {
   }
 }
 
-@media screen and (max-width: 900px) {
-  .container {
-    height: auto;
-  }
-  
+@media screen and (max-width: 900px) {  
   .image-upload-container {
     width: 100%;
     margin: 0;

@@ -10,9 +10,13 @@ import { dom } from "@fortawesome/fontawesome-svg-core";
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import i18n from './i18n'
+
 import BaseSpinner from './components/ui/BaseSpinner.vue';
 import BaseDialog from './components/ui/BaseDialog.vue';
 import BasePageContainer from './components/ui/BasePageContainer.vue';
+import BaseContainer from './components/ui/BaseContainer.vue';
+import BaseContentContainer from './components/ui/BaseContentContainer.vue';
+import BaseTitlesContainer from './components/ui/BaseTitlesContainer.vue';
 
 library.add(fas);
 library.add(far);
@@ -28,5 +32,8 @@ app.component('font-awesome-icon', FontAwesomeIcon);
 app.component('base-spinner', BaseSpinner);
 app.component('base-dialog', BaseDialog);
 app.component('base-page-container', BasePageContainer);
+app.component('base-container', BaseContainer);
+app.component('base-content-container', BaseContentContainer);
+app.component('base-titles-container', BaseTitlesContainer);
 
 app.mount('#app');
