@@ -3,6 +3,7 @@
   "logout": "Log Out",
   "username": "Username",
   "password": "Password",
+  "close": "Close",
   "wrong_credentials": "Incorrect username or password.",
   "contentManagementSystem": "Content Management System",
   "sidebarTitle": "Content management",

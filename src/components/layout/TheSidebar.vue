@@ -50,7 +50,7 @@
       </ul>
     </div>
     <div class="dev-info">Algebra Dev Team&copy; 2022</div>
-    <div class="app-info">{{ $t("version") }} 0.1.0</div>
+    <div class="app-info">{{ $t("version") }} 1.0.0</div>
   </nav>
   <base-dialog
     :show="error"
@@ -60,7 +60,7 @@
     @close="handleDialog"
   >
     <template v-slot:footer v-if="error">
-      <button class="close-dialog-btn" @click="handleDialog">Zatvori</button>
+      <button class="close-dialog-btn" @click="handleDialog">{{ $t("close") }}</button>
     </template>
   </base-dialog>
 </template>

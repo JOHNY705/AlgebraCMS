@@ -3,6 +3,7 @@
   "logout": "Odjava",
   "username": "Korisničko ime",
   "password": "Lozinka",
+  "close": "Zatvori",
   "wrong_credentials": "Krivo korisničko ime ili lozinka.",
   "contentManagementSystem": "Sustav za upravljanje sadržajem",
   "sidebarTitle": "Upravljanje sadržajem",

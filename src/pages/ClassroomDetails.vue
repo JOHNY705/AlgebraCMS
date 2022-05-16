@@ -99,7 +99,7 @@
       <base-spinner v-if="isLoadingAddDelete" :spinnerWithBackground="isLoadingAddDelete"></base-spinner>
       <base-dialog :show="error || isDeleteDialogShown" :title="dialogTitle" :message="dialogMessage" :dialogWarning="error || isDeleteDialogShown" @close="handleDialog">
         <template v-slot:footer v-if="error">
-          <button class="close-dialog-btn" @click="handleDialog">Zatvori</button>
+          <button class="close-dialog-btn" @click="handleDialog">{{ $t("close") }}</button>
         </template>
         <template v-slot:footer v-else>
           <button class="confirm-delete-btn" @click="deletePicture">
