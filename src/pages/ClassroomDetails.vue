@@ -11,7 +11,8 @@
       >
       </base-titles-container>
       <base-media-container>
-        <div class="images-container">
+      <base-images-container :pictures="pictures" @showDeleteDialog="showDeleteDialog"></base-images-container>
+        <!-- <div class="images-container">
           <h3 class="images-title">
             {{ $t("currentImagesOnTablet") }}
           </h3>
@@ -41,7 +42,7 @@
           <div v-else class="title-no-images">
             <h2>{{ $t("noImagesForClassroom") }}</h2>
           </div>
-        </div>
+        </div> -->
         <div class="image-upload-container">
           <div class="image-upload-tooltip-label">
             <div class="tooltip-container">
