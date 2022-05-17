@@ -5,13 +5,13 @@
     </h3>
     <div v-if="pictures.length > 0" class="images">
       <div class="image-card" v-for="picture in pictures" :key="picture.id">
-        <div class="image-card-image">
+        <div>
           <img
             class="tablet-image"
             :src="`data:image/png;base64,${picture.base64Encoded}`"
           />
         </div>
-        <div class="image-card-image-delete">
+        <div>
           <a
             href="#"
             class="delete-image-btn"
@@ -37,8 +37,8 @@ export default {
     },
   },
   methods: {
-    showDeleteDialog(mediaId) {
-      this.$emit("showDeleteDialog", mediaId);
+    showDeleteDialog(pictureId) {
+      this.$emit("showDeleteDialog", pictureId);
     },
   },
 };

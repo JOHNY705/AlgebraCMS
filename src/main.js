@@ -16,7 +16,7 @@ import BaseDialog from './components/ui/BaseDialog.vue';
 import BasePageContainer from './components/ui/BasePageContainer.vue';
 import BaseContainer from './components/ui/BaseContainer.vue';
 import BaseTitlesContainer from './components/ui/BaseTitlesContainer.vue';
-import BaseMediaContainer from './components/ui/BaseMediaContainer.vue';
+import BaseMediaAndUploadContainer from './components/ui/BaseMediaAndUploadContainer.vue';
 import BaseImagesContainer from './components/ui/BaseImagesContainer.vue';
 
 library.add(fas);
@@ -35,7 +35,7 @@ app.component('base-dialog', BaseDialog);
 app.component('base-page-container', BasePageContainer);
 app.component('base-container', BaseContainer);
 app.component('base-titles-container', BaseTitlesContainer);
-app.component('base-media-container', BaseMediaContainer);
+app.component('base-media-and-upload-container', BaseMediaAndUploadContainer);
 app.component('base-images-container', BaseImagesContainer);
 
 app.mount('#app');

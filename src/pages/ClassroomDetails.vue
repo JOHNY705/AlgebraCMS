@@ -10,39 +10,8 @@
         :cityLocationTitle="selectedCityAndAddress"
       >
       </base-titles-container>
-      <base-media-container>
+      <base-media-and-upload-container>
       <base-images-container :pictures="pictures" @showDeleteDialog="showDeleteDialog"></base-images-container>
-        <!-- <div class="images-container">
-          <h3 class="images-title">
-            {{ $t("currentImagesOnTablet") }}
-          </h3>
-          <div v-if="pictures.length > 0" class="images">
-            <div
-              class="image-card"
-              v-for="picture in pictures"
-              :key="picture.id"
-            >
-              <div class="image-card-image">
-                <img
-                  class="tablet-image"
-                  :src="`data:image/png;base64,${picture.base64Encoded}`"
-                />
-              </div>
-              <div class="image-card-image-delete">
-                <a
-                  href="#"
-                  class="delete-image-btn"
-                  @click.prevent="showDeleteDialog(picture.id)"
-                >
-                  <img class="far fa-trash-alt delete-icon" />
-                </a>
-              </div>
-            </div>
-          </div>
-          <div v-else class="title-no-images">
-            <h2>{{ $t("noImagesForClassroom") }}</h2>
-          </div>
-        </div> -->
         <div class="image-upload-container">
           <div class="image-upload-tooltip-label">
             <div class="tooltip-container">
@@ -95,7 +64,7 @@
             </button>
           </div>
         </div>
-      </base-media-container>
+      </base-media-and-upload-container>
       <base-spinner
         v-if="isLoadingAddDelete"
         :spinnerWithBackground="isLoadingAddDelete"
@@ -327,40 +296,6 @@ export default {
   padding-left: max(30rem, 19.5%);
 }
 
-.images-title {
-  width: 100%;
-  font-size: 1.6rem;
-  margin-bottom: 1rem;
-  font-weight: 400;
-  color: rgb(104, 101, 101);
-}
-
-.images-container {
-  border-radius: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 1.5rem;
-  width: 70%;
-  height: 100%;
-  background: white;
-  margin-right: 0.5rem;
-  box-shadow: 0 0 10px rgb(0 0 0 / 0.2);
-}
-
-.delete-icon {
-  color: rgb(223, 15, 15);
-  height: 2rem;
-  width: 2rem;
-  transition: 0.3s;
-}
-
-.delete-icon:hover {
-  cursor: pointer;
-  transform: scale(1.2);
-}
-
 ul {
   padding: 1rem 2rem;
   list-style: none;
@@ -509,77 +444,11 @@ input[type="file"] {
   transform: scale(1.05);
 }
 
-.delete-image-btn {
-  background: transparent;
-  border-color: transparent;
-  border-style: none;
-}
-
 .fa-image {
   margin-right: 0.6rem;
   width: 1.8rem;
   height: 1.8rem;
   padding-top: 0.2rem;
-}
-
-.images {
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-.image-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 18%;
-  min-width: 8rem;
-  padding: 1rem;
-  background: rgb(223, 224, 231);
-  border-radius: 0.5rem;
-  align-items: center;
-  margin-right: 2%;
-}
-
-.tablet-image {
-  width: 100%;
-  object-fit: contain;
-  border-radius: 0.5rem;
-  transition: 0.3s;
-  margin-bottom: 0.5rem;
-}
-
-.image-card:last-child {
-  margin-right: 0;
-}
-
-.image-card:nth-child(5) {
-  margin-right: 0;
-}
-
-.tablet-image:hover {
-  transform: scale(1.9);
-  border-radius: 0;
-}
-
-.title-no-images {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  padding: 5rem;
-}
-
-.title-no-images h2 {
-  font-size: 1.6rem;
-  text-align: center;
-  font-weight: 400;
 }
 
 ::-webkit-scrollbar {
@@ -639,16 +508,6 @@ input[type="file"] {
 }
 
 @media screen and (max-width: 1279px) {
-  .images-container {
-    width: 100%;
-    margin: 0;
-    height: 50%;
-  }
-
-  .images {
-    padding: 0;
-  }
-
   .image-card {
     margin: 1%;
     margin: max(0.5rem, 1%);
@@ -695,12 +554,6 @@ input[type="file"] {
     justify-content: center;
     align-items: center;
     height: 50%;
-  }
-
-  .image-card {
-    width: 32%;
-    min-width: 10rem;
-    margin: max(0.5rem, 1%);
   }
 
   .image-preview {
