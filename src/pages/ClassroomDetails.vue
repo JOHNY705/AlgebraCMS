@@ -4,99 +4,112 @@
       <base-spinner></base-spinner>
     </div>
     <base-container v-else>
-      <base-content-container>
-        <base-titles-container 
-          :locationType="locationType"
-          :locationTitle="selectedClassroom" 
-          :cityLocationTitle="selectedCityAndAddress">
-        </base-titles-container>
-        <base-media-container>
-          <div class="images-container">
-            <h3 class="images-title">
-              {{ $t("currentImagesOnTablet") }}
-            </h3>
-            <div v-if="pictures.length > 0" class="images">
-              <div
-                class="image-card"
-                v-for="picture in pictures"
-                :key="picture.id"
-              >
-                <div class="image-card-image">
-                  <img
-                    class="tablet-image"
-                    :src="`data:image/png;base64,${picture.base64Encoded}`"
-                  />
-                </div>
-                <div class="image-card-image-delete">
-                  <a
-                    href="#"
-                    class="delete-image-btn"
-                    @click.prevent="showDeleteDialog(picture.id)"
-                  >
-                    <img class="far fa-trash-alt delete-icon" />
-                  </a>
-                </div>
+      <base-titles-container
+        :locationType="locationType"
+        :locationTitle="selectedClassroom"
+        :cityLocationTitle="selectedCityAndAddress"
+      >
+      </base-titles-container>
+      <base-media-container>
+        <div class="images-container">
+          <h3 class="images-title">
+            {{ $t("currentImagesOnTablet") }}
+          </h3>
+          <div v-if="pictures.length > 0" class="images">
+            <div
+              class="image-card"
+              v-for="picture in pictures"
+              :key="picture.id"
+            >
+              <div class="image-card-image">
+                <img
+                  class="tablet-image"
+                  :src="`data:image/png;base64,${picture.base64Encoded}`"
+                />
               </div>
-            </div>
-            <div v-else class="title-no-images">
-              <h2>{{ $t("noImagesForClassroom") }}</h2>
+              <div class="image-card-image-delete">
+                <a
+                  href="#"
+                  class="delete-image-btn"
+                  @click.prevent="showDeleteDialog(picture.id)"
+                >
+                  <img class="far fa-trash-alt delete-icon" />
+                </a>
+              </div>
             </div>
           </div>
-          <div class="image-upload-container">
-            <div class="image-upload-tooltip-label">
-              <div class="tooltip-container">
-                <img class="fas fa-exclamation-circle tooltip" />
-                <span class="tooltiptext">
-                  {{ $t("tooltipAddingNewImage") }}
-                </span>
-              </div>
-              <label class="choose-image-lbl">
-                {{ $t("addingNewImages") }}
-              </label>
+          <div v-else class="title-no-images">
+            <h2>{{ $t("noImagesForClassroom") }}</h2>
+          </div>
+        </div>
+        <div class="image-upload-container">
+          <div class="image-upload-tooltip-label">
+            <div class="tooltip-container">
+              <img class="fas fa-exclamation-circle tooltip" />
+              <span class="tooltiptext">
+                {{ $t("tooltipAddingNewImage") }}
+              </span>
             </div>
-            <label class="image-upload"
-              ><input
-                class="image-select"
-                ref="fileInput"
-                type="file"
-                accept="image/jpeg, image/png, image/gif"
-                @input="pickFile"
-                @change="clearFileSelection"
-              /><img class="fas fa-image" />{{ $t("chooseImage") }}</label
-            >
-            <div
-              id="image-preview"
-              class="image-preview"
-              @dragenter.prevent="toggleDropzone"
-              @dragleave.prevent="toggleDropzone"
-              @dragover.prevent
-              @drop.prevent="dragnDropFile"
-              :class="{ dropzone: isDropzoneActive }"
-              :style="{
-                'background-image': previewImage
-                  ? `url(${previewImage})`
-                  : `url(${require('@/assets/image-icon.png')})`,
-              }"
-            >
-            </div>
-            <div class="add-image-btn-container">
-              <button
+            <label class="choose-image-lbl">
+              {{ $t("addingNewImages") }}
+            </label>
+          </div>
+          <label class="image-upload"
+            ><input
+              class="image-select"
+              ref="fileInput"
+              type="file"
+              accept="image/jpeg, image/png, image/gif"
+              @input="pickFile"
+              @change="clearFileSelection"
+            /><img class="fas fa-image" />{{ $t("chooseImage") }}</label
+          >
+          <div
+            id="image-preview"
+            class="image-preview"
+            @dragenter.prevent="toggleDropzone"
+            @dragleave.prevent="toggleDropzone"
+            @dragover.prevent
+            @drop.prevent="dragnDropFile"
+            :class="{ dropzone: isDropzoneActive }"
+            :style="{
+              'background-image': previewImage
+                ? `url(${previewImage})`
+                : `url(${require('@/assets/image-icon.png')})`,
+            }"
+          ></div>
+          <div class="add-image-btn-container">
+            <button
               class="add-image-btn"
               :class="{ active: previewImage && pictures.length < 5 }"
-              @click="uploadPicture"       
+              @click="uploadPicture"
               :disabled="!previewImage || pictures.length === 5"
             >
-              <span v-if="pictures.length === 5" class="add-image-btn-tooltiptext">{{ $t("tooltipMaxNumberOfImages") }}</span>
+              <span
+                v-if="pictures.length === 5"
+                class="add-image-btn-tooltiptext"
+                >{{ $t("tooltipMaxNumberOfImages") }}</span
+              >
               <img class="fa-solid fa-circle-plus" />{{ $t("addImage") }}
             </button>
-            </div>
           </div>
-        </base-media-container>
-      </base-content-container>
-      <base-spinner v-if="isLoadingAddDelete" :spinnerWithBackground="isLoadingAddDelete"></base-spinner>
-      <base-dialog :show="error || isDeleteDialogShown" :title="dialogTitle" :message="dialogMessage" :dialogWarning="error || isDeleteDialogShown" @close="handleDialog">
+        </div>
+      </base-media-container>
+      <base-spinner
+        v-if="isLoadingAddDelete"
+        :spinnerWithBackground="isLoadingAddDelete"
+      ></base-spinner>
+      <base-dialog
+        :show="error || isDeleteDialogShown"
+        :title="dialogTitle"
+        :message="dialogMessage"
+        :dialogWarning="error || isDeleteDialogShown"
+        @close="handleDialog"
+      >
         <template v-slot:footer v-if="error">
-          <button class="close-dialog-btn" @click="handleDialog">Zatvori</button>
+          <button class="close-dialog-btn" @click="handleDialog">
+            Zatvori
+          </button>
         </template>
         <template v-slot:footer v-else>
           <button class="confirm-delete-btn" @click="deletePicture">
@@ -130,7 +143,7 @@ export default {
       isLoading: true,
       isLoadingAddDelete: false,
       isImageSelected: false,
-      isDropzoneActive: false
+      isDropzoneActive: false,
     };
   },
   computed: {
@@ -177,7 +190,7 @@ export default {
         });
       } catch (error) {
         this.error = true;
-        this.dialogTitle = i18n.global.t('error');
+        this.dialogTitle = i18n.global.t("error");
         this.dialogMessage = error.message;
       }
       this.isLoading = false;
@@ -218,8 +231,8 @@ export default {
     showDeleteDialog(pictureID) {
       this.selectedPictureID = pictureID;
       this.isDeleteDialogShown = true;
-      this.dialogTitle = i18n.global.t('deleteImage');
-      this.dialogMessage = i18n.global.t('confirmDeleteImage');
+      this.dialogTitle = i18n.global.t("deleteImage");
+      this.dialogMessage = i18n.global.t("confirmDeleteImage");
     },
     async deletePicture() {
       this.handleDialog();
@@ -229,11 +242,11 @@ export default {
         await this.$store.dispatch("pictures/deletePicture", {
           classroomID: this.selectedClassroomID,
           pictureID: this.selectedPictureID,
-          pictures: this.pictures
+          pictures: this.pictures,
         });
       } catch (error) {
         this.error = true;
-        this.dialogTitle = i18n.global.t('error');
+        this.dialogTitle = i18n.global.t("error");
         this.dialogMessage = error.message;
       }
       this.isLoadingAddDelete = false;
@@ -248,7 +261,7 @@ export default {
           });
         } catch (error) {
           this.error = true;
-          this.dialogTitle = i18n.global.t('error');
+          this.dialogTitle = i18n.global.t("error");
           this.dialogMessage = error.message;
         }
         this.previewImage = null;
@@ -259,11 +272,7 @@ export default {
       event.target.value = null;
     },
     setBackgroundImage(file) {
-      const allowedFileTypes = [
-        "image/jpeg",
-        "image/png",
-        "image/gif",
-      ];
+      const allowedFileTypes = ["image/jpeg", "image/png", "image/gif"];
       if (file) {
         if (allowedFileTypes.includes(file.type)) {
           let reader = new FileReader();
@@ -275,27 +284,27 @@ export default {
               if (img.width === 800 && img.height === 1240) {
                 this.previewImage = e.target.result;
                 this.previewImageType = e.target.result.type;
-              }
-              else {
+              } else {
                 this.error = true;
-                this.dialogTitle = i18n.global.t('error');
-                this.dialogMessage = i18n.global.t('errorWrongImageResolutionForTablet');
+                this.dialogTitle = i18n.global.t("error");
+                this.dialogMessage = i18n.global.t(
+                  "errorWrongImageResolutionForTablet"
+                );
               }
-            }      
+            };
           };
           reader.readAsDataURL(file);
           this.$emit("input", file);
-        }
-        else {
+        } else {
           this.error = true;
-          this.dialogTitle = i18n.global.t('error');
-          this.dialogMessage = i18n.global.t('errorWrongFileFormat');
+          this.dialogTitle = i18n.global.t("error");
+          this.dialogMessage = i18n.global.t("errorWrongFileFormat");
         }
       }
     },
     toggleDropzone() {
       this.isDropzoneActive = !this.isDropzoneActive;
-    }
+    },
   },
 };
 </script>
@@ -676,7 +685,7 @@ input[type="file"] {
   }
 }
 
-@media screen and (max-width: 900px) {  
+@media screen and (max-width: 900px) {
   .image-upload-container {
     width: 100%;
     margin: 0;
@@ -698,7 +707,8 @@ input[type="file"] {
     margin: 1rem 0;
   }
 
-  .image-upload, .add-image-btn {
+  .image-upload,
+  .add-image-btn {
     min-width: 18rem;
   }
 
@@ -707,5 +717,4 @@ input[type="file"] {
     justify-content: center;
   }
 }
-
 </style>

@@ -1,6 +1,8 @@
 <template>
   <div class="container">
-    <slot></slot>
+    <div class="content-container">
+      <slot></slot>
+    </div>
   </div>
 </template>
 
@@ -11,6 +13,16 @@
   display: flex;
   justify-content: center;
   padding: 2rem;
+}
+
+.content-container {
+  padding: 0.6rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  width: 100%;
+  height: 100%;
 }
 
 @media screen and (max-width: 1279px) {

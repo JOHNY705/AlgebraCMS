@@ -15,7 +15,6 @@ import BaseSpinner from './components/ui/BaseSpinner.vue';
 import BaseDialog from './components/ui/BaseDialog.vue';
 import BasePageContainer from './components/ui/BasePageContainer.vue';
 import BaseContainer from './components/ui/BaseContainer.vue';
-import BaseContentContainer from './components/ui/BaseContentContainer.vue';
 import BaseTitlesContainer from './components/ui/BaseTitlesContainer.vue';
 import BaseMediaContainer from './components/ui/BaseMediaContainer.vue';
 
@@ -34,7 +33,6 @@ app.component('base-spinner', BaseSpinner);
 app.component('base-dialog', BaseDialog);
 app.component('base-page-container', BasePageContainer);
 app.component('base-container', BaseContainer);
-app.component('base-content-container', BaseContentContainer);
 app.component('base-titles-container', BaseTitlesContainer);
 app.component('base-media-container', BaseMediaContainer);
 
