@@ -40,6 +40,7 @@ export default {
   font-size: 2rem;
   font-weight: 400;
   color: black;
+  margin: 0;
 }
 
 .city-location-title {
@@ -47,5 +48,6 @@ export default {
   font-size: 1.6rem;
   font-weight: 400;
   color: rgb(104, 101, 101);
+  margin: 0;
 }
 </style>
