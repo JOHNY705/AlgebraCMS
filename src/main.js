@@ -18,6 +18,7 @@ import BaseContainer from './components/ui/BaseContainer.vue';
 import BaseTitlesContainer from './components/ui/BaseTitlesContainer.vue';
 import BaseMediaAndUploadContainer from './components/ui/BaseMediaAndUploadContainer.vue';
 import BaseImagesContainer from './components/ui/BaseImagesContainer.vue';
+import BaseUploadMediaContainer from './components/ui/BaseUploadMediaContainer.vue';
 
 library.add(fas);
 library.add(far);
@@ -37,5 +38,6 @@ app.component('base-container', BaseContainer);
 app.component('base-titles-container', BaseTitlesContainer);
 app.component('base-media-and-upload-container', BaseMediaAndUploadContainer);
 app.component('base-images-container', BaseImagesContainer);
+app.component('base-upload-media-container', BaseUploadMediaContainer);
 
 app.mount('#app');

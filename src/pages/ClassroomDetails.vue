@@ -12,7 +12,7 @@
       </base-titles-container>
       <base-media-and-upload-container>
       <base-images-container :pictures="pictures" @showDeleteDialog="showDeleteDialog"></base-images-container>
-        <div class="image-upload-container">
+        <base-upload-media-container>
           <div class="image-upload-tooltip-label">
             <div class="tooltip-container">
               <img class="fas fa-exclamation-circle tooltip" />
@@ -63,7 +63,7 @@
               <img class="fa-solid fa-circle-plus" />{{ $t("addImage") }}
             </button>
           </div>
-        </div>
+        </base-upload-media-container>
       </base-media-and-upload-container>
       <base-spinner
         v-if="isLoadingAddDelete"
@@ -383,20 +383,6 @@ ul li {
   font-size: 1.4rem;
 }
 
-.image-upload-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 1.5rem;
-  align-items: center;
-  width: 30%;
-  margin-left: 0.5rem;
-  height: 100%;
-  background: white;
-  border-radius: 0.5rem;
-  box-shadow: 0 0 10px rgb(0 0 0 / 0.2);
-}
-
 .image-preview {
   position: relative;
   background-size: contain;
@@ -513,16 +499,6 @@ input[type="file"] {
     margin: max(0.5rem, 1%);
   }
 
-  .image-upload-container {
-    width: 100%;
-    margin: 0;
-    margin-top: 1rem;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    height: 50%;
-  }
-
   .choose-image-lbl {
     width: auto;
   }
@@ -546,16 +522,6 @@ input[type="file"] {
 }
 
 @media screen and (max-width: 900px) {
-  .image-upload-container {
-    width: 100%;
-    margin: 0;
-    margin-top: 1rem;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 50%;
-  }
-
   .image-preview {
     width: 31%;
     margin: 1rem 0;
