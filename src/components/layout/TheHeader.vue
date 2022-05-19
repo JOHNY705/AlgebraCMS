@@ -143,6 +143,7 @@ header nav {
   transition: 0.5s;
   visibility: hidden;
   opacity: 0;
+  height: 6rem;
 }
 
 .user-menu.active {
@@ -151,7 +152,6 @@ header nav {
   visibility: visible;
   opacity: 0.99;
   z-index: -100;
-  height: 6rem;
 }
 
 .action .user-menu ul {

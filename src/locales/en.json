@@ -9,6 +9,7 @@
   "sidebarTitle": "Content management",
   "contentForTablets": "Images for tablets",
   "selectedClassroom": "Selected classroom:",
+  "selectedDevice": "Selected device:",
   "currentImagesOnTablet": "Images that are currently shown on tablet:",
   "pictureName": "Picture name",
   "changeDate": "Change date",

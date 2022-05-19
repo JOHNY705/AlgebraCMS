@@ -77,9 +77,13 @@
         @close="handleDialog"
       >
         <template v-slot:footer v-if="error">
+<<<<<<< HEAD
+          <button class="close-dialog-btn" @click="handleDialog">{{ $t("close") }}</button>
+=======
           <button class="close-dialog-btn" @click="handleDialog">
             Zatvori
           </button>
+>>>>>>> vue-components
         </template>
         <template v-slot:footer v-else>
           <button class="confirm-delete-btn" @click="deletePicture">

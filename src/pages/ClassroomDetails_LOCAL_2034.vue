@@ -1,85 +1,105 @@
 <template>
-  <base-page-container>
+  <div class="page-container">
     <div class="loading-spinner-container" v-if="isLoading">
       <base-spinner></base-spinner>
     </div>
-    <base-container v-else>
-      <base-titles-container
-        :locationType="locationType"
-        :locationTitle="selectedClassroom"
-        :cityLocationTitle="selectedCityAndAddress"
-      >
-      </base-titles-container>
-      <base-media-and-upload-container>
-      <base-images-container :pictures="pictures" @showDeleteDialog="showDeleteDialog"></base-images-container>
-        <base-upload-media-container>
-          <div class="image-upload-tooltip-label">
-            <div class="tooltip-container">
-              <img class="fas fa-exclamation-circle tooltip" />
-              <span class="tooltiptext">
-                {{ $t("tooltipAddingNewImage") }}
-              </span>
+    <div class="container" v-else>
+      <div class="content-container">
+        <div class="titles-container">
+          <h2 class="classroom-title">
+            {{ $t("selectedClassroom") }} {{ selectedClassroom }}
+          </h2>
+          <h2 class="classroom-location-title">{{ selectedCityAndAddress }}</h2>
+        </div>
+        <div class="title-images-separator"></div>
+        <div class="images-and-upload-container">
+          <div class="images-container">
+            <h3 class="images-title">
+              {{ $t("currentImagesOnTablet") }}
+            </h3>
+            <div v-if="pictures.length > 0" class="images">
+              <div
+                class="image-card"
+                v-for="picture in pictures"
+                :key="picture.id"
+              >
+                <div class="image-card-image">
+                  <img
+                    class="tablet-image"
+                    :src="`data:image/png;base64,${picture.base64Encoded}`"
+                  />
+                </div>
+                <div class="image-card-image-delete">
+                  <a
+                    href="#"
+                    class="delete-image-btn"
+                    @click.prevent="showDeleteDialog(picture.id)"
+                  >
+                    <img class="far fa-trash-alt delete-icon" />
+                  </a>
+                </div>
+              </div>
             </div>
-            <label class="choose-image-lbl">
-              {{ $t("addingNewImages") }}
-            </label>
+            <div v-else class="title-no-images">
+              <h2>{{ $t("noImagesForClassroom") }}</h2>
+            </div>
           </div>
-          <label class="image-upload"
-            ><input
-              class="image-select"
-              ref="fileInput"
-              type="file"
-              accept="image/jpeg, image/png, image/gif"
-              @input="pickFile"
-              @change="clearFileSelection"
-            /><img class="fas fa-image" />{{ $t("chooseImage") }}</label
-          >
-          <div
-            id="image-preview"
-            class="image-preview"
-            @dragenter.prevent="toggleDropzone"
-            @dragleave.prevent="toggleDropzone"
-            @dragover.prevent
-            @drop.prevent="dragnDropFile"
-            :class="{ dropzone: isDropzoneActive }"
-            :style="{
-              'background-image': previewImage
-                ? `url(${previewImage})`
-                : `url(${require('@/assets/image-icon.png')})`,
-            }"
-          ></div>
-          <div class="add-image-btn-container">
-            <button
+          <div class="image-upload-container">
+            <div class="image-upload-tooltip-label">
+              <div class="tooltip-container">
+                <img class="fas fa-exclamation-circle tooltip" />
+                <span class="tooltiptext">
+                  {{ $t("tooltipAddingNewImage") }}
+                </span>
+              </div>
+              <label class="choose-image-lbl">
+                {{ $t("addingNewImages") }}
+              </label>
+            </div>
+            <label class="image-upload"
+              ><input
+                class="image-select"
+                ref="fileInput"
+                type="file"
+                accept="image/jpeg, image/png, image/gif"
+                @input="pickFile"
+                @change="clearFileSelection"
+              /><img class="fas fa-image" />{{ $t("chooseImage") }}</label
+            >
+            <div
+              id="image-preview"
+              class="image-preview"
+              @dragenter.prevent="toggleDropzone"
+              @dragleave.prevent="toggleDropzone"
+              @dragover.prevent
+              @drop.prevent="dragnDropFile"
+              :class="{ dropzone: isDropzoneActive }"
+              :style="{
+                'background-image': previewImage
+                  ? `url(${previewImage})`
+                  : `url(${require('@/assets/image-icon.png')})`,
+              }"
+            >
+              <!-- <span class="drag-n-drop-tooltiptext">Drag and drop image</span> -->
+            </div>
+            <div class="add-image-btn-container">
+              <button
               class="add-image-btn"
               :class="{ active: previewImage && pictures.length < 5 }"
-              @click="uploadPicture"
+              @click="uploadPicture"       
               :disabled="!previewImage || pictures.length === 5"
             >
-              <span
-                v-if="pictures.length === 5"
-                class="add-image-btn-tooltiptext"
-                >{{ $t("tooltipMaxNumberOfImages") }}</span
-              >
+              <span v-if="pictures.length === 5" class="add-image-btn-tooltiptext">{{ $t("tooltipMaxNumberOfImages") }}</span>
               <img class="fa-solid fa-circle-plus" />{{ $t("addImage") }}
             </button>
+            </div>
           </div>
-        </base-upload-media-container>
-      </base-media-and-upload-container>
-      <base-spinner
-        v-if="isLoadingAddDelete"
-        :spinnerWithBackground="isLoadingAddDelete"
-      ></base-spinner>
-      <base-dialog
-        :show="error || isDeleteDialogShown"
-        :title="dialogTitle"
-        :message="dialogMessage"
-        :dialogWarning="error || isDeleteDialogShown"
-        @close="handleDialog"
-      >
+        </div>
+      </div>
+      <base-spinner v-if="isLoadingAddDelete" :spinnerWithBackground="isLoadingAddDelete"></base-spinner>
+      <base-dialog :show="error || isDeleteDialogShown" :title="dialogTitle" :message="dialogMessage" :dialogWarning="error || isDeleteDialogShown" @close="handleDialog">
         <template v-slot:footer v-if="error">
-          <button class="close-dialog-btn" @click="handleDialog">
-            Zatvori
-          </button>
+          <button class="close-dialog-btn" @click="handleDialog">{{ $t("close") }}</button>
         </template>
         <template v-slot:footer v-else>
           <button class="confirm-delete-btn" @click="deletePicture">
@@ -90,18 +110,16 @@
           </button>
         </template>
       </base-dialog>
-    </base-container>
-  </base-page-container>
+    </div>
+  </div>
 </template>
 
 <script>
 import i18n from "@/i18n";
-import { Location } from "./../enums/location.js";
 
 export default {
   data() {
     return {
-      locationType: Location.Classroom,
       error: false,
       dialogTitle: null,
       dialogMessage: null,
@@ -113,7 +131,7 @@ export default {
       isLoading: true,
       isLoadingAddDelete: false,
       isImageSelected: false,
-      isDropzoneActive: false,
+      isDropzoneActive: false
     };
   },
   computed: {
@@ -160,7 +178,7 @@ export default {
         });
       } catch (error) {
         this.error = true;
-        this.dialogTitle = i18n.global.t("error");
+        this.dialogTitle = i18n.global.t('error');
         this.dialogMessage = error.message;
       }
       this.isLoading = false;
@@ -201,8 +219,8 @@ export default {
     showDeleteDialog(pictureID) {
       this.selectedPictureID = pictureID;
       this.isDeleteDialogShown = true;
-      this.dialogTitle = i18n.global.t("deleteImage");
-      this.dialogMessage = i18n.global.t("confirmDeleteImage");
+      this.dialogTitle = i18n.global.t('deleteImage');
+      this.dialogMessage = i18n.global.t('confirmDeleteImage');
     },
     async deletePicture() {
       this.handleDialog();
@@ -212,11 +230,11 @@ export default {
         await this.$store.dispatch("pictures/deletePicture", {
           classroomID: this.selectedClassroomID,
           pictureID: this.selectedPictureID,
-          pictures: this.pictures,
+          pictures: this.pictures
         });
       } catch (error) {
         this.error = true;
-        this.dialogTitle = i18n.global.t("error");
+        this.dialogTitle = i18n.global.t('error');
         this.dialogMessage = error.message;
       }
       this.isLoadingAddDelete = false;
@@ -231,7 +249,7 @@ export default {
           });
         } catch (error) {
           this.error = true;
-          this.dialogTitle = i18n.global.t("error");
+          this.dialogTitle = i18n.global.t('error');
           this.dialogMessage = error.message;
         }
         this.previewImage = null;
@@ -242,7 +260,11 @@ export default {
       event.target.value = null;
     },
     setBackgroundImage(file) {
-      const allowedFileTypes = ["image/jpeg", "image/png", "image/gif"];
+      const allowedFileTypes = [
+        "image/jpeg",
+        "image/png",
+        "image/gif",
+      ];
       if (file) {
         if (allowedFileTypes.includes(file.type)) {
           let reader = new FileReader();
@@ -254,27 +276,27 @@ export default {
               if (img.width === 800 && img.height === 1240) {
                 this.previewImage = e.target.result;
                 this.previewImageType = e.target.result.type;
-              } else {
-                this.error = true;
-                this.dialogTitle = i18n.global.t("error");
-                this.dialogMessage = i18n.global.t(
-                  "errorWrongImageResolutionForTablet"
-                );
               }
-            };
+              else {
+                this.error = true;
+                this.dialogTitle = i18n.global.t('error');
+                this.dialogMessage = i18n.global.t('errorWrongImageResolutionForTablet');
+              }
+            }      
           };
           reader.readAsDataURL(file);
           this.$emit("input", file);
-        } else {
+        }
+        else {
           this.error = true;
-          this.dialogTitle = i18n.global.t("error");
-          this.dialogMessage = i18n.global.t("errorWrongFileFormat");
+          this.dialogTitle = i18n.global.t('error');
+          this.dialogMessage = i18n.global.t('errorWrongFileFormat');
         }
       }
     },
     toggleDropzone() {
       this.isDropzoneActive = !this.isDropzoneActive;
-    },
+    }
   },
 };
 </script>
@@ -289,11 +311,108 @@ export default {
   height: 10%;
 }
 
+.page-container {
+  height: 100%;
+  height: min(calc(100vh - 80px), 90%);
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  background: rgb(223, 224, 231);
+  overflow: scroll;
+}
+
 .loading-spinner-container {
   width: 100%;
   height: 100%;
   display: flex;
   padding-left: max(30rem, 19.5%);
+}
+
+.container {
+  height: 100%;
+  margin-left: max(30rem, 19.5%);
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.content-container {
+  padding: 0.6rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  width: 100%;
+  height: 100%;
+}
+
+.titles-container {
+  width: 100%;
+  background: white;
+  border-radius: 0.5rem;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 0 10px rgb(0 0 0 / 0.2);
+}
+
+.classroom-title {
+  width: 100%;
+  font-size: 2rem;
+  font-weight: 400;
+  color: black;
+}
+
+.classroom-location-title {
+  width: 100%;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: rgb(104, 101, 101);
+}
+
+.images-title {
+  width: 100%;
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  font-weight: 400;
+  color: rgb(104, 101, 101);
+}
+
+.title-images-separator {
+  width: 100%;
+  background: rgb(223, 224, 231);
+}
+
+.images-and-upload-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  padding-top: 1rem;
+}
+
+.images-container {
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1.5rem;
+  width: 70%;
+  height: 100%;
+  background: white;
+  margin-right: 0.5rem;
+  box-shadow: 0 0 10px rgb(0 0 0 / 0.2);
+}
+
+.delete-icon {
+  color: rgb(223, 15, 15);
+  height: 2rem;
+  width: 2rem;
+  transition: 0.3s;
+}
+
+.delete-icon:hover {
+  cursor: pointer;
+  transform: scale(1.2);
 }
 
 ul {
@@ -383,6 +502,20 @@ ul li {
   font-size: 1.4rem;
 }
 
+.image-upload-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1.5rem;
+  align-items: center;
+  width: 30%;
+  margin-left: 0.5rem;
+  height: 100%;
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 10px rgb(0 0 0 / 0.2);
+}
+
 .image-preview {
   position: relative;
   background-size: contain;
@@ -399,6 +532,25 @@ ul li {
   border: 3px dashed rgb(203, 204, 214);
   border-radius: 0.5rem;
 }
+
+/* .drag-n-drop-tooltiptext {
+  visibility: hidden;
+  background: black;
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  color: white;
+  font-size: 1.3rem;
+  text-align: center;
+  position: absolute;
+  transition: 0.2s ease-in-out;
+  opacity: 0;
+}
+
+.image-preview:hover .drag-n-drop-tooltiptext {
+  visibility: visible;
+  opacity: 1;
+} */
 
 .choose-image-lbl {
   font-size: 1.6rem;
@@ -430,11 +582,77 @@ input[type="file"] {
   transform: scale(1.05);
 }
 
+.delete-image-btn {
+  background: transparent;
+  border-color: transparent;
+  border-style: none;
+}
+
 .fa-image {
   margin-right: 0.6rem;
   width: 1.8rem;
   height: 1.8rem;
   padding-top: 0.2rem;
+}
+
+.images {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.image-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 18%;
+  min-width: 8rem;
+  padding: 1rem;
+  background: rgb(223, 224, 231);
+  border-radius: 0.5rem;
+  align-items: center;
+  margin-right: 2%;
+}
+
+.tablet-image {
+  width: 100%;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  transition: 0.3s;
+  margin-bottom: 0.5rem;
+}
+
+.image-card:last-child {
+  margin-right: 0;
+}
+
+.image-card:nth-child(5) {
+  margin-right: 0;
+}
+
+.tablet-image:hover {
+  transform: scale(1.9);
+  border-radius: 0;
+}
+
+.title-no-images {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 5rem;
+}
+
+.title-no-images h2 {
+  font-size: 1.6rem;
+  text-align: center;
+  font-weight: 400;
 }
 
 ::-webkit-scrollbar {
@@ -467,9 +685,10 @@ input[type="file"] {
 .tooltiptext {
   visibility: hidden;
   background: black;
-  width: auto;
+  width: 29rem;
   height: auto;
-  padding: 0.5rem 1rem;
+  padding-bottom: 0.5rem;
+  padding-top: 0.5rem;
   border-radius: 0.5rem;
   margin-bottom: 10rem;
   color: white;
@@ -494,9 +713,37 @@ input[type="file"] {
 }
 
 @media screen and (max-width: 1279px) {
+  .container {
+    height: auto;
+  }
+
+  .images-and-upload-container {
+    flex-direction: column;
+  }
+
+  .images-container {
+    width: 100%;
+    margin: 0;
+    height: 50%;
+  }
+
+  .images {
+    padding: 0;
+  }
+
   .image-card {
     margin: 1%;
     margin: max(0.5rem, 1%);
+  }
+
+  .image-upload-container {
+    width: 100%;
+    margin: 0;
+    margin-top: 1rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: 50%;
   }
 
   .choose-image-lbl {
@@ -522,13 +769,32 @@ input[type="file"] {
 }
 
 @media screen and (max-width: 900px) {
+  .container {
+    height: auto;
+  }
+  
+  .image-upload-container {
+    width: 100%;
+    margin: 0;
+    margin-top: 1rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+  }
+
+  .image-card {
+    width: 32%;
+    min-width: 10rem;
+    margin: max(0.5rem, 1%);
+  }
+
   .image-preview {
     width: 31%;
     margin: 1rem 0;
   }
 
-  .image-upload,
-  .add-image-btn {
+  .image-upload, .add-image-btn {
     min-width: 18rem;
   }
 
@@ -537,4 +803,5 @@ input[type="file"] {
     justify-content: center;
   }
 }
+
 </style>
