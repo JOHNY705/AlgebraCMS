@@ -5,7 +5,7 @@ import getters from "./getters.js";
 export default {
   namespaced: true,
   state: {
-    locations: [],
+    tabletLocations: [],
   },
   mutations,
   actions,

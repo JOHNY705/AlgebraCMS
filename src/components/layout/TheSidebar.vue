@@ -29,6 +29,33 @@
           </li>
         </ul>
       </li>
+      <li>
+        <a @click.prevent="toggleTVMediaDDL" href="#">
+          <img class="fas fa-solid fa-tv tv-icon" />
+          {{ $t("contentForTVs") }}
+          <div
+            class="span tableti"
+            :class="{ rotate: isTVMediaDDLActive }"
+          >
+            <span class="fas fa-caret-down"></span>
+          </div>
+        </a>
+        <ul
+          class="media-tv-show"
+          :class="{ showTVs: isTVMediaDDLActive }"
+        >
+          <li v-for="location in tvLocations" :key="location.id">
+            <a
+              class="tableti-slike-ddl-item"
+              :class="{ active: location.isActive }"
+              href="#"
+              @clickout="closeTVMediaMenu"
+              @click.prevent="toggleMediaTVsMenu(location.id)"
+              >{{ location.city + ", " + location.name }}
+            </a>
+          </li>
+        </ul>
+      </li>
     </ul>
     <div v-else>
       <base-spinner></base-spinner>
@@ -49,6 +76,24 @@
         </li>
       </ul>
     </div>
+    <!-- TEST -->
+    <div
+      v-for="location in tvLocations"
+      :key="location.id"
+      class="slike-tableti-menu"
+      :class="{ active: location.isActive }"
+    >
+      <ul class="slike-tableti-menu-ul">
+        <li v-for="classroom in location.classrooms" :key="classroom.id">
+          <router-link
+            :to="'/Media/' + location.id + '/Classroom/' + classroom.id"
+          >
+            {{ classroom.name }}
+          </router-link>
+        </li>
+      </ul>
+    </div>
+    <!-- TEST -->
     <div class="dev-info">Algebra Dev Team&copy; 2022</div>
     <div class="app-info">{{ $t("version") }} 1.0.0</div>
   </nav>
@@ -72,6 +117,7 @@ export default {
   data() {
     return {
       isSlikeTabletiDDLActive: false,
+      isTVMediaDDLActive: false,
       error: false,
       dialogTitle: null,
       dialogMessage: null,
@@ -79,30 +125,59 @@ export default {
   },
   computed: {
     locations() {
-      return this.$store.getters["locations/locations"];
+      return this.$store.getters["tabletLocations/tabletLocations"];
+    },
+    tvLocations() {
+      return this.$store.getters["tvLocations/tvLocations"];
     },
   },
   methods: {
     toggleSlikeTabletiDDL() {
       this.isSlikeTabletiDDLActive = !this.isSlikeTabletiDDLActive;
     },
+    toggleTVMediaDDL() {
+      this.isTVMediaDDLActive = !this.isTVMediaDDLActive;
+    },
     toggleSlikeTabletiMenu(id) {
       this.locations.forEach((location) => {
-        if (location.id !== id) {
+        if (location.id !== id && location.type !== "tablet") {
           location.isActive = false;
         }
       });
-      this.locations.find((location) => location.id === id).isActive =
-        !this.locations.find((location) => location.id === id).isActive;
+      this.locations.find((location) => location.id === id && location.type === "tablet").isActive =
+        !this.locations.find((location) => location.id === id && location.type === "tablet").isActive;
+    },
+    toggleMediaTVsMenu(id) {
+      this.tvLocations.forEach((location) => {
+        if (location.id !== id && location.type !== "tv") {
+          location.isActive = false;
+        }
+      });
+      this.tvLocations.find((location) => location.id === id && location.type === "tv").isActive =
+        !this.tvLocations.find((location) => location.id === id && location.type === "tv").isActive;
     },
     closeSlikeTabletiMenu() {
       this.locations.forEach((location) => {
         location.isActive = false;
       });
     },
+    closeTVMediaMenu() {
+      this.tvLocations.forEach((location) => {
+        location.isActive = false;
+      });
+    },
     async loadLocations() {
       try {
-        await this.$store.dispatch("locations/loadLocations");
+        await this.$store.dispatch("tabletLocations/loadTabletLocations");
+      } catch (error) {
+        this.error = true;
+        this.dialogTitle = i18n.global.t("error");
+        this.dialogMessage = error.message;
+      }
+    },
+    async loadTVLocations() {
+      try {
+        await this.$store.dispatch("tvLocations/loadTVLocations");
       } catch (error) {
         this.error = true;
         this.dialogTitle = i18n.global.t("error");
@@ -117,6 +192,7 @@ export default {
   },
   created() {
     this.loadLocations();
+    this.loadTVLocations();
   },
 };
 </script>
@@ -154,6 +230,10 @@ export default {
   margin-right: 0.8rem;
 }
 
+.tv-icon {
+  margin-right: 0.4rem;
+}
+
 nav ul {
   height: auto;
   width: 100%;
@@ -187,6 +267,10 @@ nav ul ul {
 }
 
 nav ul .slike-tableti-show.showTableti {
+  display: block;
+}
+
+nav ul .media-tv-show.showTVs {
   display: block;
 }
 

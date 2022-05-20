@@ -101,7 +101,7 @@ import { Location } from "./../enums/location.js";
 export default {
   data() {
     return {
-      locationType: Location.Classroom,
+      locationType: Location.Tablet,
       error: false,
       dialogTitle: null,
       dialogMessage: null,

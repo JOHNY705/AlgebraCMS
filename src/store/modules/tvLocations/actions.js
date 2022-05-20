@@ -1,9 +1,10 @@
 import axios from "axios";
 import i18n from "@/i18n";
+import { Location } from "./../../../enums/location.js";
 
 export default {
-  async loadLocations(context) {
-    const locations = [];
+  async loadTVLocations(context) {
+    const tvLocations = [];
 
     await axios
       .get("https://cmsapi.algebra.hr/api/locations", {
@@ -20,8 +21,9 @@ export default {
               city: response.data.locations[id].city,
               classrooms: response.data.locations[id].classrooms,
               isActive: false,
+              type: Location.TV
             };
-            locations.push(location);
+            tvLocations.push(location);
           }
         }
       })
@@ -29,6 +31,6 @@ export default {
         throw new Error(`${i18n.global.t("errorWhileFetchingLocations")} ${i18n.global.t("pleaseTryAgainLater")}`);
       });
 
-    context.commit("setLocations", locations);
+    context.commit("setTVLocations", tvLocations);
   },
 };
