@@ -1,4 +1,4 @@
 export const Location = {
-    Tablet: 'tablet',
-    TV: 'tv'
+    Tablet: 'Tablet',
+    TV: 'TV'
 }

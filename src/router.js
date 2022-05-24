@@ -4,6 +4,7 @@ import LoginPage from "./pages/LoginPage.vue";
 import AccessDeniedPage from "./pages/AccessDeniedPage.vue";
 import HomePage from "./pages/HomePage.vue";
 import ClassroomDetails from "./pages/ClassroomDetails.vue";
+import TVDetails from './pages/TVDetails.vue';
 import store from "./store/index.js";
 import { Role } from './enums/role.js';
 
@@ -32,6 +33,11 @@ const router = createRouter({
       component: ClassroomDetails,
       meta: { componentsEnabled: true, authorize: [Role.CMSAdmin] },
     },
+    {
+      path: "/Media/:locationID/TV/:classroomID",
+      component: TVDetails,
+      meta: { componentsEnabled: true, authorize: [Role.CMSAdmin] },
+    }
   ],
   linkActiveClass: "active",
 });

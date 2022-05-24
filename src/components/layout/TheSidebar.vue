@@ -86,7 +86,7 @@
       <ul class="slike-tableti-menu-ul">
         <li v-for="classroom in location.classrooms" :key="classroom.id">
           <router-link
-            :to="'/Media/' + location.id + '/Classroom/' + classroom.id"
+            :to="'/Media/' + location.id + '/TV/' + classroom.id"
           >
             {{ classroom.name }}
           </router-link>
@@ -112,6 +112,7 @@
 
 <script>
 import i18n from "@/i18n";
+import { Location } from "./../../enums/location.js";
 
 export default {
   data() {
@@ -140,21 +141,21 @@ export default {
     },
     toggleSlikeTabletiMenu(id) {
       this.locations.forEach((location) => {
-        if (location.id !== id && location.type !== "tablet") {
+        if (location.id !== id && location.type !== Location.Tablet) {
           location.isActive = false;
         }
       });
-      this.locations.find((location) => location.id === id && location.type === "tablet").isActive =
-        !this.locations.find((location) => location.id === id && location.type === "tablet").isActive;
+      this.locations.find((location) => location.id === id && location.type === Location.Tablet).isActive =
+        !this.locations.find((location) => location.id === id && location.type === Location.Tablet).isActive;
     },
     toggleMediaTVsMenu(id) {
       this.tvLocations.forEach((location) => {
-        if (location.id !== id && location.type !== "tv") {
+        if (location.id !== id && location.type !== Location.TV) {
           location.isActive = false;
         }
       });
-      this.tvLocations.find((location) => location.id === id && location.type === "tv").isActive =
-        !this.tvLocations.find((location) => location.id === id && location.type === "tv").isActive;
+      this.tvLocations.find((location) => location.id === id && location.type === Location.TV).isActive =
+        !this.tvLocations.find((location) => location.id === id && location.type === Location.TV).isActive;
     },
     closeSlikeTabletiMenu() {
       this.locations.forEach((location) => {

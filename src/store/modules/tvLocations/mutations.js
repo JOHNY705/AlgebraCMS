@@ -1,5 +1,5 @@
 export default {
-    setTVLocations(state, payload) {
-        state.tvLocations = payload;
-    }
-}
+  setTVLocations(state, payload) {
+    state.tvLocations = payload;
+  },
+};

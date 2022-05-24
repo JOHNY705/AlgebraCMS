@@ -1,7 +1,7 @@
 <template>
   <div class="images-container">
     <h3 class="images-title">
-      {{ $t("currentImagesOnTablet") }}
+      {{ $t("current" + mediaType + tvOrientation + locationType) }}
     </h3>
     <div v-if="pictures.length > 0" class="images">
       <div class="image-card" v-for="picture in pictures" :key="picture.id">
@@ -31,9 +31,22 @@
 <script>
 export default {
   props: {
+    locationType: {
+      type: String,
+      required: true
+    },
+    mediaType: {
+      type: String,
+      required: true
+    },
+    tvOrientation: {
+      type: String,
+      required: false,
+      default: ""
+    },
     pictures: {
       type: Array,
-      required: true,
+      required: false
     },
   },
   methods: {

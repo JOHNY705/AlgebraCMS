@@ -11,15 +11,23 @@
       >
       </base-titles-container>
       <base-media-and-upload-container>
-      <base-images-container :locationType="locationType" :mediaType="mediaType" :pictures="pictures" @showDeleteDialog="showDeleteDialog"></base-images-container>
+        <base-images-container
+          :locationType="locationType"
+          :mediaType="mediaType"
+          :tvOrientation="tv"
+          :pictures="pictures"
+          @showDeleteDialog="showDeleteDialog"
+        ></base-images-container>
         <base-upload-media-container>
           <div class="image-upload-tooltip-label">
             <div class="tooltip-container">
               <img class="fas fa-exclamation-circle tooltip" />
+              <!-- IF DEVICE TYPE IS VERTICAL TV -->
               <span class="tooltiptext">
-                {{ $t("tooltipAddingNewTabletImage") }}
+                {{ $t("tooltipAddingNewVerticalTVImage") }}
               </span>
             </div>
+            <!-- IF MEDIA TYPE IS IMAGES -->
             <label class="choose-image-lbl">
               {{ $t("addingNewImages") }}
             </label>
@@ -29,7 +37,7 @@
               class="image-select"
               ref="fileInput"
               type="file"
-              accept="image/jpeg, image/png, image/gif"
+              accept="image/jpeg, image/png, image/gif, *"
               @input="pickFile"
               @change="clearFileSelection"
             /><img class="fas fa-image" />{{ $t("chooseImage") }}</label
@@ -98,12 +106,14 @@
 import i18n from "@/i18n";
 import { Location } from "./../enums/location.js";
 import { Media } from "./../enums/media.js";
+import { TV } from "./../enums/tv.js";
 
 export default {
   data() {
     return {
-      locationType: Location.Tablet,
+      locationType: Location.TV,
       mediaType: Media.Image,
+      tv: TV.Vertical,
       error: false,
       dialogTitle: null,
       dialogMessage: null,
@@ -123,7 +133,7 @@ export default {
       return this.$store.getters["pictures/pictures"];
     },
     locations() {
-      return this.$store.getters["tabletLocations/tabletLocations"];
+      return this.$store.getters["tvLocations/tvLocations"];
     },
     selectedClassroomID() {
       return parseInt(this.$route.params.classroomID);
@@ -253,14 +263,14 @@ export default {
             var img = new Image();
             img.src = e.target.result;
             img.onload = () => {
-              if (img.width === 800 && img.height === 1240) {
+              if (img.width === 1080 && img.height === 1920) {
                 this.previewImage = e.target.result;
                 this.previewImageType = e.target.result.type;
               } else {
                 this.error = true;
                 this.dialogTitle = i18n.global.t("error");
                 this.dialogMessage = i18n.global.t(
-                  "errorWrongImageResolutionForTablet"
+                  "errorWrongImageResolutionForVerticalTV"
                 );
               }
             };
