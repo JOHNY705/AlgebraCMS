@@ -11,25 +11,23 @@
       >
       </base-titles-container>
       <base-media-and-upload-container>
-        <base-images-container
+        <base-media-container
           :locationType="locationType"
           :mediaType="mediaType"
-          :tvOrientation="tv"
+          :tvType="tvType"
           :pictures="pictures"
           @showDeleteDialog="showDeleteDialog"
-        ></base-images-container>
-        <base-upload-media-container>
+        ></base-media-container>
+        <base-upload-media-container :location="locationType" :tvType="tvType"  v-if="tvType === tvEnum.Vertical">
           <div class="image-upload-tooltip-label">
             <div class="tooltip-container">
               <img class="fas fa-exclamation-circle tooltip" />
-              <!-- IF DEVICE TYPE IS VERTICAL TV -->
               <span class="tooltiptext">
-                {{ $t("tooltipAddingNewVerticalTVImage") }}
+                {{ $t("tooltipAddingNew" + tvType + locationType + mediaType) }}
               </span>
             </div>
-            <!-- IF MEDIA TYPE IS IMAGES -->
             <label class="choose-image-lbl">
-              {{ $t("addingNewImages") }}
+              {{ $t("addingNew" + mediaType + "s") }}
             </label>
           </div>
           <label class="image-upload"
@@ -66,7 +64,7 @@
               <span
                 v-if="pictures.length === 5"
                 class="add-image-btn-tooltiptext"
-                >{{ $t("tooltipMaxNumberOfImages") }}</span
+                >{{ $t("tooltipMaxNumberOf" + tvType + locationType + mediaType) }}</span
               >
               <img class="fa-solid fa-circle-plus" />{{ $t("addImage") }}
             </button>
@@ -111,9 +109,10 @@ import { TV } from "./../enums/tv.js";
 export default {
   data() {
     return {
+      tvEnum: TV,
       locationType: Location.TV,
       mediaType: Media.Image,
-      tv: TV.Vertical,
+      tvType: TV.Vertical,
       error: false,
       dialogTitle: null,
       dialogMessage: null,
@@ -182,7 +181,7 @@ export default {
         var imageImagePreview = document.getElementById("image-preview");
         if (imageImagePreview !== null) {
           imageImagePreview.style.height =
-            imageImagePreview.offsetWidth * 1.55 + "px";
+            imageImagePreview.offsetWidth * 1.78 + "px";
         }
       });
 
@@ -190,7 +189,7 @@ export default {
         let imageImagePreview = this.document.getElementById("image-preview");
         if (imageImagePreview !== null) {
           imageImagePreview.style.height =
-            imageImagePreview.offsetWidth * 1.55 + "px";
+            imageImagePreview.offsetWidth * 1.78 + "px";
         }
       });
     },
@@ -332,7 +331,7 @@ ul li {
 }
 
 .add-image-btn-container {
-  width: 77.61%;
+  width: 77%;
 }
 
 .add-image-btn {
@@ -401,8 +400,7 @@ ul li {
   background-repeat: no-repeat;
   background-position: center center;
   border-radius: 0.5rem;
-  height: 75%;
-  width: 77.61%;
+  width: 69%;
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
 }
@@ -426,7 +424,7 @@ input[type="file"] {
 
 .image-upload {
   background: rgb(221, 111, 38);
-  width: 77.61%;
+  width: 77%;
   height: 2.9rem;
   padding-top: 0.4rem;
   font-size: 1.5rem;
@@ -503,6 +501,20 @@ input[type="file"] {
   text-align: center;
   justify-content: center;
   display: flex;
+}
+
+@media screen and (min-width: 1800px) {
+  .image-preview {
+    width: 81%;
+  }
+
+  .add-image-btn-container {
+    width: 81%;
+  }
+
+  .image-upload {
+    width: 81%;
+  }
 }
 
 @media screen and (max-width: 1279px) {

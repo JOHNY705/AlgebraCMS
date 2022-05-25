@@ -1,11 +1,35 @@
 <template>
-  <div class="image-upload-container">
+  <div v-if="location === locationEnum.Tablet || tvType === tvEnum.Vertical || tvType === tvEnum.Schedule" class="vertical-image-upload-container">
     <slot></slot>
   </div>
 </template>
 
+<script>
+import { TV } from "./../../enums/tv.js";
+import { Location } from "./../../enums/location.js";
+
+export default {
+  data() {
+    return {
+      locationEnum: Location,
+      tvEnum: TV,
+    }
+  },
+  props: {
+    location: {
+      type: String,
+      required: true
+    },
+    tvType: {
+      type: String,
+      required: false
+    }
+  }
+}
+</script>
+
 <style scoped>
-.image-upload-container {
+.vertical-image-upload-container {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -21,7 +45,7 @@
 
 
 @media screen and (max-width: 1279px) {
-  .image-upload-container {
+  .vertical-image-upload-container {
     width: 100%;
     margin: 0;
     margin-top: 1rem;
@@ -33,7 +57,7 @@
 }
 
 @media screen and (max-width: 900px) {
-  .image-upload-container {
+  .vertical-image-upload-container {
     width: 100%;
     margin: 0;
     margin-top: 1rem;

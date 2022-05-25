@@ -11,8 +11,13 @@
       >
       </base-titles-container>
       <base-media-and-upload-container>
-      <base-images-container :locationType="locationType" :mediaType="mediaType" :pictures="pictures" @showDeleteDialog="showDeleteDialog"></base-images-container>
-        <base-upload-media-container>
+        <base-media-container
+          :locationType="locationType"
+          :mediaType="mediaType"
+          :pictures="pictures"
+          @showDeleteDialog="showDeleteDialog"
+        ></base-media-container>
+        <base-upload-media-container :location="locationType">
           <div class="image-upload-tooltip-label">
             <div class="tooltip-container">
               <img class="fas fa-exclamation-circle tooltip" />
@@ -56,10 +61,17 @@
               :disabled="!previewImage || pictures.length === 5"
             >
               <span
-                v-if="pictures.length === 5"
+                v-if="pictures.length === 5 && selectedClassroomID !== 0"
                 class="add-image-btn-tooltiptext"
-                >{{ $t("tooltipMaxNumberOfImages") }}</span
-              >
+                >{{ $t("tooltipMaxNumberOfTabletImage") }}
+              </span>
+
+              <span
+                v-else-if="pictures.length === 5 && selectedClassroomID === 0"
+                class="add-image-btn-tooltiptext"
+                >{{ $t("tooltipMaxNumberOfSharedTabletImage") }}
+              </span>
+
               <img class="fa-solid fa-circle-plus" />{{ $t("addImage") }}
             </button>
           </div>

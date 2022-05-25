@@ -1,11 +1,11 @@
 <template>
-  <div class="images-and-upload-container">
+  <div class="media-and-upload-container">
     <slot></slot>
   </div>
 </template>
 
 <style scoped>
-.images-and-upload-container {
+.media-and-upload-container {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -14,7 +14,7 @@
 }
 
 @media screen and (max-width: 1279px) {
-  .images-and-upload-container {
+  .media-and-upload-container {
     flex-direction: column;
   }
 }

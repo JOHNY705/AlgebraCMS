@@ -1,7 +1,7 @@
 <template>
-  <div class="images-container">
+  <div v-if="locationType === locationEnum.Tablet || tvType === tvEnum.Vertical || tvType === tvEnum.Schedule" class="vertical-images-container">
     <h3 class="images-title">
-      {{ $t("current" + mediaType + tvOrientation + locationType) }}
+      {{ $t("current" + mediaType + tvType + locationType) }}
     </h3>
     <div v-if="pictures.length > 0" class="images">
       <div class="image-card" v-for="picture in pictures" :key="picture.id">
@@ -23,30 +23,39 @@
       </div>
     </div>
     <div v-else class="title-no-images">
-      <h2>{{ $t("noImagesForClassroom") }}</h2>
+      <h2>{{ $t("no" + mediaType + locationType) }}</h2>
     </div>
   </div>
 </template>
 
 <script>
+import { TV } from "./../../enums/tv.js";
+import { Location } from "./../../enums/location.js";
+
 export default {
+  data() {
+    return {
+      locationEnum: Location,
+      tvEnum: TV,
+    };
+  },
   props: {
     locationType: {
       type: String,
-      required: true
+      required: true,
     },
     mediaType: {
       type: String,
-      required: true
+      required: true,
     },
-    tvOrientation: {
+    tvType: {
       type: String,
       required: false,
-      default: ""
+      default: "",
     },
     pictures: {
       type: Array,
-      required: false
+      required: false,
     },
   },
   methods: {
@@ -58,7 +67,7 @@ export default {
 </script>
 
 <style scoped>
-.images-container {
+.vertical-images-container {
   border-radius: 0.5rem;
   display: flex;
   flex-direction: column;
@@ -160,7 +169,7 @@ export default {
 }
 
 @media screen and (max-width: 1279px) {
-  .images-container {
+  .vertical-images-container {
     width: 100%;
     margin: 0;
     height: 50%;

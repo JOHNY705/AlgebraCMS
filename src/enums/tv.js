@@ -1,4 +1,5 @@
 export const TV = {
     Vertical: 'Vertical',
-    Horizontal: 'Horizontal'
+    Horizontal: 'Horizontal',
+    Schedule: 'Schedule'
 }
