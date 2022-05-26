@@ -10,7 +10,7 @@
         :cityLocationTitle="selectedCityAndAddress"
       >
       </base-titles-container>
-      <base-media-and-upload-container>
+      <base-media-and-upload-container :locationType="locationType" :tvType="tvType">
         <base-media-container
           :locationType="locationType"
           :mediaType="mediaType"
@@ -38,7 +38,7 @@
               accept="image/jpeg, image/png, image/gif, *"
               @input="pickFile"
               @change="clearFileSelection"
-            /><img class="fas fa-image" />{{ $t("chooseImage") }}</label
+            /><img class="fas fa-image" />{{ $t("choose" + mediaType) }}</label
           >
           <div
             id="image-preview"
@@ -54,7 +54,7 @@
                 : `url(${require('@/assets/image-icon.png')})`,
             }"
           ></div>
-          <div class="add-image-btn-container">
+          <div class="add-media-btn-container">
             <button
               class="add-image-btn"
               :class="{ active: previewImage && pictures.length < 5 }"
@@ -66,7 +66,59 @@
                 class="add-image-btn-tooltiptext"
                 >{{ $t("tooltipMaxNumberOf" + tvType + locationType + mediaType) }}</span
               >
-              <img class="fa-solid fa-circle-plus" />{{ $t("addImage") }}
+              <img class="fa-solid fa-circle-plus" />{{ $t("add" + mediaType) }}
+            </button>
+          </div>
+        </base-upload-media-container>
+        <base-upload-media-container :location="locationType" :tvType="tvType"  v-if="tvType === tvEnum.Horizontal">
+          <div class="image-upload-tooltip-label">
+            <div class="tooltip-container">
+              <img class="fas fa-exclamation-circle tooltip" />
+              <span class="tooltiptext">
+                {{ $t("tooltipAddingNew" + tvType + locationType + mediaType) }}
+              </span>
+            </div>
+            <label class="choose-image-lbl">
+              {{ $t("addingNew" + mediaType + "s") }}
+            </label>
+          </div>
+          <label class="horizontal-media-upload"
+            ><input
+              class="image-select"
+              ref="fileInput"
+              type="file"
+              accept="image/jpeg, image/png, image/gif, *"
+              @input="pickFile"
+              @change="clearFileSelection"
+            /><img class="fas fa-image horizontal-media-icon" />{{ $t("choose" + mediaType) }}</label
+          >
+          <div
+            id="horizontal-image-preview"
+            class="horizontal-image-preview"
+            @dragenter.prevent="toggleDropzone"
+            @dragleave.prevent="toggleDropzone"
+            @dragover.prevent
+            @drop.prevent="dragnDropFile"
+            :class="{ dropzone: isDropzoneActive }"
+            :style="{
+              'background-image': previewImage
+                ? `url(${previewImage})`
+                : `url(${require('@/assets/image-icon.png')})`,
+            }"
+          ></div>
+          <div class="add-horizontal-media-btn-container">
+            <button
+              class="add-image-btn"
+              :class="{ active: previewImage && pictures.length < 5 }"
+              @click="uploadPicture"
+              :disabled="!previewImage || pictures.length === 5"
+            >
+              <span
+                v-if="pictures.length === 5"
+                class="add-image-btn-tooltiptext"
+                >{{ $t("tooltipMaxNumberOf" + tvType + locationType + mediaType) }}</span
+              >
+              <img class="fa-solid fa-circle-plus" />{{ $t("add" + mediaType) }}
             </button>
           </div>
         </base-upload-media-container>
@@ -112,7 +164,7 @@ export default {
       tvEnum: TV,
       locationType: Location.TV,
       mediaType: Media.Image,
-      tvType: TV.Vertical,
+      tvType: TV.Horizontal,
       error: false,
       dialogTitle: null,
       dialogMessage: null,
@@ -192,6 +244,22 @@ export default {
             imageImagePreview.offsetWidth * 1.78 + "px";
         }
       });
+
+      this.$nextTick(() => {
+        var imageImagePreview = document.getElementById("horizontal-image-preview");
+        if (imageImagePreview !== null) {
+          imageImagePreview.style.height =
+            imageImagePreview.offsetWidth * 0.563 + "px";
+        }
+      });
+
+      window.addEventListener("resize", function () {
+        let imageImagePreview = this.document.getElementById("horizontal-image-preview");
+        if (imageImagePreview !== null) {
+          imageImagePreview.style.height =
+            imageImagePreview.offsetWidth * 0.563 + "px";
+        }
+      });
     },
     handleDialog() {
       this.error = false;
@@ -262,7 +330,7 @@ export default {
             var img = new Image();
             img.src = e.target.result;
             img.onload = () => {
-              if (img.width === 1080 && img.height === 1920) {
+              if (img.width === 1920 && img.height === 1080) {
                 this.previewImage = e.target.result;
                 this.previewImageType = e.target.result.type;
               } else {
@@ -330,7 +398,7 @@ ul li {
   margin-right: 0.6rem;
 }
 
-.add-image-btn-container {
+.add-media-btn-container {
   width: 77%;
 }
 
@@ -426,8 +494,8 @@ input[type="file"] {
   background: rgb(221, 111, 38);
   width: 77%;
   height: 2.9rem;
-  padding-top: 0.4rem;
   font-size: 1.5rem;
+  padding-top: 0.4rem;
   border-radius: 0.5rem;
   text-align: center;
   align-items: center;
@@ -503,12 +571,56 @@ input[type="file"] {
   display: flex;
 }
 
+/* --------------------------------------------------------------- */
+
+.horizontal-media-upload {
+  background: rgb(221, 111, 38);
+  width: 20%;
+  height: 2.9rem;
+  font-size: 1.5rem;
+  padding-top: 0.4rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  align-items: center;
+  color: white;
+  transition: 0.3s;
+}
+
+.horizontal-media-upload:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.horizontal-media-icon {
+  padding-top: 0.2rem;
+}
+
+.horizontal-image-preview {
+  position: relative;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  border-radius: 0.5rem;
+  width: 42%;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.horizontal-image-preview.dropzone {
+  border: 3px dashed rgb(203, 204, 214);
+  border-radius: 0.5rem;
+}
+
+.add-horizontal-media-btn-container {
+  width: 20%;
+}
+
 @media screen and (min-width: 1800px) {
   .image-preview {
     width: 81%;
   }
 
-  .add-image-btn-container {
+  .add-media-btn-container {
     width: 81%;
   }
 
@@ -536,7 +648,7 @@ input[type="file"] {
     margin: 0 2rem;
   }
 
-  .add-image-btn-container {
+  .add-media-btn-container {
     width: 30%;
   }
 
@@ -556,7 +668,7 @@ input[type="file"] {
     min-width: 18rem;
   }
 
-  .add-image-btn-container {
+  .add-media-btn-container {
     display: flex;
     justify-content: center;
   }

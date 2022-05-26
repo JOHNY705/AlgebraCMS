@@ -26,6 +26,14 @@
       <h2>{{ $t("no" + mediaType + locationType) }}</h2>
     </div>
   </div>
+  <div v-else-if="tvType === tvEnum.Horizontal" class="horizontal-media-container">
+    <h3 class="images-title">
+      {{ $t("current" + mediaType + tvType + locationType) }}
+    </h3>
+    <div class="title-no-images">
+      <h2>{{ $t("no" + mediaType + locationType) }}</h2>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -166,6 +174,20 @@ export default {
   font-size: 1.6rem;
   text-align: center;
   font-weight: 400;
+}
+
+.horizontal-media-container {
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1.5rem;
+  width: 100%;
+  height: 100%;
+  background: white;
+  margin-right: 0.5rem;
+  box-shadow: 0 0 10px rgb(0 0 0 / 0.2);
 }
 
 @media screen and (max-width: 1279px) {

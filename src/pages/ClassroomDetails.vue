@@ -10,7 +10,7 @@
         :cityLocationTitle="selectedCityAndAddress"
       >
       </base-titles-container>
-      <base-media-and-upload-container>
+      <base-media-and-upload-container :locationType="locationType">
         <base-media-container
           :locationType="locationType"
           :mediaType="mediaType"

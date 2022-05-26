@@ -2,6 +2,9 @@
   <div v-if="location === locationEnum.Tablet || tvType === tvEnum.Vertical || tvType === tvEnum.Schedule" class="vertical-image-upload-container">
     <slot></slot>
   </div>
+  <div v-else-if="tvType === tvEnum.Horizontal" class="horizontal-media-upload-container">
+    <slot></slot>
+  </div>
 </template>
 
 <script>
@@ -43,6 +46,20 @@ export default {
   box-shadow: 0 0 10px rgb(0 0 0 / 0.2);
 }
 
+.horizontal-media-upload-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 1.5rem;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background: white;
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+  box-shadow: 0 0 10px rgb(0 0 0 / 0.2);
+}
 
 @media screen and (max-width: 1279px) {
   .vertical-image-upload-container {
