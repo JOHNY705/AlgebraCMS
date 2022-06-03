@@ -26,7 +26,7 @@
               </span>
             </div>
             <label class="choose-image-lbl">
-              {{ $t("addingNewImages") }}
+              {{ $t("addingNewTabletMedia") }}
             </label>
           </div>
           <label class="image-upload"

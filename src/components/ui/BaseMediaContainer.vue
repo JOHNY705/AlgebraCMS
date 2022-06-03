@@ -1,7 +1,7 @@
 <template>
   <div v-if="locationType === locationEnum.Tablet || tvType === tvEnum.Vertical || tvType === tvEnum.Schedule" class="vertical-images-container">
     <h3 class="images-title">
-      {{ $t("current" + mediaType + tvType + locationType) }}
+      {{ $t("current" + tvType + locationType + "Content") }}
     </h3>
     <div v-if="pictures.length > 0" class="images">
       <div class="image-card" v-for="picture in pictures" :key="picture.id">
@@ -28,10 +28,10 @@
   </div>
   <div v-else-if="tvType === tvEnum.Horizontal" class="horizontal-media-container">
     <h3 class="images-title">
-      {{ $t("current" + mediaType + tvType + locationType) }}
+      {{ $t("current" + tvType + locationType + "Content") }}
     </h3>
     <div class="title-no-images">
-      <h2>{{ $t("no" + mediaType + locationType) }}</h2>
+      <h2>{{ $t("noContent" + tvType + locationType) }}</h2>
     </div>
   </div>
 </template>

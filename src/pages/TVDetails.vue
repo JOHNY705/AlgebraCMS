@@ -18,16 +18,16 @@
           :pictures="pictures"
           @showDeleteDialog="showDeleteDialog"
         ></base-media-container>
-        <base-upload-media-container :location="locationType" :tvType="tvType"  v-if="tvType === tvEnum.Vertical">
+        <base-upload-media-container :location="locationType" :tvType="tvType">
           <div class="image-upload-tooltip-label">
             <div class="tooltip-container">
               <img class="fas fa-exclamation-circle tooltip" />
               <span class="tooltiptext">
-                {{ $t("tooltipAddingNew" + tvType + locationType + mediaType) }}
+                {{ $t("tooltipAddingNew" + tvType + locationType + "Media") }}
               </span>
             </div>
             <label class="choose-image-lbl">
-              {{ $t("addingNew" + mediaType + "s") }}
+              {{ $t("addingNew" + tvType + locationType + "Media") }}
             </label>
           </div>
           <label class="image-upload"
@@ -38,7 +38,7 @@
               accept="image/jpeg, image/png, image/gif, *"
               @input="pickFile"
               @change="clearFileSelection"
-            /><img class="fas fa-image" />{{ $t("choose" + mediaType) }}</label
+            /><img class="fas fa-image" />{{ $t("choose" + tvType + locationType + "Media") }}</label
           >
           <div
             id="image-preview"
@@ -66,11 +66,11 @@
                 class="add-image-btn-tooltiptext"
                 >{{ $t("tooltipMaxNumberOf" + tvType + locationType + mediaType) }}</span
               >
-              <img class="fa-solid fa-circle-plus" />{{ $t("add" + mediaType) }}
+              <img class="fa-solid fa-circle-plus" />{{ $t("add" + tvType + locationType + "Media") }}
             </button>
           </div>
         </base-upload-media-container>
-        <base-upload-media-container :location="locationType" :tvType="tvType"  v-if="tvType === tvEnum.Horizontal">
+        <!-- <base-upload-media-container :location="locationType" :tvType="tvType"  v-if="tvType === tvEnum.Horizontal">
           <div class="image-upload-tooltip-label">
             <div class="tooltip-container">
               <img class="fas fa-exclamation-circle tooltip" />
@@ -121,17 +121,18 @@
               <img class="fa-solid fa-circle-plus" />{{ $t("add" + mediaType) }}
             </button>
           </div>
-        </base-upload-media-container>
+        </base-upload-media-container> -->
       </base-media-and-upload-container>
       <base-spinner
         v-if="isLoadingAddDelete"
         :spinnerWithBackground="isLoadingAddDelete"
       ></base-spinner>
       <base-dialog
-        :show="error || isDeleteDialogShown"
+        :show="error || isDeleteDialogShown || true"
         :title="dialogTitle"
         :message="dialogMessage"
         :dialogWarning="error || isDeleteDialogShown"
+        :dialogTVMapLocations="dialogTVMapLocations"
         @close="handleDialog"
       >
         <template v-slot:footer v-if="error">
@@ -164,10 +165,11 @@ export default {
       tvEnum: TV,
       locationType: Location.TV,
       mediaType: Media.Image,
-      tvType: TV.Horizontal,
+      tvType: TV.Vertical,
       error: false,
       dialogTitle: null,
       dialogMessage: null,
+      dialogTVMapLocations: true,
       images: null,
       previewImage: null,
       previewImageType: null,
@@ -330,7 +332,7 @@ export default {
             var img = new Image();
             img.src = e.target.result;
             img.onload = () => {
-              if (img.width === 1920 && img.height === 1080) {
+              if (img.width === 1080 && img.height === 1920) {
                 this.previewImage = e.target.result;
                 this.previewImageType = e.target.result.type;
               } else {
@@ -576,6 +578,7 @@ input[type="file"] {
 .horizontal-media-upload {
   background: rgb(221, 111, 38);
   width: 20%;
+  min-width: 15rem;
   height: 2.9rem;
   font-size: 1.5rem;
   padding-top: 0.4rem;
@@ -613,6 +616,7 @@ input[type="file"] {
 
 .add-horizontal-media-btn-container {
   width: 20%;
+  min-width: 15rem;
 }
 
 @media screen and (min-width: 1800px) {
