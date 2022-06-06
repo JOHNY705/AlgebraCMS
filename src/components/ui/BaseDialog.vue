@@ -22,7 +22,7 @@
               <button class="btn-tab-floor" @click="openFloor($event, 'Floor D')">{{ $t("floorD") }}</button>
               <button class="btn-tab-floor" @click="openFloor($event, 'Floor E')">{{ $t("floorE") }}</button>
             </div>
-            <div id="Floor A" class="modal-tv-map-locations-card-floor" style="display: flex;">
+            <div id="Floor A" class="modal-tv-map-locations-card-floor"  style="display: flex;">
               <div
                 class="modal-tv-map-locations-card-locations-image-A"
                 :style="{
@@ -36,7 +36,7 @@
                 </div>
               </div>
             </div>
-            <div id="Floor B" class="modal-tv-map-locations-card-floor">
+            <div id="Floor B" class="modal-tv-map-locations-card-floor ">
               <div
                 class="modal-tv-map-locations-card-locations-image-B"
                 :style="{
@@ -218,9 +218,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  /* width: 98rem; */
   width: 110rem;
-  /* height: 93vh; */
   height: 70rem;
   min-width: 110rem;
   min-height: 70rem;
@@ -267,7 +265,7 @@ export default {
 .floor-tabs {
   display: flex;
   width: 100%;
-  justify-content: space-evenly;
+  justify-content: center;
   background: linear-gradient(45deg, rgb(221,111,38), rgb(195,30,97)) center bottom no-repeat;
   background: -webkit-linear-gradient(left bottom, #DD6F26 0%, #C31E61 100%) center bottom no-repeat;
   background: -moz-linear-gradient(left bottom, #DD6F26 0%, #C31E61 100%) center bottom no-repeat;
@@ -342,108 +340,108 @@ export default {
 
 .modal-tv-map-locations-card-locations-tv-TV010A {
   right: 23rem;
-  top: 17.8rem;
+  top: 19.3rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV0190A1 {
   right: 42.5rem;
-  bottom: 18.6rem;
+  bottom: 20.2rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV0190A2 {
   right: 38.4rem;
-  bottom: 18.6rem;
+  bottom: 20.2rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV430B1 {
-  left: 43.9rem;
-  bottom: 21.1rem;
+  left: 44.2rem;
+  bottom: 22.6rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV430B2 {
-  left: 45.8rem;
-  bottom: 22.3rem;
+  left: 46rem;
+  bottom: 23.7rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV430B3 {
   width: 2.6rem;
-  left: 43.1rem;
-  bottom: 22.3rem;
+  left: 43.3rem;
+  bottom: 23.7rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV430B4 {
   height: 4rem;
   width: 1rem;
-  right: 45.1rem;
-  top: 14.5rem;
+  right: 45.3rem;
+  top: 16.2rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV020B1 {
   width: 2.6rem;
   right: 25.6rem;
-  bottom: 24.6rem;
+  bottom: 26rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV020B2 {
   width: 2.6rem;
   right: 28.3rem;
-  bottom: 24.6rem;
+  bottom: 26rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV020B3 {
   width: 2.6rem;
   right: 31rem;
-  bottom: 24.6rem;
+  bottom: 26rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV020B4 {
-  right: 17.8rem;
-  bottom: 25.3rem;
+  right: 18rem;
+  bottom: 26.9rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV020B5 {
-  right: 22.6rem;
-  top: 15.8rem;
+  right: 22.7rem;
+  top: 17.5rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV470B1 {
-  right: 34.1rem;
-  bottom: 21.5rem;
+  right: 34.4rem;
+  bottom: 23rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV470B2 {
-  right: 38.2rem;
-  bottom: 21.5rem;
+  right: 38.5rem;
+  bottom: 23rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV180C1 {
-  right: 38.3rem;
-  bottom: 22.8rem;
+  right: 38.5rem;
+  bottom: 24.3rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV180C2 {
-  right: 34.1rem;
-  bottom: 22.8rem;
+  right: 34.3rem;
+  bottom: 24.3rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV180D1 {
-  right: 38.3rem;
-  bottom: 23rem;
+  right: 38.6rem;
+  bottom: 24.6rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV180D2 {
-  right: 34.2rem;
-  bottom: 23rem;
+  right: 34.5rem;
+  bottom: 24.6rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV180E1 {
-  right: 39.3rem;
-  bottom: 23rem;
+  right: 39.6rem;
+  bottom: 24.6rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV180E2 {
-  right: 35.2rem;
-  bottom: 23rem;
+  right: 35.4rem;
+  bottom: 24.6rem;
 }
 
 .close-icon-container {
