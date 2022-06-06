@@ -63,5 +63,10 @@
   "errorWhileLoggingIn": "An error occured while trying to log in.",
   "accessDenied": "Access Denied",
   "accessDeniedDescription": "You do not have the permission to access this page.",
-  "returnToHomePage": "Return to home page"
+  "returnToHomePage": "Return to home page",
+  "floorA": "Floor -1(A)",
+  "floorB": "Floor 0(B)",
+  "floorC": "Floor 1(C)",
+  "floorD": "Floor 2(D)",
+  "floorE": "Floor 3(E)"
 }

@@ -128,14 +128,14 @@
         :spinnerWithBackground="isLoadingAddDelete"
       ></base-spinner>
       <base-dialog
-        :show="error || isDeleteDialogShown || true"
+        :show="error || isDeleteDialogShown || dialogTVMapLocations"
         :title="dialogTitle"
         :message="dialogMessage"
         :dialogWarning="error || isDeleteDialogShown"
         :dialogTVMapLocations="dialogTVMapLocations"
         @close="handleDialog"
       >
-        <template v-slot:footer v-if="error">
+        <template v-slot:footer v-if="error || dialogTVMapLocations">
           <button class="close-dialog-btn" @click="handleDialog">
             Zatvori
           </button>

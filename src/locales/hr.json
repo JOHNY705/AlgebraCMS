@@ -66,5 +66,10 @@
   "errorWhileLoggingIn": "Došlo je do greške prilikom prijave u sustav.",
   "accessDenied": "Zabranjen pristup",
   "accessDeniedDescription": "Nemate dopuštenje za pristup ovoj stranici.",
-  "returnToHomePage": "Povratak na početnu stranicu"
+  "returnToHomePage": "Povratak na početnu stranicu",
+  "floorA": "Etaža -1(A)",
+  "floorB": "Etaža 0(B)",
+  "floorC": "Etaža 1(C)",
+  "floorD": "Etaža 2(D)",
+  "floorE": "Etaža 3(E)"
 }

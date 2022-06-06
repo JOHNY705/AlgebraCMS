@@ -15,9 +15,14 @@
             </h2>
           </div>
           <div class="modal-tv-map-locations-body">
-            <div class="modal-tv-map-locations-card">
-              <h2 class="modal-tv-map-locations-card-title">Etaža -1 (A)</h2>
-              <div class="modal-tv-map-locations-card-title-delimiter"></div>
+            <div class="floor-tabs">
+              <button class="btn-tab-floor btn-floor-active" @click="openFloor($event, 'Floor A')">{{ $t("floorA") }}</button>
+              <button class="btn-tab-floor" @click="openFloor($event, 'Floor B')">{{ $t("floorB") }}</button>
+              <button class="btn-tab-floor" @click="openFloor($event, 'Floor C')">{{ $t("floorC") }}</button>
+              <button class="btn-tab-floor" @click="openFloor($event, 'Floor D')">{{ $t("floorD") }}</button>
+              <button class="btn-tab-floor" @click="openFloor($event, 'Floor E')">{{ $t("floorE") }}</button>
+            </div>
+            <div id="Floor A" class="modal-tv-map-locations-card-floor" style="display: flex;">
               <div
                 class="modal-tv-map-locations-card-locations-image-A"
                 :style="{
@@ -31,9 +36,7 @@
                 </div>
               </div>
             </div>
-            <div class="modal-tv-map-locations-card">
-              <h2 class="modal-tv-map-locations-card-title">Etaža 0 (B)</h2>
-              <div class="modal-tv-map-locations-card-title-delimiter"></div>
+            <div id="Floor B" class="modal-tv-map-locations-card-floor">
               <div
                 class="modal-tv-map-locations-card-locations-image-B"
                 :style="{
@@ -55,9 +58,7 @@
                 </div>
               </div>
             </div>
-            <div class="modal-tv-map-locations-card">
-              <h2 class="modal-tv-map-locations-card-title">Etaža 1 (C)</h2>
-              <div class="modal-tv-map-locations-card-title-delimiter"></div>
+            <div id="Floor C" class="modal-tv-map-locations-card-floor">
               <div
                 class="modal-tv-map-locations-card-locations-image-C"
                 :style="{
@@ -70,9 +71,7 @@
                 </div>
               </div>
             </div>
-            <div class="modal-tv-map-locations-card">
-              <h2 class="modal-tv-map-locations-card-title">Etaža 2 (D)</h2>
-              <div class="modal-tv-map-locations-card-title-delimiter"></div>
+            <div id="Floor D" class="modal-tv-map-locations-card-floor">
               <div
                 class="modal-tv-map-locations-card-locations-image-D"
                 :style="{
@@ -85,9 +84,7 @@
                 </div>
               </div>
             </div>
-            <div class="modal-tv-map-locations-card">
-              <h2 class="modal-tv-map-locations-card-title">Etaža 3 (E)</h2>
-              <div class="modal-tv-map-locations-card-title-delimiter"></div>
+            <div id="Floor E" class="modal-tv-map-locations-card-floor">
               <div
                 class="modal-tv-map-locations-card-locations-image-E"
                 :style="{
@@ -160,6 +157,21 @@ export default {
     close() {
       this.$emit("close");
     },
+    openFloor(event, floorName) {
+      var i, floors, tablinks;
+
+      floors = document.getElementsByClassName("modal-tv-map-locations-card-floor");
+      for (i = 0; i < floors.length; i++) {
+        floors[i].style.display = "none";
+      }
+
+      tablinks = document.getElementsByClassName("btn-tab-floor");
+      for (i = 0; i < floors.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" btn-floor-active", "");
+      }
+      document.getElementById(floorName).style.display = "flex";
+      event.currentTarget.className += " btn-floor-active";
+    }
   },
 };
 </script>
@@ -220,7 +232,7 @@ export default {
   transition: all 0.3s ease;
   background: #ffffff;
   box-shadow: 2px 2px 20px 1px;
-  overflow-y: initial;
+  overflow-y: hidden;
 }
 
 .modal-tv-map-locations-header-title {
@@ -248,43 +260,53 @@ export default {
   width: 100%;
   width: 105rem;
   height: 85%;
-  overflow-y: scroll;
+  overflow-y: hidden;
   overflow-x: hidden;
-  margin-left: 0.6rem;
 }
 
-.modal-tv-map-locations-card {
+.floor-tabs {
   display: flex;
-  flex-direction: column;
-  width: 105rem;
-  height: 53rem;
+  width: 100%;
+  justify-content: space-evenly;
+  background: linear-gradient(45deg, rgb(221,111,38), rgb(195,30,97)) center bottom no-repeat;
+  background: -webkit-linear-gradient(left bottom, #DD6F26 0%, #C31E61 100%) center bottom no-repeat;
+  background: -moz-linear-gradient(left bottom, #DD6F26 0%, #C31E61 100%) center bottom no-repeat;
+  background-size: 92% 0.3rem;
 }
 
-.modal-tv-map-locations-card:not(:first-child) {
-  margin-top: 1rem;
+[class^='btn-tab-floor'] {
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  border: 0;
+  font-family: "Stolzl-Book";
+  font-size: 1.8rem;
+  font-weight: 600;
+  background: transparent;
+  padding: 0.5rem 1rem;
+  transition: 0.3s;
+  margin-bottom: 0.2rem;
 }
 
-/* -----------------------------PRIVREMENO----------------------------- */
-.modal-tv-map-locations-card:first-child, .modal-tv-map-locations-card:nth-child(2), 
-.modal-tv-map-locations-card:nth-child(3), .modal-tv-map-locations-card:nth-child(4) {
-  display: none;
-}
-/* -----------------------------PRIVREMENO----------------------------- */
-
-.modal-tv-map-locations-card-title {
-  font-size: 1.9rem;
-  text-align: center;
-  margin-bottom: 0.5rem;
-}
-
-.modal-tv-map-locations-card-title-delimiter {
-  width: 90%;
-  height: 0.3rem;
-  align-self: center;
-  margin-bottom: 0.5rem;
+[class^='btn-tab-floor']:hover {
+  cursor: pointer;
+  color: white;
   background: linear-gradient(45deg, rgb(227, 118, 38, 1), rgb(195, 14, 96, 1));
   background: -webkit-linear-gradient(left bottom, #e37526 0%, #c30e5f 100%);
   background: -moz-linear-gradient(left bottom, #e37526 0%, #c30e5f 100%);
+}
+
+.btn-floor-active {
+  color: white;
+  background: linear-gradient(45deg, rgb(227, 118, 38, 1), rgb(195, 14, 96, 1));
+  background: -webkit-linear-gradient(left bottom, #e37526 0%, #c30e5f 100%);
+  background: -moz-linear-gradient(left bottom, #e37526 0%, #c30e5f 100%);
+}
+
+[class^='modal-tv-map-locations-card-floor']{
+  display: none;
+  flex-direction: column;
+  width: 105rem;
+  height: 53rem;
 }
 
 [class^='modal-tv-map-locations-card-locations-image'] {
@@ -295,14 +317,6 @@ export default {
   background-position: center;
   background-size: contain;
 }
-
-/* .modal-tv-map-locations-card-locations-image-A {
-  height: 51rem;
-}
-
-.modal-tv-map-locations-card-locations-image-B {
-  height: 51rem;
-} */
 
 .modal-tv-map-locations-card-locations {
   position: relative;
@@ -431,8 +445,6 @@ export default {
   right: 35.2rem;
   bottom: 23rem;
 }
-
-/* ----------------------------------------TELEVIZORI---------------------------------------- */
 
 .close-icon-container {
   position: absolute;
