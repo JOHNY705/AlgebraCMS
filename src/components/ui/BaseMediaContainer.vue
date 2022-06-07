@@ -1,5 +1,8 @@
 <template>
-  <div v-if="locationType === locationEnum.Tablet || tvType === tvEnum.Vertical || tvType === tvEnum.Schedule" class="vertical-images-container">
+  <div
+    v-if="locationType === locationEnum.Tablet"
+    class="vertical-images-container"
+  >
     <h3 class="images-title">
       {{ $t("current" + tvType + locationType + "Content") }}
     </h3>
@@ -23,10 +26,51 @@
       </div>
     </div>
     <div v-else class="title-no-images">
-      <h2>{{ $t("no" + mediaType + locationType) }}</h2>
+      <h2>{{ $t("noContent" + tvType + locationType) }}</h2>
     </div>
   </div>
-  <div v-else-if="tvType === tvEnum.Horizontal" class="horizontal-media-container">
+  <div
+    v-if="locationType === locationEnum.TV"
+    class="vertical-images-container"
+  >
+    <div class="tooltip-tv-map-title-container">
+      <div class="tooltip-tv-map-container" @click="showMapTVLocations">
+        <img class="fas fa-exclamation-circle tooltip-tv-img" />
+        <span class="tooltip-tv-map-text">
+          {{ $t("mapWithTVLocations") }}
+        </span>
+      </div>
+      <h3 class="images-title">
+        {{ $t("current" + tvType + locationType + "Content") }}
+      </h3>
+    </div>
+    <div v-if="pictures.length > 0" class="images">
+      <div class="image-card" v-for="picture in pictures" :key="picture.id">
+        <div>
+          <img
+            class="tablet-image"
+            :src="`data:image/png;base64,${picture.base64Encoded}`"
+          />
+        </div>
+        <div>
+          <a
+            href="#"
+            class="delete-image-btn"
+            @click.prevent="showDeleteDialog(picture.id)"
+          >
+            <img class="far fa-trash-alt delete-icon" />
+          </a>
+        </div>
+      </div>
+    </div>
+    <div v-else class="title-no-images">
+      <h2>{{ $t("noContent" + tvType + locationType) }}</h2>
+    </div>
+  </div>
+  <div
+    v-else-if="tvType === tvEnum.Horizontal"
+    class="horizontal-media-container"
+  >
     <h3 class="images-title">
       {{ $t("current" + tvType + locationType + "Content") }}
     </h3>
@@ -66,10 +110,14 @@ export default {
       required: false,
     },
   },
+  emits: ['showDeleteDialog', 'showMapTVLocations'],
   methods: {
     showDeleteDialog(pictureId) {
       this.$emit("showDeleteDialog", pictureId);
     },
+    showMapTVLocations() {
+      this.$emit("showMapTVLocations");
+    }
   },
 };
 </script>
@@ -188,6 +236,49 @@ export default {
   background: white;
   margin-right: 0.5rem;
   box-shadow: 0 0 10px rgb(0 0 0 / 0.2);
+}
+
+.tooltip-tv-map-title-container {
+  width: 100%;
+  display: flex;
+  text-align: left;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.tooltip-tv-map-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin: 0;
+}
+
+.tooltip-tv-img {
+  height: 1.7rem;
+  width: 1.7rem;
+  color: rgb(104, 101, 101);
+  margin-right: 0.5rem;
+}
+
+.tooltip-tv-map-text {
+  visibility: hidden;
+  background: black;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  color: white;
+  font-size: 1.3rem;
+  text-align: center;
+  position: absolute;
+  transition: 0.2s ease-in-out;
+  opacity: 0;
+}
+
+.tooltip-tv-map-container:hover .tooltip-tv-map-text {
+  visibility: visible;
+  opacity: 1;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 1279px) {

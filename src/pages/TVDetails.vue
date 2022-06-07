@@ -17,6 +17,7 @@
           :tvType="tvType"
           :pictures="pictures"
           @showDeleteDialog="showDeleteDialog"
+          @showMapTVLocations="showMapTVLocations"
         ></base-media-container>
         <base-upload-media-container :location="locationType" :tvType="tvType">
           <div class="image-upload-tooltip-label">
@@ -169,7 +170,7 @@ export default {
       error: false,
       dialogTitle: null,
       dialogMessage: null,
-      dialogTVMapLocations: true,
+      dialogTVMapLocations: false,
       images: null,
       previewImage: null,
       previewImageType: null,
@@ -266,6 +267,7 @@ export default {
     handleDialog() {
       this.error = false;
       this.isDeleteDialogShown = false;
+      this.dialogTVMapLocations = false;
       this.dialogTitle = null;
       this.dialogMessage = null;
     },
@@ -284,6 +286,9 @@ export default {
       this.isDeleteDialogShown = true;
       this.dialogTitle = i18n.global.t("deleteImage");
       this.dialogMessage = i18n.global.t("confirmDeleteImage");
+    },
+    showMapTVLocations() {
+      this.dialogTVMapLocations = true;
     },
     async deletePicture() {
       this.handleDialog();

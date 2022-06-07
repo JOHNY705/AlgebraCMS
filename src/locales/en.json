@@ -68,5 +68,6 @@
   "floorB": "Floor 0 (B)",
   "floorC": "Floor 1 (C)",
   "floorD": "Floor 2 (D)",
-  "floorE": "Floor 3 (E)"
+  "floorE": "Floor 3 (E)",
+  "mapWithTVLocations": "Map containing TV locations."
 }
