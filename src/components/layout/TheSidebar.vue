@@ -33,17 +33,11 @@
         <a @click.prevent="toggleTVMediaDDL" href="#">
           <img class="fas fa-solid fa-tv tv-icon" />
           {{ $t("contentForTVs") }}
-          <div
-            class="span tableti"
-            :class="{ rotate: isTVMediaDDLActive }"
-          >
+          <div class="span tableti" :class="{ rotate: isTVMediaDDLActive }">
             <span class="fas fa-caret-down"></span>
           </div>
         </a>
-        <ul
-          class="media-tv-show"
-          :class="{ showTVs: isTVMediaDDLActive }"
-        >
+        <ul class="media-tv-show" :class="{ showTVs: isTVMediaDDLActive }">
           <li v-for="location in tvLocations" :key="location.id">
             <a
               class="tableti-slike-ddl-item"
@@ -80,18 +74,37 @@
     <div
       v-for="location in tvLocations"
       :key="location.id"
-      class="slike-tableti-menu"
+      class="slike-televizori-menu"
       :class="{ active: location.isActive }"
     >
-      <ul class="slike-tableti-menu-ul">
-        <li v-for="classroom in location.classrooms" :key="classroom.id">
-          <router-link
-            :to="'/Media/' + location.id + '/TV/' + classroom.id"
-          >
-            {{ classroom.name }}
-          </router-link>
-        </li>
-      </ul>
+      <div class="content-televisions-menu-ul-container">
+        <div class="content-televisions-title-container">
+          <h2 class="content-televisions-title">Vertikalni televizori</h2>
+        </div>
+        <ul class="content-televisions-vertical-ul">
+          <li v-for="tv in location.televisions" :key="tv.id">
+            <router-link
+              v-if="tv.type === tvEnum.Vertical"
+              :to="'/Media/' + location.id + '/TV/' + tv.id"
+            >
+              {{ tv.name }}
+            </router-link>
+          </li>
+        </ul>
+        <div class="content-televisions-title-container">
+          <h2 class="content-televisions-title">Horizontalni televizori</h2>
+        </div>
+        <ul class="content-televisions-vertical-ul">
+          <li v-for="tv in location.televisions" :key="tv.id">
+            <router-link
+              v-if="tv.type === tvEnum.Horizontal"
+              :to="'/Media/' + location.id + '/TV/' + tv.id"
+            >
+              {{ tv.name }}
+            </router-link>
+          </li>
+        </ul>
+      </div>
     </div>
     <!-- TEST -->
     <div class="dev-info">Algebra Dev Team&copy; 2022</div>
@@ -105,7 +118,9 @@
     @close="handleDialog"
   >
     <template v-slot:footer v-if="error">
-      <button class="close-dialog-btn" @click="handleDialog">{{ $t("close") }}</button>
+      <button class="close-dialog-btn" @click="handleDialog">
+        {{ $t("close") }}
+      </button>
     </template>
   </base-dialog>
 </template>
@@ -113,6 +128,7 @@
 <script>
 import i18n from "@/i18n";
 import { Location } from "./../../enums/location.js";
+import { TV } from "./../../enums/tv.js";
 
 export default {
   data() {
@@ -122,6 +138,7 @@ export default {
       error: false,
       dialogTitle: null,
       dialogMessage: null,
+      tvEnum: TV,
     };
   },
   computed: {
@@ -145,8 +162,11 @@ export default {
           location.isActive = false;
         }
       });
-      this.locations.find((location) => location.id === id && location.type === Location.Tablet).isActive =
-        !this.locations.find((location) => location.id === id && location.type === Location.Tablet).isActive;
+      this.locations.find(
+        (location) => location.id === id && location.type === Location.Tablet
+      ).isActive = !this.locations.find(
+        (location) => location.id === id && location.type === Location.Tablet
+      ).isActive;
     },
     toggleMediaTVsMenu(id) {
       this.tvLocations.forEach((location) => {
@@ -154,8 +174,11 @@ export default {
           location.isActive = false;
         }
       });
-      this.tvLocations.find((location) => location.id === id && location.type === Location.TV).isActive =
-        !this.tvLocations.find((location) => location.id === id && location.type === Location.TV).isActive;
+      this.tvLocations.find(
+        (location) => location.id === id && location.type === Location.TV
+      ).isActive = !this.tvLocations.find(
+        (location) => location.id === id && location.type === Location.TV
+      ).isActive;
     },
     closeSlikeTabletiMenu() {
       this.locations.forEach((location) => {
@@ -167,7 +190,7 @@ export default {
         location.isActive = false;
       });
     },
-    async loadLocations() {
+    async loadTabletLocations() {
       try {
         await this.$store.dispatch("tabletLocations/loadTabletLocations");
       } catch (error) {
@@ -192,8 +215,8 @@ export default {
     },
   },
   created() {
-    this.loadLocations();
-    this.loadTVLocations();
+    this.loadTabletLocations();
+    //this.loadTVLocations();
   },
 };
 </script>
@@ -361,7 +384,8 @@ nav ul li a .span.rotate {
   height: 100%;
 }
 
-.slike-tableti-menu ul li {
+.slike-tableti-menu ul li,
+.slike-televizori-menu ul li {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -370,7 +394,8 @@ nav ul li a .span.rotate {
   border-bottom: 0rem solid white;
 }
 
-.slike-tableti-menu ul li a {
+.slike-tableti-menu ul li a,
+.slike-televizori-menu ul li a {
   width: 100%;
   font-size: 1.6rem;
   font-weight: 400;
@@ -382,20 +407,23 @@ nav ul li a .span.rotate {
   transition: 0.5s;
 }
 
-.slike-tableti-menu.active {
+.slike-tableti-menu.active,
+.slike-televizori-menu.active {
   visibility: visible;
   top: 0;
   opacity: 0.99;
 }
 
-.slike-tableti-menu ul li a:hover {
+.slike-tableti-menu ul li a:hover,
+.slike-televizori-menu ul li a:hover {
   background: linear-gradient(45deg, rgb(227, 118, 38, 1), rgb(195, 14, 96, 1));
   background: -webkit-linear-gradient(left bottom, #e37526 0%, #c30e5f 100%);
   background: -moz-linear-gradient(left bottom, #e37526 0%, #c30e5f 100%);
   color: white;
 }
 
-.slike-tableti-menu ul li a.active {
+.slike-tableti-menu ul li a.active,
+.slike-televizori-menu ul li a.active {
   background: linear-gradient(45deg, rgb(227, 118, 38, 1), rgb(195, 14, 96, 1));
   background: -webkit-linear-gradient(left bottom, #e37526 0%, #c30e5f 100%);
   background: -moz-linear-gradient(left bottom, #e37526 0%, #c30e5f 100%);
@@ -409,6 +437,65 @@ nav ul li a .span.rotate {
 .nav ul li ul li a.active {
   background: white;
   color: rgb(195, 30, 97);
+}
+
+.slike-televizori-menu {
+  position: absolute;
+  display: flex;
+  visibility: hidden;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  opacity: 0;
+  top: 15rem;
+  z-index: 98;
+  left: 100%;
+  height: 100%;
+  min-width: 30rem;
+  width: 100%;
+  padding-top: 5%;
+  background: rgb(40, 45, 59);
+  overflow-y: auto;
+  transition: 0.5s;
+}
+
+.content-televisions-menu-ul-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 3rem;
+}
+
+.content-televisions-title-container {
+  display: flex;
+  justify-content: center;
+  width: 80%;
+  border-bottom: solid white 2px;
+}
+
+.content-televisions-title {
+  color: white;
+  text-align: center;
+  font-size: 1.7rem;
+  font-weight: 400;
+}
+
+.content-televisions-vertical-ul {
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+  /* border-top: 1px solid white;
+  border-bottom: 1px solid white; */
+}
+
+.content-televisions-vertical-ul li {
+  width: 100%;
+  padding: 0;
+}
+
+.content-televisions-vertical-ul li a{
+  width: 100%;
+  padding: 0;
 }
 
 .dev-info {
