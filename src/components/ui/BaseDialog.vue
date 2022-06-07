@@ -2,7 +2,11 @@
   <transition name="modal-transition">
     <div v-if="show" class="modal-backdrop">
       <div class="modal-wrapper">
-        <div v-if="!!dialogTVMapLocations" class="modal-tv-map-locations" @clickout="close">
+        <div
+          v-if="!!dialogTVMapLocations"
+          class="modal-tv-map-locations"
+          @clickout="close"
+        >
           <div class="close-icon-container" @click="close">
             <img class="fa solid fa-xmark close-icon" />
           </div>
@@ -16,13 +20,42 @@
           </div>
           <div class="modal-tv-map-locations-body">
             <div class="floor-tabs">
-              <button class="btn-tab-floor btn-floor-active" @click="openFloor($event, 'Floor A')">{{ $t("floorA") }}</button>
-              <button class="btn-tab-floor" @click="openFloor($event, 'Floor B')">{{ $t("floorB") }}</button>
-              <button class="btn-tab-floor" @click="openFloor($event, 'Floor C')">{{ $t("floorC") }}</button>
-              <button class="btn-tab-floor" @click="openFloor($event, 'Floor D')">{{ $t("floorD") }}</button>
-              <button class="btn-tab-floor" @click="openFloor($event, 'Floor E')">{{ $t("floorE") }}</button>
+              <button
+                class="btn-tab-floor btn-floor-active"
+                @click="openFloor($event, 'Floor A')"
+              >
+                {{ $t("floorA") }}
+              </button>
+              <button
+                class="btn-tab-floor"
+                @click="openFloor($event, 'Floor B')"
+              >
+                {{ $t("floorB") }}
+              </button>
+              <button
+                class="btn-tab-floor"
+                @click="openFloor($event, 'Floor C')"
+              >
+                {{ $t("floorC") }}
+              </button>
+              <button
+                class="btn-tab-floor"
+                @click="openFloor($event, 'Floor D')"
+              >
+                {{ $t("floorD") }}
+              </button>
+              <button
+                class="btn-tab-floor"
+                @click="openFloor($event, 'Floor E')"
+              >
+                {{ $t("floorE") }}
+              </button>
             </div>
-            <div id="Floor A" class="modal-tv-map-locations-card-floor"  style="display: flex;">
+            <div
+              id="Floor A"
+              class="modal-tv-map-locations-card-floor"
+              style="display: flex"
+            >
               <div
                 class="modal-tv-map-locations-card-locations-image-A"
                 :style="{
@@ -30,13 +63,25 @@
                 }"
               >
                 <div class="modal-tv-map-locations-card-locations">
-                  <router-link :to="'/'" class="modal-tv-map-locations-card-locations-tv-TV010A"></router-link>
-                  <router-link :to="'/'" class="modal-tv-map-locations-card-locations-tv-TV0190A1"></router-link>
-                  <router-link :to="'/'" class="modal-tv-map-locations-card-locations-tv-TV0190A2"></router-link>
+                  <router-link
+                    :to="'/Media/233/TV/4584'"
+                    active-class="modal-tv-map-locations-card-locations-tv-active"
+                    class="modal-tv-map-locations-card-locations-tv-TV010A"
+                  ></router-link>
+                  <router-link
+                    :to="'/Media/233/TV/4585'"
+                    active-class="modal-tv-map-locations-card-locations-tv-active"
+                    class="modal-tv-map-locations-card-locations-tv-TV0190A1"
+                  ></router-link>
+                  <router-link
+                    :to="'/Media/233/TV/4587'"
+                    active-class="modal-tv-map-locations-card-locations-tv-active"
+                    class="modal-tv-map-locations-card-locations-tv-TV0190A2"
+                  ></router-link>
                 </div>
               </div>
             </div>
-            <div id="Floor B" class="modal-tv-map-locations-card-floor ">
+            <div id="Floor B" class="modal-tv-map-locations-card-floor">
               <div
                 class="modal-tv-map-locations-card-locations-image-B"
                 :style="{
@@ -44,17 +89,61 @@
                 }"
               >
                 <div class="modal-tv-map-locations-card-locations">
-                  <router-link :to="'/'" class="modal-tv-map-locations-card-locations-tv-TV430B1"></router-link>
-                  <router-link :to="'/'" class="modal-tv-map-locations-card-locations-tv-TV430B2"></router-link>
-                  <router-link :to="'/'" class="modal-tv-map-locations-card-locations-tv-TV430B3"></router-link>
-                  <router-link :to="'/'" class="modal-tv-map-locations-card-locations-tv-TV430B4"></router-link>
-                  <router-link :to="'/'" class="modal-tv-map-locations-card-locations-tv-TV020B1"></router-link>
-                  <router-link :to="'/'" class="modal-tv-map-locations-card-locations-tv-TV020B2"></router-link>
-                  <router-link :to="'/'" class="modal-tv-map-locations-card-locations-tv-TV020B3"></router-link>
-                  <router-link :to="'/'" class="modal-tv-map-locations-card-locations-tv-TV020B4"></router-link>
-                  <router-link :to="'/'" class="modal-tv-map-locations-card-locations-tv-TV020B5"></router-link>
-                  <router-link :to="'/'" class="modal-tv-map-locations-card-locations-tv-TV470B1"></router-link>
-                  <router-link :to="'/'" class="modal-tv-map-locations-card-locations-tv-TV470B2"></router-link>
+                  <router-link
+                    :to="'/Media/233/TV/4588'"
+                    active-class="modal-tv-map-locations-card-locations-tv-active"
+                    class="modal-tv-map-locations-card-locations-tv-TV430B1"
+                  ></router-link>
+                  <router-link
+                    :to="'/Media/233/TV/4589'"
+                    active-class="modal-tv-map-locations-card-locations-tv-active"
+                    class="modal-tv-map-locations-card-locations-tv-TV430B2"
+                  ></router-link>
+                  <router-link
+                    :to="'/Media/233/TV/4590'"
+                    active-class="modal-tv-map-locations-card-locations-tv-active"
+                    class="modal-tv-map-locations-card-locations-tv-TV430B3"
+                  ></router-link>
+                  <router-link
+                    :to="'/Media/233/TV/4591'"
+                    active-class="modal-tv-map-locations-card-locations-tv-active"
+                    class="modal-tv-map-locations-card-locations-tv-TV430B4"
+                  ></router-link>
+                  <router-link
+                    :to="'/Media/233/TV/4592'"
+                    active-class="modal-tv-map-locations-card-locations-tv-active"
+                    class="modal-tv-map-locations-card-locations-tv-TV020B1"
+                  ></router-link>
+                  <router-link
+                    :to="'/Media/233/TV/4593'"
+                    active-class="modal-tv-map-locations-card-locations-tv-active"
+                    class="modal-tv-map-locations-card-locations-tv-TV020B2"
+                  ></router-link>
+                  <router-link
+                    :to="'/Media/233/TV/4594'"
+                    active-class="modal-tv-map-locations-card-locations-tv-active"
+                    class="modal-tv-map-locations-card-locations-tv-TV020B3"
+                  ></router-link>
+                  <router-link
+                    :to="'/Media/233/TV/4595'"
+                    active-class="modal-tv-map-locations-card-locations-tv-active"
+                    class="modal-tv-map-locations-card-locations-tv-TV020B4"
+                  ></router-link>
+                  <router-link
+                    :to="'/Media/233/TV/4596'"
+                    active-class="modal-tv-map-locations-card-locations-tv-active"
+                    class="modal-tv-map-locations-card-locations-tv-TV020B5"
+                  ></router-link>
+                  <router-link
+                    :to="'/Media/233/TV/4597'"
+                    active-class="modal-tv-map-locations-card-locations-tv-active"
+                    class="modal-tv-map-locations-card-locations-tv-TV470B1"
+                  ></router-link>
+                  <router-link
+                    :to="'/Media/233/TV/4598'"
+                    active-class="modal-tv-map-locations-card-locations-tv-active"
+                    class="modal-tv-map-locations-card-locations-tv-TV470B2"
+                  ></router-link>
                 </div>
               </div>
             </div>
@@ -66,8 +155,16 @@
                 }"
               >
                 <div class="modal-tv-map-locations-card-locations">
-                  <router-link :to="'/'" class="modal-tv-map-locations-card-locations-tv-TV180C1"></router-link>
-                  <router-link :to="'/'" class="modal-tv-map-locations-card-locations-tv-TV180C2"></router-link>
+                  <router-link
+                    :to="'/Media/233/TV/4599'"
+                    active-class="modal-tv-map-locations-card-locations-tv-active"
+                    class="modal-tv-map-locations-card-locations-tv-TV180C1"
+                  ></router-link>
+                  <router-link
+                    :to="'/Media/233/TV/4600'"
+                    active-class="modal-tv-map-locations-card-locations-tv-active"
+                    class="modal-tv-map-locations-card-locations-tv-TV180C2"
+                  ></router-link>
                 </div>
               </div>
             </div>
@@ -79,8 +176,16 @@
                 }"
               >
                 <div class="modal-tv-map-locations-card-locations">
-                  <router-link :to="'/'" class="modal-tv-map-locations-card-locations-tv-TV180D1"></router-link>
-                  <router-link :to="'/'" class="modal-tv-map-locations-card-locations-tv-TV180D2"></router-link>
+                  <router-link
+                    :to="'/Media/233/TV/4601'"
+                    active-class="modal-tv-map-locations-card-locations-tv-active"
+                    class="modal-tv-map-locations-card-locations-tv-TV180D1"
+                  ></router-link>
+                  <router-link
+                    :to="'/Media/233/TV/4602'"
+                    active-class="modal-tv-map-locations-card-locations-tv-active"
+                    class="modal-tv-map-locations-card-locations-tv-TV180D2"
+                  ></router-link>
                 </div>
               </div>
             </div>
@@ -92,8 +197,16 @@
                 }"
               >
                 <div class="modal-tv-map-locations-card-locations">
-                  <router-link :to="'/'" class="modal-tv-map-locations-card-locations-tv-TV180E1"></router-link>
-                  <router-link :to="'/'" class="modal-tv-map-locations-card-locations-tv-TV180E2"></router-link>
+                  <router-link
+                    :to="'/Media/233/TV/4603'"
+                    active-class="modal-tv-map-locations-card-locations-tv-active"
+                    class="modal-tv-map-locations-card-locations-tv-TV180E1"
+                  ></router-link>
+                  <router-link
+                    :to="'/Media/233/TV/4604'"
+                    active-class="modal-tv-map-locations-card-locations-tv-active"
+                    class="modal-tv-map-locations-card-locations-tv-TV180E2"
+                  ></router-link>
                 </div>
               </div>
             </div>
@@ -160,18 +273,23 @@ export default {
     openFloor(event, floorName) {
       var i, floors, tablinks;
 
-      floors = document.getElementsByClassName("modal-tv-map-locations-card-floor");
+      floors = document.getElementsByClassName(
+        "modal-tv-map-locations-card-floor"
+      );
       for (i = 0; i < floors.length; i++) {
         floors[i].style.display = "none";
       }
 
       tablinks = document.getElementsByClassName("btn-tab-floor");
       for (i = 0; i < floors.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" btn-floor-active", "");
+        tablinks[i].className = tablinks[i].className.replace(
+          " btn-floor-active",
+          ""
+        );
       }
       document.getElementById(floorName).style.display = "flex";
       event.currentTarget.className += " btn-floor-active";
-    }
+    },
   },
 };
 </script>
@@ -266,13 +384,16 @@ export default {
   display: flex;
   width: 100%;
   justify-content: center;
-  background: linear-gradient(45deg, rgb(221,111,38), rgb(195,30,97)) center bottom no-repeat;
-  background: -webkit-linear-gradient(left bottom, #DD6F26 0%, #C31E61 100%) center bottom no-repeat;
-  background: -moz-linear-gradient(left bottom, #DD6F26 0%, #C31E61 100%) center bottom no-repeat;
+  background: linear-gradient(45deg, rgb(221, 111, 38), rgb(195, 30, 97)) center
+    bottom no-repeat;
+  background: -webkit-linear-gradient(left bottom, #dd6f26 0%, #c31e61 100%)
+    center bottom no-repeat;
+  background: -moz-linear-gradient(left bottom, #dd6f26 0%, #c31e61 100%) center
+    bottom no-repeat;
   background-size: 92% 0.3rem;
 }
 
-[class^='btn-tab-floor'] {
+[class^="btn-tab-floor"] {
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
   border: 0;
@@ -285,7 +406,7 @@ export default {
   margin-bottom: 0.2rem;
 }
 
-[class^='btn-tab-floor']:hover {
+[class^="btn-tab-floor"]:hover {
   cursor: pointer;
   color: white;
   background: linear-gradient(45deg, rgb(227, 118, 38, 1), rgb(195, 14, 96, 1));
@@ -300,14 +421,14 @@ export default {
   background: -moz-linear-gradient(left bottom, #e37526 0%, #c30e5f 100%);
 }
 
-[class^='modal-tv-map-locations-card-floor']{
+[class^="modal-tv-map-locations-card-floor"] {
   display: none;
   flex-direction: column;
   width: 105rem;
   height: 53rem;
 }
 
-[class^='modal-tv-map-locations-card-locations-image'] {
+[class^="modal-tv-map-locations-card-locations-image"] {
   width: 100%;
   height: 51rem;
   background: white;
@@ -322,7 +443,7 @@ export default {
   height: 100%;
 }
 
-[class^='modal-tv-map-locations-card-locations-tv'] {
+[class^="modal-tv-map-locations-card-locations-tv"] {
   position: absolute;
   width: 4rem;
   height: 1rem;
@@ -332,10 +453,21 @@ export default {
   z-index: 100;
 }
 
-[class^='modal-tv-map-locations-card-locations-tv']:hover {
+[class^="modal-tv-map-locations-card-locations-tv"]:hover {
   transform: scale(1.5);
   background: rgb(195, 14, 96, 1);
   z-index: 101;
+}
+
+.modal-tv-map-locations-card-locations-tv-active {
+  position: absolute;
+  transform: scale(1.2);
+  background: rgb(195, 14, 96, 1);
+  z-index: 102;
+}
+
+.modal-tv-map-locations-card-locations-tv-active:hover {
+  background: rgb(195, 14, 96, 1);
 }
 
 .modal-tv-map-locations-card-locations-tv-TV010A {
