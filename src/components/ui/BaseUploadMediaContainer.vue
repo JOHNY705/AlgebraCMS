@@ -48,16 +48,14 @@ export default {
 
 .horizontal-media-upload-container {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   padding: 1.5rem;
   align-items: center;
-  width: 100%;
+  width: 30%;
   height: 100%;
   background: white;
   border-radius: 0.5rem;
-  margin-top: 1rem;
   box-shadow: 0 0 10px rgb(0 0 0 / 0.2);
 }
 

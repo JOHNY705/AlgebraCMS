@@ -1,10 +1,10 @@
 <template>
-  <div v-if="locationType === location.Tablet || tvType === tv.Vertical || tvType === tv.Schedule" class="vertical-media-and-upload-container">
+  <div class="vertical-media-and-upload-container">
     <slot></slot>
   </div>
-  <div v-else-if="tvType === tv.Horizontal" class="horizontal-media-and-upload-container">
+  <!-- <div v-else-if="tvType === tv.Horizontal" class="horizontal-media-and-upload-container">
     <slot></slot>
-  </div>
+  </div> -->
 </template>
 
 <script>

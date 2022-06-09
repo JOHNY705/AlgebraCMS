@@ -8,27 +8,29 @@
         :locationType="locationType"
         :locationTitle="selectedClassroom"
         :cityLocationTitle="selectedCityAndAddress"
+        :mediaType="selectedTVMedia"
+        :tvType="selectedTVType"
       >
       </base-titles-container>
-      <base-media-and-upload-container :locationType="locationType" :tvType="tvType">
+      <base-media-and-upload-container :locationType="locationType" :tvType="selectedTVType">
         <base-media-container
           :locationType="locationType"
-          :mediaType="mediaType"
-          :tvType="tvType"
+          :mediaType="selectedTVMedia"
+          :tvType="selectedTVType"
           :pictures="pictures"
           @showDeleteDialog="showDeleteDialog"
           @showMapTVLocations="showMapTVLocations"
         ></base-media-container>
-        <base-upload-media-container :location="locationType" :tvType="tvType">
+        <base-upload-media-container :location="locationType" :tvType="selectedTVType">
           <div class="image-upload-tooltip-label">
             <div class="tooltip-container">
               <img class="fas fa-exclamation-circle tooltip" />
               <span class="tooltiptext">
-                {{ $t("tooltipAddingNew" + tvType + locationType + "Media") }}
+                {{ $t("tooltipAddingNew" + selectedTVType + locationType + "Media") }}
               </span>
             </div>
             <label class="choose-image-lbl">
-              {{ $t("addingNew" + tvType + locationType + "Media") }}
+              {{ $t("addingNew" + selectedTVType + locationType + "Media") }}
             </label>
           </div>
           <label class="image-upload"
@@ -36,10 +38,10 @@
               class="image-select"
               ref="fileInput"
               type="file"
-              accept="image/jpeg, image/png, image/gif, *"
+              accept="image/jpeg, image/png, image/gif"
               @input="pickFile"
               @change="clearFileSelection"
-            /><img class="fas fa-image" />{{ $t("choose" + tvType + locationType + "Media") }}</label
+            /><img class="fas fa-image" />{{ $t("choose" + selectedTVType + locationType + "Media") }}</label
           >
           <div
             id="image-preview"
@@ -199,13 +201,19 @@ export default {
       return this.locations.find((l) => l.id === this.selectedLocationID);
     },
     selectedClassroom() {
-      return this.selectedLocation.classrooms.find(
-        (c) => c.id === this.selectedClassroomID
+      return this.selectedLocation.televisions.find(
+        (tv) => tv.id === this.selectedClassroomID
       ).name;
     },
     selectedCityAndAddress() {
       return this.selectedLocation.city + ", " + this.selectedLocation.name;
     },
+    selectedTVType() {
+      return this.selectedLocation.televisions.find(tv => tv.id === this.selectedClassroomID).type;
+    },
+    selectedTVMedia() {
+      return this.selectedLocation.televisions.find(tv => tv.id === this.selectedClassroomID).media;
+    }
   },
   watch: {
     isLoading(value) {
@@ -328,7 +336,18 @@ export default {
       event.target.value = null;
     },
     setBackgroundImage(file) {
-      const allowedFileTypes = ["image/jpeg", "image/png", "image/gif"];
+      const allowedFileTypes = ["image/jpeg", "image/png", "image/gif", "video/*"];
+      //const allowedFileTypes = ["video/*"];
+      var requiredWidth, requiredHeight;
+      if (this.selectedTVType === this.tvEnum.Horizontal) {
+        requiredWidth = 1920;
+        requiredHeight = 1080;
+      } 
+      else {
+        requiredWidth = 1080;
+        requiredHeight = 1920;
+      }
+
       if (file) {
         if (allowedFileTypes.includes(file.type)) {
           let reader = new FileReader();
@@ -337,14 +356,14 @@ export default {
             var img = new Image();
             img.src = e.target.result;
             img.onload = () => {
-              if (img.width === 1080 && img.height === 1920) {
+              if (img.width === requiredWidth && img.height === requiredHeight) {
                 this.previewImage = e.target.result;
                 this.previewImageType = e.target.result.type;
               } else {
                 this.error = true;
                 this.dialogTitle = i18n.global.t("error");
                 this.dialogMessage = i18n.global.t(
-                  "errorWrongImageResolutionForVerticalTV"
+                  "errorWrongContentResolutionFor" + this.selectedTVType + "TV"
                 );
               }
             };

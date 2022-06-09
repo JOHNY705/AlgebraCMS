@@ -104,6 +104,19 @@
             </router-link>
           </li>
         </ul>
+        <div class="content-televisions-title-container">
+          <h2 class="content-televisions-title">Televizori za raspored</h2>
+        </div>
+        <ul class="content-televisions-vertical-ul">
+          <li v-for="tv in location.televisions" :key="tv.id">
+            <router-link
+              v-if="tv.type === tvEnum.Schedule"
+              :to="'/Media/' + location.id + '/TV/' + tv.id"
+            >
+              {{ tv.name }}
+            </router-link>
+          </li>
+        </ul>
       </div>
     </div>
     <!-- TEST -->
@@ -484,8 +497,6 @@ nav ul li a .span.rotate {
 .content-televisions-vertical-ul {
   margin-top: 0.5rem;
   margin-bottom: 2rem;
-  /* border-top: 1px solid white;
-  border-bottom: 1px solid white; */
 }
 
 .content-televisions-vertical-ul li {
