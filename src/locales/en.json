@@ -73,5 +73,6 @@
   "Schedule": "Schedule",
   "type": "Type",
   "media": "Media",
-  "resolution": "Resolution"
+  "resolution": "Resolution",
+  "location": "Location"
 }

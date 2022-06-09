@@ -76,5 +76,6 @@
   "Schedule": "Raspored",
   "type": "Tip",
   "media": "Sadržaj",
-  "resolution": "Rezolucija"
+  "resolution": "Rezolucija",
+  "location": "Lokacija"
 }
