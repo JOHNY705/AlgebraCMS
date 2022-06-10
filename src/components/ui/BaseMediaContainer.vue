@@ -33,14 +33,11 @@
     v-if="locationType === locationEnum.TV"
     class="vertical-images-container"
   >
-    <div class="tooltip-tv-map-title-container">
-      <div class="tooltip-tv-map-container" @click="showMapTVLocations">
-        <img class="fas fa-exclamation-circle tooltip-tv-img" />
-        <span class="tooltip-tv-map-text">
-          {{ $t("mapWithTVLocations") }}
-        </span>
-      </div>
-      <h3 class="images-title">
+    <div class="button-tv-map-title-container">
+      <button class="tv-map-btn" @click="showMapTVLocations">
+        <img class="fa-solid fa-map  tv-maps-img" />{{ $t("mapWithTVs") }}
+      </button>
+      <h3 class="images-title-tv">
         {{ $t("current" + locationType + "Content") }}
       </h3>
     </div>
@@ -146,6 +143,16 @@ export default {
   color: rgb(104, 101, 101);
 }
 
+.images-title-tv {
+  width: 100%;
+  font-size: 1.6rem;
+  margin: 0;
+  font-weight: 400;
+  color: rgb(104, 101, 101);
+  align-self: center;
+  margin-left: 1rem;
+}
+
 .images {
   height: 100%;
   display: flex;
@@ -238,22 +245,23 @@ export default {
   box-shadow: 0 0 10px rgb(0 0 0 / 0.2);
 }
 
-.tooltip-tv-map-title-container {
+.button-tv-map-title-container {
   width: 100%;
   display: flex;
   text-align: left;
   justify-content: center;
   align-items: flex-start;
+  margin-bottom: 1rem;
 }
 
-.tooltip-tv-map-container {
+/* .tooltip-tv-map-container {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   margin: 0;
-}
+} */
 
-.tooltip-tv-img {
+/* .tooltip-tv-img {
   height: 1.7rem;
   width: 1.7rem;
   color: rgb(104, 101, 101);
@@ -273,12 +281,39 @@ export default {
   position: absolute;
   transition: 0.2s ease-in-out;
   opacity: 0;
-}
+} */
 
-.tooltip-tv-map-container:hover .tooltip-tv-map-text {
+/* .tooltip-tv-map-container:hover .tooltip-tv-map-text {
   visibility: visible;
   opacity: 1;
   cursor: pointer;
+} */
+
+.tv-map-btn {
+  border: 0;
+  background: linear-gradient(45deg, rgb(227, 118, 38, 1), rgb(195, 14, 96, 1));
+  background: -webkit-linear-gradient(left bottom, #e37526 0%, #c30e5f 100%);
+  background: -moz-linear-gradient(left bottom, #e37526 0%, #c30e5f 100%);
+  color: white;
+  font-family: 'Stolzl-Book';
+  border-radius: 0.5rem;
+  width: 27rem;
+  padding: 0.5rem 1rem;
+  font-size: 1.5rem;
+  transition: 0.3s;
+  display: inline-flex;
+  align-items: center;
+}
+
+.tv-map-btn:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.tv-maps-img {
+  height: 2rem;
+  color: white;
+  margin-right: 1rem;
 }
 
 @media screen and (max-width: 1279px) {

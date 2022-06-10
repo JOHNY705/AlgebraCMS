@@ -74,5 +74,6 @@
   "type": "Type",
   "media": "Media",
   "resolution": "Resolution",
-  "location": "Location"
+  "location": "Location",
+  "mapWithTVs": "Map with TVs"
 }
