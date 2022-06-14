@@ -12,7 +12,10 @@
         :tvType="selectedTVType"
       >
       </base-titles-container>
-      <base-media-and-upload-container :locationType="locationType" :tvType="selectedTVType">
+      <base-media-and-upload-container
+        :locationType="locationType"
+        :tvType="selectedTVType"
+      >
         <base-media-container
           :locationType="locationType"
           :mediaType="selectedTVMedia"
@@ -21,12 +24,20 @@
           @showDeleteDialog="showDeleteDialog"
           @showMapTVLocations="showMapTVLocations"
         ></base-media-container>
-        <base-upload-media-container :location="locationType" :tvType="selectedTVType">
+        <base-upload-media-container
+          v-if="selectedTVType === tvEnum.Vertical || selectedTVType === tvEnum.Schedule"
+          :location="locationType"
+          :tvType="selectedTVType"
+        >
           <div class="image-upload-tooltip-label">
             <div class="tooltip-container">
               <img class="fas fa-exclamation-circle tooltip" />
               <span class="tooltiptext">
-                {{ $t("tooltipAddingNew" + selectedTVType + locationType + "Media") }}
+                {{
+                  $t(
+                    "tooltipAddingNew" + selectedTVType + locationType + "Media"
+                  )
+                }}
               </span>
             </div>
             <label class="choose-image-lbl">
@@ -41,15 +52,18 @@
               accept="image/jpeg, image/png, image/gif"
               @input="pickFile"
               @change="clearFileSelection"
-            /><img class="fas fa-image" />{{ $t("choose" + selectedTVType + locationType + "Media") }}</label
+            /><img class="fas fa-image" />{{
+              $t("choose" + selectedTVType + locationType + "Media")
+            }}</label
           >
           <div
+            v-if="selectedTVMedia === mediaEnum.Image"
             id="image-preview"
             class="image-preview"
             @dragenter.prevent="toggleDropzone"
             @dragleave.prevent="toggleDropzone"
             @dragover.prevent
-            @drop.prevent="dragnDropFile"
+            @drop.prevent="dragnDropImage"
             :class="{ dropzone: isDropzoneActive }"
             :style="{
               'background-image': previewImage
@@ -57,6 +71,27 @@
                 : `url(${require('@/assets/image-icon.png')})`,
             }"
           ></div>
+
+          <div
+            v-else-if="selectedTVMedia === mediaEnum.Video"
+            id="image-preview"
+            class="image-preview"
+            @dragenter.prevent="toggleDropzone"
+            @dragleave.prevent="toggleDropzone"
+            @dragover.prevent
+            @drop.prevent="dragnDropVideo"
+            :class="{ dropzone: isDropzoneActive }"
+            :style="{
+              'background-image': previewVideo
+                ? ``
+                : `url(${require('@/assets/film.png')})`,
+            }"
+          >
+            <video class="video-container" autoplay loop id="video-tag">
+              <source id="video-source" />
+            </video>
+          </div>
+
           <div class="add-media-btn-container">
             <button
               class="add-image-btn"
@@ -67,41 +102,82 @@
               <span
                 v-if="pictures.length === 5"
                 class="add-image-btn-tooltiptext"
-                >{{ $t("tooltipMaxNumberOf" + tvType + locationType + mediaType) }}</span
+                >{{
+                  $t(
+                    "tooltipMaxNumberOf" +
+                      tvType +
+                      locationType +
+                      selectedTVMedia
+                  )
+                }}</span
               >
-              <img class="fa-solid fa-circle-plus" />{{ $t("add" + tvType + locationType + "Media") }}
+              <img class="fa-solid fa-circle-plus" />{{
+                $t("add" + tvType + locationType + "Media")
+              }}
             </button>
           </div>
         </base-upload-media-container>
-        <!-- <base-upload-media-container :location="locationType" :tvType="tvType"  v-if="tvType === tvEnum.Horizontal">
+        <base-upload-media-container
+          v-else-if="selectedTVType === tvEnum.Horizontal"
+          :location="locationType"
+          :tvType="selectedTVType"
+        >
           <div class="image-upload-tooltip-label">
             <div class="tooltip-container">
               <img class="fas fa-exclamation-circle tooltip" />
               <span class="tooltiptext">
-                {{ $t("tooltipAddingNew" + tvType + locationType + mediaType) }}
+                {{
+                  $t(
+                    "tooltipAddingNew" + selectedTVType + locationType + "Media"
+                  )
+                }}
               </span>
             </div>
             <label class="choose-image-lbl">
-              {{ $t("addingNew" + mediaType + "s") }}
+              {{ $t("addingNew" + selectedTVType + locationType + "Media") }}
             </label>
           </div>
-          <label class="horizontal-media-upload"
+          <label class="image-upload"
             ><input
               class="image-select"
               ref="fileInput"
               type="file"
-              accept="image/jpeg, image/png, image/gif, *"
-              @input="pickFile"
+              accept="video/*"
+              @input="pickVideo"
               @change="clearFileSelection"
-            /><img class="fas fa-image horizontal-media-icon" />{{ $t("choose" + mediaType) }}</label
+            /><img class="fas fa-image" />{{
+              $t("choose" + selectedTVType + locationType + "Media")
+            }}</label
           >
+
           <div
-            id="horizontal-image-preview"
-            class="horizontal-image-preview"
+            v-if="selectedTVMedia === mediaEnum.Video"
+            id="horizontal-media-preview"
+            class="horizontal-media-preview"
             @dragenter.prevent="toggleDropzone"
             @dragleave.prevent="toggleDropzone"
             @dragover.prevent
-            @drop.prevent="dragnDropFile"
+            @drop.prevent="dragnDropVideo"
+            :class="{ dropzone: isDropzoneActive }"
+            :style="{
+              'background-image': previewVideo
+                ? ``
+                : `url(${require('@/assets/film.png')})`,
+            }"
+          >
+            <video class="video-container" autoplay loop id="video-tag">
+              <source id="video-source" />
+            </video>
+          </div>
+
+          <div
+            v-else-if="selectedTVMedia === mediaEnum.Image"
+            id="horizontal-media-preview"
+            class="horizontal-media-preview"
+            @dragenter.prevent="toggleDropzone"
+            @dragleave.prevent="toggleDropzone"
+            @dragover.prevent
+            @drop.prevent="dragnDropImage"
             :class="{ dropzone: isDropzoneActive }"
             :style="{
               'background-image': previewImage
@@ -109,7 +185,8 @@
                 : `url(${require('@/assets/image-icon.png')})`,
             }"
           ></div>
-          <div class="add-horizontal-media-btn-container">
+
+          <div class="add-media-btn-container">
             <button
               class="add-image-btn"
               :class="{ active: previewImage && pictures.length < 5 }"
@@ -119,12 +196,21 @@
               <span
                 v-if="pictures.length === 5"
                 class="add-image-btn-tooltiptext"
-                >{{ $t("tooltipMaxNumberOf" + tvType + locationType + mediaType) }}</span
+                >{{
+                  $t(
+                    "tooltipMaxNumberOf" +
+                      tvType +
+                      locationType +
+                      selectedTVMedia
+                  )
+                }}</span
               >
-              <img class="fa-solid fa-circle-plus" />{{ $t("add" + mediaType) }}
+              <img class="fa-solid fa-circle-plus" />{{
+                $t("add" + tvType + locationType + "Media")
+              }}
             </button>
           </div>
-        </base-upload-media-container> -->
+        </base-upload-media-container>
       </base-media-and-upload-container>
       <base-spinner
         v-if="isLoadingAddDelete"
@@ -167,7 +253,7 @@ export default {
     return {
       tvEnum: TV,
       locationType: Location.TV,
-      mediaType: Media.Image,
+      mediaEnum: Media,
       tvType: TV.Vertical,
       error: false,
       dialogTitle: null,
@@ -175,6 +261,7 @@ export default {
       dialogTVMapLocations: false,
       images: null,
       previewImage: null,
+      previewVideo: null,
       previewImageType: null,
       isDeleteDialogShown: false,
       selectedPictureID: null,
@@ -209,11 +296,15 @@ export default {
       return this.selectedLocation.city + ", " + this.selectedLocation.name;
     },
     selectedTVType() {
-      return this.selectedLocation.televisions.find(tv => tv.id === this.selectedClassroomID).type;
+      return this.selectedLocation.televisions.find(
+        (tv) => tv.id === this.selectedClassroomID
+      ).type;
     },
     selectedTVMedia() {
-      return this.selectedLocation.televisions.find(tv => tv.id === this.selectedClassroomID).media;
-    }
+      return this.selectedLocation.televisions.find(
+        (tv) => tv.id === this.selectedClassroomID
+      ).media;
+    },
   },
   watch: {
     isLoading(value) {
@@ -257,7 +348,9 @@ export default {
       });
 
       this.$nextTick(() => {
-        var imageImagePreview = document.getElementById("horizontal-image-preview");
+        var imageImagePreview = document.getElementById(
+          "horizontal-media-preview"
+        );
         if (imageImagePreview !== null) {
           imageImagePreview.style.height =
             imageImagePreview.offsetWidth * 0.563 + "px";
@@ -265,7 +358,9 @@ export default {
       });
 
       window.addEventListener("resize", function () {
-        let imageImagePreview = this.document.getElementById("horizontal-image-preview");
+        let imageImagePreview = this.document.getElementById(
+          "horizontal-media-preview"
+        );
         if (imageImagePreview !== null) {
           imageImagePreview.style.height =
             imageImagePreview.offsetWidth * 0.563 + "px";
@@ -280,13 +375,21 @@ export default {
       this.dialogMessage = null;
     },
     pickFile() {
-      let input = this.$refs.fileInput;
-      let file = input.files[0];
+      let file = this.$refs.fileInput.files[0];
       this.setBackgroundImage(file);
     },
-    dragnDropFile(e) {
+    pickVideo() {
+      let file = this.$refs.fileInput.files[0];
+      this.setBackgroundVideo(file)
+    },
+    dragnDropImage(e) {
       let file = e.dataTransfer.files[0];
       this.setBackgroundImage(file);
+      this.toggleDropzone();
+    },
+    dragnDropVideo(e) {
+      let file = e.dataTransfer.files[0];
+      this.setBackgroundVideo(file);
       this.toggleDropzone();
     },
     showDeleteDialog(pictureID) {
@@ -336,14 +439,16 @@ export default {
       event.target.value = null;
     },
     setBackgroundImage(file) {
-      const allowedFileTypes = ["image/jpeg", "image/png", "image/gif", "video/*"];
-      //const allowedFileTypes = ["video/*"];
+      const allowedFileTypes = [
+        "image/jpeg",
+        "image/png",
+        "image/gif",
+      ];
       var requiredWidth, requiredHeight;
       if (this.selectedTVType === this.tvEnum.Horizontal) {
         requiredWidth = 1920;
         requiredHeight = 1080;
-      } 
-      else {
+      } else {
         requiredWidth = 1080;
         requiredHeight = 1920;
       }
@@ -356,7 +461,10 @@ export default {
             var img = new Image();
             img.src = e.target.result;
             img.onload = () => {
-              if (img.width === requiredWidth && img.height === requiredHeight) {
+              if (
+                img.width === requiredWidth &&
+                img.height === requiredHeight
+              ) {
                 this.previewImage = e.target.result;
                 this.previewImageType = e.target.result.type;
               } else {
@@ -374,6 +482,32 @@ export default {
           this.error = true;
           this.dialogTitle = i18n.global.t("error");
           this.dialogMessage = i18n.global.t("errorWrongFileFormat");
+        }
+      }
+    },
+    setBackgroundVideo(file) {
+
+      let videoSrc = document.querySelector("#video-source");
+      let videoTag = document.querySelector("#video-tag");
+
+      const allowedVideoTypes = ["video/mp4", "video/avi"];
+      
+      if (file) {
+        if (allowedVideoTypes.includes(file.type)) {
+          var reader = new FileReader();
+
+          reader.onload = function (e) {
+            videoSrc.src = e.target.result;
+            videoTag.load();
+          }.bind(this);
+
+          this.previewVideo = true;
+
+          reader.readAsDataURL(file);
+        } else {
+          this.error = true;
+          this.dialogTitle = i18n.global.t("error");
+          this.dialogMessage = i18n.global.t("errorWrongVideoFileFormat");
         }
       }
     },
@@ -597,43 +731,21 @@ input[type="file"] {
   display: flex;
 }
 
-/* --------------------------------------------------------------- */
-
-.horizontal-media-upload {
-  background: rgb(221, 111, 38);
-  width: 20%;
-  min-width: 15rem;
-  height: 2.9rem;
-  font-size: 1.5rem;
-  padding-top: 0.4rem;
-  border-radius: 0.5rem;
-  text-align: center;
-  align-items: center;
-  color: white;
-  transition: 0.3s;
-}
-
-.horizontal-media-upload:hover {
-  cursor: pointer;
-  transform: scale(1.05);
-}
-
 .horizontal-media-icon {
   padding-top: 0.2rem;
 }
 
-.horizontal-image-preview {
+.horizontal-media-preview {
   position: relative;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
   border-radius: 0.5rem;
-  width: 42%;
-  margin-left: 2rem;
-  margin-right: 2rem;
+  width: 95%;
+  margin: 38% 2rem;
 }
 
-.horizontal-image-preview.dropzone {
+.horizontal-media-preview.dropzone {
   border: 3px dashed rgb(203, 204, 214);
   border-radius: 0.5rem;
 }
@@ -641,6 +753,22 @@ input[type="file"] {
 .add-horizontal-media-btn-container {
   width: 20%;
   min-width: 15rem;
+}
+
+.video-container {
+  width: 100%;
+  height: 100%;
+}
+
+.video-preview {
+  position: relative;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  border-radius: 0.5rem;
+  width: 69%;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 @media screen and (min-width: 1800px) {
@@ -674,6 +802,11 @@ input[type="file"] {
   .image-preview {
     width: 20%;
     margin: 0 2rem;
+  }
+
+  .horizontal-media-preview {
+    width: 80%;
+    margin: 1.5rem;
   }
 
   .add-media-btn-container {

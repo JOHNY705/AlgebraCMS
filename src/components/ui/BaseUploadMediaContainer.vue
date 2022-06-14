@@ -1,5 +1,5 @@
 <template>
-  <div v-if="location === locationEnum.Tablet || tvType === tvEnum.Vertical || tvType === tvEnum.Schedule" class="vertical-image-upload-container">
+  <div v-if="location === locationEnum.Tablet || tvType === tvEnum.Vertical || tvType === tvEnum.Schedule" class="vertical-media-upload-container">
     <slot></slot>
   </div>
   <div v-else-if="tvType === tvEnum.Horizontal" class="horizontal-media-upload-container">
@@ -32,7 +32,7 @@ export default {
 </script>
 
 <style scoped>
-.vertical-image-upload-container {
+.vertical-media-upload-container, .horizontal-media-upload-container {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -46,21 +46,8 @@ export default {
   box-shadow: 0 0 10px rgb(0 0 0 / 0.2);
 }
 
-.horizontal-media-upload-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 1.5rem;
-  align-items: center;
-  width: 30%;
-  height: 100%;
-  background: white;
-  border-radius: 0.5rem;
-  box-shadow: 0 0 10px rgb(0 0 0 / 0.2);
-}
-
 @media screen and (max-width: 1279px) {
-  .vertical-image-upload-container {
+  .vertical-media-upload-container, .horizontal-media-upload-container {
     width: 100%;
     margin: 0;
     margin-top: 1rem;
@@ -72,7 +59,7 @@ export default {
 }
 
 @media screen and (max-width: 900px) {
-  .vertical-image-upload-container {
+  .vertical-media-upload-container, .horizontal-media-upload-container {
     width: 100%;
     margin: 0;
     margin-top: 1rem;

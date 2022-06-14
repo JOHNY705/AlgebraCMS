@@ -298,6 +298,7 @@ export default {
   font-family: 'Stolzl-Book';
   border-radius: 0.5rem;
   width: 27rem;
+  min-width: 21rem;
   padding: 0.5rem 1rem;
   font-size: 1.5rem;
   transition: 0.3s;
