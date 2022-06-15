@@ -1,10 +1,7 @@
 <template>
-  <div class="vertical-media-and-upload-container">
+  <div class="media-and-upload-container">
     <slot></slot>
   </div>
-  <!-- <div v-else-if="tvType === tv.Horizontal" class="horizontal-media-and-upload-container">
-    <slot></slot>
-  </div> -->
 </template>
 
 <script>
@@ -32,7 +29,7 @@ export default {
 </script>
 
 <style scoped>
-.vertical-media-and-upload-container {
+.media-and-upload-container {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -40,16 +37,8 @@ export default {
   padding-top: 1rem;
 }
 
-.horizontal-media-and-upload-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  padding-top: 1rem;
-}
-
 @media screen and (max-width: 1279px) {
-  .vertical-media-and-upload-container {
+  .media-and-upload-container {
     flex-direction: column;
   }
 }

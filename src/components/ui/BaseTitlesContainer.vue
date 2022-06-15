@@ -110,17 +110,17 @@ export default {
   height: 100%;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .tv-details-title, .tablet-details-title {
   font-size: 1.6rem;
   font-weight: 400;
   margin: 0;
-  margin-right: 4rem;
   color: rgb(104, 101, 101);
 }
 
-.tv-details-titles-right, .tablet-details-titles-right {
-  margin-left: 4rem;
+.tv-details-titles-left, .tablet-details-titles-left {
+  margin-right: 4rem;
 }
 </style>

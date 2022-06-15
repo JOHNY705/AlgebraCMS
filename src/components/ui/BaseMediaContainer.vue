@@ -37,9 +37,9 @@
       <button class="tv-map-btn" @click="showMapTVLocations">
         <img class="fa-solid fa-map  tv-maps-img" />{{ $t("mapWithTVs") }}
       </button>
-      <h3 class="images-title-tv">
+      <!-- <h3 class="images-title-tv">
         {{ $t("current" + locationType + "Content") }}
-      </h3>
+      </h3> -->
     </div>
     <div v-if="pictures.length > 0" class="images">
       <div class="image-card" v-for="picture in pictures" :key="picture.id">
@@ -249,7 +249,6 @@ export default {
   width: 100%;
   display: flex;
   text-align: left;
-  justify-content: center;
   align-items: flex-start;
   margin-bottom: 1rem;
 }
@@ -297,7 +296,7 @@ export default {
   color: white;
   font-family: 'Stolzl-Book';
   border-radius: 0.5rem;
-  width: 27rem;
+  width: 21rem;
   min-width: 21rem;
   padding: 0.5rem 1rem;
   font-size: 1.5rem;
