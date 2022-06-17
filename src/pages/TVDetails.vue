@@ -490,18 +490,37 @@ export default {
       let videoSrc = document.querySelector("#video-source");
       let videoTag = document.querySelector("#video-tag");
 
+      let requiredWidth, requiredHeight;
+      if (this.selectedTVType === this.tvEnum.Horizontal) {
+        requiredWidth = 1920;
+        requiredHeight = 1080;
+      } else {
+        requiredWidth = 1080;
+        requiredHeight = 1920;
+      }
+
       const allowedVideoTypes = ["video/mp4", "video/avi"];
       
       if (file) {
         if (allowedVideoTypes.includes(file.type)) {
           var reader = new FileReader();
 
+          console.log(file.name);
+
           reader.onload = function (e) {
             videoSrc.src = e.target.result;
             videoTag.load();
+            console.log("Reader on load");
           }.bind(this);
 
-          this.previewVideo = true;
+          videoTag.addEventListener("loadedmetadata", function () {
+            if (this.videoWidth === requiredWidth && this.videoHeight === requiredHeight) {
+              this.previewVideo = true;
+            } else {
+              videoSrc.src = "";
+              videoTag.load();
+            }
+          });
 
           reader.readAsDataURL(file);
         } else {
@@ -758,6 +777,7 @@ input[type="file"] {
 .video-container {
   width: 100%;
   height: 100%;
+  border-radius: 0.5rem;
 }
 
 .video-preview {
