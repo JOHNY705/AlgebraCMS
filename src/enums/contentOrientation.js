@@ -1,5 +1,5 @@
 export const ContentOrientation = {
-    Vertical: 'Vertical',
-    Horizontal: 'Horizontal',
-    Schedule: 'Schedule'
+    Vertical: 'Vertikalno',
+    Horizontal: 'Horizontalno',
+    Schedule: 'Vertikalno Raspored'
 }

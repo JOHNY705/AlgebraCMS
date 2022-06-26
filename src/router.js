@@ -29,7 +29,7 @@ const router = createRouter({
       meta: { componentsEnabled: true, authorize: [] },
     },
     {
-      path: "/Media/:locationID/Classroom/:classroomID",
+      path: "/Media/:locationID/Classroom/:deviceID",
       component: ClassroomDetails,
       meta: { componentsEnabled: true, authorize: [Role.CMSAdmin] },
     },

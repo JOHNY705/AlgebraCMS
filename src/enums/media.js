@@ -1,4 +1,4 @@
 export const Media = {
-    Image: 'Image',
+    Image: 'Picture',
     Video: 'Video'
 }

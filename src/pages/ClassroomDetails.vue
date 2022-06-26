@@ -25,11 +25,11 @@
             <div class="tooltip-container">
               <img class="fas fa-exclamation-circle tooltip" />
               <span class="tooltiptext">
-                {{ $t("tooltipAddingNewTabletImage") }}
+                {{ $t("tooltipAddingNewContent") }} {{ selectedTabletContentResolution }}
               </span>
             </div>
             <label class="choose-image-lbl">
-              {{ $t("addingNewTabletMedia") }}
+              {{ $t("addingNewMedia") }}
             </label>
           </div>
           <label class="image-upload"
@@ -40,7 +40,7 @@
               accept="image/jpeg, image/png, image/gif"
               @input="pickFile"
               @change="clearFileSelection"
-            /><img class="fas fa-image" />{{ $t("chooseImage") }}</label
+            /><img class="fas fa-image" />{{ $t("chooseMedia") }}</label
           >
           <div
             id="image-preview"
@@ -75,7 +75,7 @@
                 >{{ $t("tooltipMaxNumberOfTabletImage") }}
               </span>
 
-              <img class="fa-solid fa-circle-plus" />{{ $t("addImage") }}
+              <img class="fa-solid fa-circle-plus" />{{ $t("addContent") }}
             </button>
           </div>
         </base-upload-media-container>
@@ -139,7 +139,7 @@ export default {
       return this.$store.getters["tabletLocations/tabletLocations"];
     },
     selectedTabletID() {
-      return parseInt(this.$route.params.classroomID);
+      return parseInt(this.$route.params.deviceID);
     },
     selectedLocationID() {
       return parseInt(this.$route.params.locationID);
@@ -148,7 +148,7 @@ export default {
       return this.locations.find((l) => l.id === this.selectedLocationID);
     },
     selectedTablet() {
-      return this.selectedLocation.classrooms.find(
+      return this.selectedLocation.devices.find(
         (c) => c.id === this.selectedTabletID
       ).name;
     },
@@ -156,17 +156,17 @@ export default {
       return this.selectedLocation.city + ", " + this.selectedLocation.name;
     },
     selectedTabletContentOrientation() {
-      return this.selectedLocation.classrooms.find(
+      return this.selectedLocation.devices.find(
         (tablet) => tablet.id === this.selectedTabletID
       ).contentOrientation;
     },
     selectedTabletMedia() {
-      return this.selectedLocation.classrooms.find(
+      return this.selectedLocation.devices.find(
         (tablet) => tablet.id === this.selectedTabletID
       ).contentType;
     },
     selectedTabletContentResolution() {
-      return this.selectedLocation.classrooms.find(
+      return this.selectedLocation.devices.find(
         (tablet) => tablet.id === this.selectedTabletID
       ).contentResolution;
     }

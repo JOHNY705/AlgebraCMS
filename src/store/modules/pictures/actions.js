@@ -1,7 +1,8 @@
 import axios from "axios";
 import i18n from "@/i18n";
 
-const picturesBaseUrl = "https://cmsapi.algebra.hr/api/pictures";
+//const picturesBaseUrl = "https://cmsapi.algebra.hr/api/pictures";
+const picturesBaseUrl = "https://cmsapitest.algebra.hr:50074/api/content";
 const headers = {
   'api-key': process.env.VUE_APP_API_KEY
 }
@@ -10,20 +11,20 @@ export default {
   async loadPictures(context, payload) {
     const pictures = [];
 
-    const loadPicturesURL =
-      payload.classroomID === 0
-        ? picturesBaseUrl + "/shared"
-        : picturesBaseUrl + `/${payload.classroomID}`;
+    // const loadPicturesURL =
+    //   payload.classroomID === 0
+    //     ? picturesBaseUrl + "/shared"
+    //     : picturesBaseUrl + `/${payload.classroomID}`;
+
+    const loadPicturesURL = picturesBaseUrl + `/${payload.classroomID}`
 
     await axios
       .get(loadPicturesURL, {
-        headers: {
-          'api-key': process.env.VUE_APP_API_KEY
-        }
+        headers: headers
       })
       .then((response) => {
         if (response.data.isSuccessful) {
-          pictures.push(...response.data.pictures);
+          pictures.push(...response.data.content);
         }
       })
       .catch(() => {
@@ -34,9 +35,9 @@ export default {
   },
   async addPicture(context, payload) {
     const data = {
-      base64Picture: payload.picture.split(",")[1],
-      classroomId: payload.classroomID,
-      isShared: payload.classroomID === 0 ? true : false,
+      deviceId: payload.classroomID,
+      contentType: 1,
+      base64Content: payload.picture.split(",")[1],
     }
     await axios
       .post(picturesBaseUrl, data, {headers: headers})
@@ -55,9 +56,9 @@ export default {
     await axios
       .delete(picturesBaseUrl, {
         data: {
-          pictureId: payload.pictureID,
-          classroomId: payload.classroomID,
-          isShared: payload.classroomID === 0 ? true : false,
+          deviceId: payload.classroomID,
+          contentId: payload.pictureID,
+          contentType: 1
         },
         headers: headers
       })

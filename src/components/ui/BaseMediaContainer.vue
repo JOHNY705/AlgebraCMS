@@ -11,7 +11,7 @@
         <div>
           <img
             class="tablet-image"
-            :src="`data:image/png;base64,${picture.base64Encoded}`"
+            :src="`data:image/png;base64,${picture.contentBase64}`"
           />
         </div>
         <div>
@@ -46,7 +46,7 @@
         <div>
           <img
             class="tablet-image"
-            :src="`data:image/png;base64,${picture.base64Encoded}`"
+            :src="`data:image/png;base64,${picture.contentBase64}`"
           />
         </div>
         <div>

@@ -6,7 +6,7 @@
     <base-container v-else>
       <base-titles-container
         :locationType="locationType"
-        :locationTitle="selectedClassroom"
+        :locationTitle="selectedTV"
         :cityLocationTitle="selectedCityAndAddress"
         :mediaType="selectedTVMedia"
         :orientationType="selectedTVContentOrientation"
@@ -26,7 +26,10 @@
           @showMapTVLocations="showMapTVLocations"
         ></base-media-container>
         <base-upload-media-container
-          v-if="selectedTVContentOrientation === tvEnum.Vertical || selectedTVContentOrientation === tvEnum.Schedule"
+          v-if="
+            selectedTVContentOrientation === contentOrientationEnum.Vertical ||
+            selectedTVContentOrientation === contentOrientationEnum.Schedule
+          "
           :location="locationType"
           :contentOrientationType="selectedTVContentOrientation"
         >
@@ -34,15 +37,12 @@
             <div class="tooltip-container">
               <img class="fas fa-exclamation-circle tooltip" />
               <span class="tooltiptext">
-                {{
-                  $t(
-                    "tooltipAddingNew" + selectedTVContentOrientation + locationType + "Media"
-                  )
-                }}
+                {{ $t("tooltipAddingNewContent") }}
+                {{ selectedTVContentResolution }}
               </span>
             </div>
             <label class="choose-image-lbl">
-              {{ $t("addingNew" + selectedTVContentOrientation + locationType + "Media") }}
+              {{ $t("addingNewMedia") }}
             </label>
           </div>
           <label class="image-upload"
@@ -53,9 +53,8 @@
               accept="image/jpeg, image/png, image/gif"
               @input="pickFile"
               @change="clearFileSelection"
-            /><img class="fas fa-image" />{{
-              $t("choose" + selectedTVContentOrientation + locationType + "Media")
-            }}</label
+            /><img class="fas fa-image" />{{$t("chooseMedia")}}
+            </label
           >
           <div
             v-if="selectedTVMedia === mediaEnum.Image"
@@ -106,20 +105,18 @@
                 >{{
                   $t(
                     "tooltipMaxNumberOf" +
-                      tvType +
+                      selectedTVContentOrientation +
                       locationType +
                       selectedTVMedia
                   )
                 }}</span
               >
-              <img class="fa-solid fa-circle-plus" />{{
-                $t("add" + tvType + locationType + "Media")
-              }}
+              <img class="fa-solid fa-circle-plus" />{{ $t("addContent") }}
             </button>
           </div>
         </base-upload-media-container>
         <base-upload-media-container
-          v-else-if="selectedTVContentOrientation === tvEnum.Horizontal"
+          v-else-if="selectedTVContentOrientation === contentOrientationEnum.Horizontal"
           :location="locationType"
           :contentOrientationType="selectedTVContentOrientation"
         >
@@ -127,15 +124,12 @@
             <div class="tooltip-container">
               <img class="fas fa-exclamation-circle tooltip" />
               <span class="tooltiptext">
-                {{
-                  $t(
-                    "tooltipAddingNew" + selectedTVContentOrientation + locationType + "Media"
-                  )
-                }}
+                {{ $t("tooltipAddingNewContent") }}
+                {{ selectedTVContentResolution }}
               </span>
             </div>
             <label class="choose-image-lbl">
-              {{ $t("addingNew" + selectedTVContentOrientation + locationType + "Media") }}
+              {{ $t("addingNewMedia") }}
             </label>
           </div>
           <label class="image-upload"
@@ -146,9 +140,8 @@
               accept="video/*"
               @input="pickVideo"
               @change="clearFileSelection"
-            /><img class="fas fa-image" />{{
-              $t("choose" + selectedTVContentOrientation + locationType + "Media")
-            }}</label
+            /><img class="fas fa-image" />{{$t("chooseMedia")}}
+            </label
           >
 
           <div
@@ -200,15 +193,13 @@
                 >{{
                   $t(
                     "tooltipMaxNumberOf" +
-                      tvType +
+                      selectedTVContentOrientation +
                       locationType +
                       selectedTVMedia
                   )
                 }}</span
               >
-              <img class="fa-solid fa-circle-plus" />{{
-                $t("add" + tvType + locationType + "Media")
-              }}
+              <img class="fa-solid fa-circle-plus" />{{ $t("addContent") }}
             </button>
           </div>
         </base-upload-media-container>
@@ -252,7 +243,7 @@ import { ContentOrientation } from "../enums/contentOrientation.js";
 export default {
   data() {
     return {
-      tvEnum: ContentOrientation,
+      contentOrientationEnum: ContentOrientation,
       locationType: Location.TV,
       mediaEnum: Media,
       tvType: ContentOrientation.Vertical,
@@ -289,7 +280,7 @@ export default {
     selectedLocation() {
       return this.locations.find((l) => l.id === this.selectedLocationID);
     },
-    selectedClassroom() {
+    selectedTV() {
       return this.selectedLocation.devices.find(
         (tv) => tv.id === this.selectedDeviceID
       ).name;
@@ -311,7 +302,7 @@ export default {
       return this.selectedLocation.devices.find(
         (tv) => tv.id === this.selectedDeviceID
       ).contentResolution;
-    }
+    },
   },
   watch: {
     isLoading(value) {
@@ -387,7 +378,7 @@ export default {
     },
     pickVideo() {
       let file = this.$refs.fileInput.files[0];
-      this.setBackgroundVideo(file)
+      this.setBackgroundVideo(file);
     },
     dragnDropImage(e) {
       let file = e.dataTransfer.files[0];
@@ -446,13 +437,12 @@ export default {
       event.target.value = null;
     },
     setBackgroundImage(file) {
-      const allowedFileTypes = [
-        "image/jpeg",
-        "image/png",
-        "image/gif",
-      ];
+      const allowedFileTypes = ["image/jpeg", "image/png", "image/gif"];
       var requiredWidth, requiredHeight;
-      if (this.selectedTVContentOrientation === this.tvEnum.Horizontal) {
+      if (
+        this.selectedTVContentOrientation ===
+        this.contentOrientationEnum.Horizontal
+      ) {
         requiredWidth = 1920;
         requiredHeight = 1080;
       } else {
@@ -478,7 +468,9 @@ export default {
                 this.error = true;
                 this.dialogTitle = i18n.global.t("error");
                 this.dialogMessage = i18n.global.t(
-                  "errorWrongContentResolutionFor" + this.selectedTVContentOrientation + "TV"
+                  "errorWrongContentResolutionFor" +
+                    this.selectedTVContentOrientation +
+                    "TV"
                 );
               }
             };
@@ -493,12 +485,14 @@ export default {
       }
     },
     setBackgroundVideo(file) {
-
       let videoSrc = document.querySelector("#video-source");
       let videoTag = document.querySelector("#video-tag");
 
       let requiredWidth, requiredHeight;
-      if (this.selectedTVContentOrientation === this.tvEnum.Horizontal) {
+      if (
+        this.selectedTVContentOrientation ===
+        this.contentOrientationEnum.Horizontal
+      ) {
         requiredWidth = 1920;
         requiredHeight = 1080;
       } else {
@@ -507,7 +501,7 @@ export default {
       }
 
       const allowedVideoTypes = ["video/mp4", "video/avi"];
-      
+
       if (file) {
         if (allowedVideoTypes.includes(file.type)) {
           var reader = new FileReader();
@@ -522,7 +516,10 @@ export default {
           var self = this;
 
           videoTag.addEventListener("loadedmetadata", function () {
-            if (this.videoWidth === requiredWidth && this.videoHeight === requiredHeight) {
+            if (
+              this.videoWidth === requiredWidth &&
+              this.videoHeight === requiredHeight
+            ) {
               this.previewVideo = true;
             } else {
               videoSrc.src = "";
@@ -545,7 +542,7 @@ export default {
     handleVideoError() {
       this.error = true;
       this.dialogTitle = i18n.global.t("error");
-    }
+    },
   },
 };
 </script>

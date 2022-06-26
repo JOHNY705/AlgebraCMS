@@ -19,7 +19,7 @@ export default {
               id: response.data.locations[id].id,
               name: response.data.locations[id].name,
               city: response.data.locations[id].city,
-              classrooms: response.data.locations[id].devices,
+              devices: response.data.locations[id].devices,
               isActive: false,
               type: Location.Tablet
             };

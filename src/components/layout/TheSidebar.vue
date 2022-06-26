@@ -61,16 +61,15 @@
       :class="{ active: location.isActive }"
     >
       <ul class="slike-tableti-menu-ul">
-        <li v-for="classroom in location.classrooms" :key="classroom.id">
+        <li v-for="tablet in location.devices" :key="tablet.id">
           <router-link
-            :to="'/Media/' + location.id + '/Classroom/' + classroom.id"
+            :to="'/Media/' + location.id + '/Classroom/' + tablet.id"
           >
-            {{ classroom.name }}
+            {{ tablet.name }}
           </router-link>
         </li>
       </ul>
     </div>
-    <!-- TEST -->
     <div
       v-for="tvLocation in tvLocations"
       :key="tvLocation.id"
@@ -84,7 +83,7 @@
         <ul class="content-televisions-vertical-ul">
           <li v-for="tv in tvLocation.devices" :key="tv.id">
             <router-link
-              v-if="tv.contentOrientation === 'Vertikalno'"
+              v-if="tv.contentOrientation === contentOrientationEnum.Vertical"
               :to="'/Media/' + tvLocation.id + '/TV/' + tv.id"
             >
               {{ tv.name }}
@@ -97,7 +96,7 @@
         <ul class="content-televisions-vertical-ul">
           <li v-for="tv in tvLocation.devices" :key="tv.id">
             <router-link
-              v-if="tv.contentOrientation === 'Horizontalno'"
+              v-if="tv.contentOrientation === contentOrientationEnum.Horizontal"
               :to="'/Media/' + tvLocation.id + '/TV/' + tv.id"
             >
               {{ tv.name }}
@@ -110,7 +109,7 @@
         <ul class="content-televisions-vertical-ul">
           <li v-for="tv in tvLocation.devices" :key="tv.id">
             <router-link
-              v-if="tv.contentOrientation === 'Vertikalno Raspored' && tv.name === 'Dijeljene slike'"
+              v-if="tv.contentOrientation === contentOrientationEnum.Schedule && tv.name === 'Dijeljene slike'"
               :to="'/Media/' + tvLocation.id + '/TV/' + tv.id"
             >
               {{ tv.name }}
@@ -119,7 +118,6 @@
         </ul>
       </div>
     </div>
-    <!-- TEST -->
     <div class="dev-info">Algebra Dev Team&copy; 2022</div>
     <div class="app-info">{{ $t("version") }} 1.0.0</div>
   </nav>
