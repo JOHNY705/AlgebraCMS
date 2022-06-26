@@ -66,7 +66,7 @@
   "floorD": "Floor 2 (D)",
   "floorE": "Floor 3 (E)",
   "mapWithTVLocations": "Map containing TV locations.",
-  "Image": "Pictures",
+  "Picture": "Pictures",
   "Video": "Video",
   "Vertical": "Vertical",
   "Horizontalni": "Horizontal",
@@ -75,5 +75,6 @@
   "media": "Media",
   "resolution": "Resolution",
   "location": "Location",
-  "mapWithTVs": "Map with TVs"
+  "mapWithTVs": "Map with TVs",
+  "orientation": "Orientation"
 }

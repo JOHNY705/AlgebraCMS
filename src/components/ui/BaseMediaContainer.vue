@@ -65,7 +65,7 @@
     </div>
   </div>
   <div
-    v-else-if="tvType === tvEnum.Horizontal"
+    v-else-if="tvType === contentOrientationEnum.Horizontal"
     class="horizontal-media-container"
   >
     <h3 class="images-title">
@@ -78,14 +78,14 @@
 </template>
 
 <script>
-import { TV } from "./../../enums/tv.js";
+import { ContentOrientation } from "../../enums/contentOrientation.js";
 import { Location } from "./../../enums/location.js";
 
 export default {
   data() {
     return {
       locationEnum: Location,
-      tvEnum: TV,
+      contentOrientationEnum: ContentOrientation,
     };
   },
   props: {

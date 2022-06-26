@@ -7,7 +7,7 @@ export default {
     const tabletLocations = [];
 
     await axios
-      .get("https://cmsapi.algebra.hr/api/locations", {
+      .get("https://cmsapitest.algebra.hr:50074/api/locations", {
         headers: {
           'api-key': process.env.VUE_APP_API_KEY
         }
@@ -19,7 +19,7 @@ export default {
               id: response.data.locations[id].id,
               name: response.data.locations[id].name,
               city: response.data.locations[id].city,
-              classrooms: response.data.locations[id].classrooms,
+              classrooms: response.data.locations[id].devices,
               isActive: false,
               type: Location.Tablet
             };

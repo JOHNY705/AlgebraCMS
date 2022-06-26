@@ -72,20 +72,20 @@
     </div>
     <!-- TEST -->
     <div
-      v-for="location in tvLocations"
-      :key="location.id"
+      v-for="tvLocation in tvLocations"
+      :key="tvLocation.id"
       class="slike-televizori-menu"
-      :class="{ active: location.isActive }"
+      :class="{ active: tvLocation.isActive }"
     >
       <div class="content-televisions-menu-ul-container">
         <div class="content-televisions-title-container">
           <h2 class="content-televisions-title">Vertikalni televizori</h2>
         </div>
         <ul class="content-televisions-vertical-ul">
-          <li v-for="tv in location.televisions" :key="tv.id">
+          <li v-for="tv in tvLocation.devices" :key="tv.id">
             <router-link
-              v-if="tv.type === tvEnum.Vertical"
-              :to="'/Media/' + location.id + '/TV/' + tv.id"
+              v-if="tv.contentOrientation === 'Vertikalno'"
+              :to="'/Media/' + tvLocation.id + '/TV/' + tv.id"
             >
               {{ tv.name }}
             </router-link>
@@ -95,10 +95,10 @@
           <h2 class="content-televisions-title">Horizontalni televizori</h2>
         </div>
         <ul class="content-televisions-vertical-ul">
-          <li v-for="tv in location.televisions" :key="tv.id">
+          <li v-for="tv in tvLocation.devices" :key="tv.id">
             <router-link
-              v-if="tv.type === tvEnum.Horizontal"
-              :to="'/Media/' + location.id + '/TV/' + tv.id"
+              v-if="tv.contentOrientation === 'Horizontalno'"
+              :to="'/Media/' + tvLocation.id + '/TV/' + tv.id"
             >
               {{ tv.name }}
             </router-link>
@@ -108,10 +108,10 @@
           <h2 class="content-televisions-title">Televizori za raspored</h2>
         </div>
         <ul class="content-televisions-vertical-ul">
-          <li v-for="tv in location.televisions" :key="tv.id">
+          <li v-for="tv in tvLocation.devices" :key="tv.id">
             <router-link
-              v-if="tv.type === tvEnum.Schedule"
-              :to="'/Media/' + location.id + '/TV/' + tv.id"
+              v-if="tv.contentOrientation === 'Vertikalno Raspored' && tv.name === 'Dijeljene slike'"
+              :to="'/Media/' + tvLocation.id + '/TV/' + tv.id"
             >
               {{ tv.name }}
             </router-link>
@@ -141,7 +141,7 @@
 <script>
 import i18n from "@/i18n";
 import { Location } from "./../../enums/location.js";
-import { TV } from "./../../enums/tv.js";
+import { ContentOrientation } from "../../enums/contentOrientation.js";
 
 export default {
   data() {
@@ -151,7 +151,7 @@ export default {
       error: false,
       dialogTitle: null,
       dialogMessage: null,
-      tvEnum: TV,
+      contentOrientationEnum: ContentOrientation,
     };
   },
   computed: {
@@ -221,6 +221,15 @@ export default {
         this.dialogMessage = error.message;
       }
     },
+    async loadLocations() {
+      try {
+        await this.$store.dispatch("locations/loadLocations");
+      } catch (error) {
+        this.error = true;
+        this.dialogTitle = i18n.global.t("error");
+        this.dialogMessage = error.message;
+      }
+    },
     handleDialog() {
       this.error = false;
       this.dialogTitle = null;
@@ -229,7 +238,7 @@ export default {
   },
   created() {
     this.loadTabletLocations();
-    //this.loadTVLocations();
+    this.loadTVLocations();
   },
 };
 </script>

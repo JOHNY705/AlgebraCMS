@@ -34,7 +34,7 @@ const router = createRouter({
       meta: { componentsEnabled: true, authorize: [Role.CMSAdmin] },
     },
     {
-      path: "/Media/:locationID/TV/:classroomID",
+      path: "/Media/:locationID/TV/:deviceID",
       component: TVDetails,
       meta: { componentsEnabled: true, authorize: [Role.CMSAdmin] },
     }

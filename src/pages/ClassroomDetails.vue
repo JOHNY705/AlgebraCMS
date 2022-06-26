@@ -6,18 +6,21 @@
     <base-container v-else>
       <base-titles-container
         :locationType="locationType"
-        :locationTitle="selectedClassroom"
+        :locationTitle="selectedTablet"
         :cityLocationTitle="selectedCityAndAddress"
+        :mediaType="selectedTabletMedia"
+        :orientationType="selectedTabletContentOrientation"
+        :resolutionType="selectedTabletContentResolution"
       >
       </base-titles-container>
       <base-media-and-upload-container :locationType="locationType">
         <base-media-container
           :locationType="locationType"
-          :mediaType="mediaType"
+          :mediaType="selectedTabletMedia"
           :pictures="pictures"
           @showDeleteDialog="showDeleteDialog"
         ></base-media-container>
-        <base-upload-media-container :location="locationType">
+        <base-upload-media-container :location="locationType" :contentOrientationType="selectedTabletContentOrientation">
           <div class="image-upload-tooltip-label">
             <div class="tooltip-container">
               <img class="fas fa-exclamation-circle tooltip" />
@@ -61,15 +64,15 @@
               :disabled="!previewImage || pictures.length === 5"
             >
               <span
-                v-if="pictures.length === 5 && selectedClassroomID !== 0"
+                v-if="pictures.length === 5 && selectedTablet === 'Dijeljene slike'"
                 class="add-image-btn-tooltiptext"
-                >{{ $t("tooltipMaxNumberOfTabletImage") }}
+                >{{ $t("tooltipMaxNumberOfSharedTabletImage") }}
               </span>
 
               <span
-                v-else-if="pictures.length === 5 && selectedClassroomID === 0"
+                v-else-if="pictures.length === 5"
                 class="add-image-btn-tooltiptext"
-                >{{ $t("tooltipMaxNumberOfSharedTabletImage") }}
+                >{{ $t("tooltipMaxNumberOfTabletImage") }}
               </span>
 
               <img class="fa-solid fa-circle-plus" />{{ $t("addImage") }}
@@ -109,13 +112,11 @@
 <script>
 import i18n from "@/i18n";
 import { Location } from "./../enums/location.js";
-import { Media } from "./../enums/media.js";
 
 export default {
   data() {
     return {
       locationType: Location.Tablet,
-      mediaType: Media.Image,
       error: false,
       dialogTitle: null,
       dialogMessage: null,
@@ -137,7 +138,7 @@ export default {
     locations() {
       return this.$store.getters["tabletLocations/tabletLocations"];
     },
-    selectedClassroomID() {
+    selectedTabletID() {
       return parseInt(this.$route.params.classroomID);
     },
     selectedLocationID() {
@@ -146,14 +147,29 @@ export default {
     selectedLocation() {
       return this.locations.find((l) => l.id === this.selectedLocationID);
     },
-    selectedClassroom() {
+    selectedTablet() {
       return this.selectedLocation.classrooms.find(
-        (c) => c.id === this.selectedClassroomID
+        (c) => c.id === this.selectedTabletID
       ).name;
     },
     selectedCityAndAddress() {
       return this.selectedLocation.city + ", " + this.selectedLocation.name;
     },
+    selectedTabletContentOrientation() {
+      return this.selectedLocation.classrooms.find(
+        (tablet) => tablet.id === this.selectedTabletID
+      ).contentOrientation;
+    },
+    selectedTabletMedia() {
+      return this.selectedLocation.classrooms.find(
+        (tablet) => tablet.id === this.selectedTabletID
+      ).contentType;
+    },
+    selectedTabletContentResolution() {
+      return this.selectedLocation.classrooms.find(
+        (tablet) => tablet.id === this.selectedTabletID
+      ).contentResolution;
+    }
   },
   watch: {
     isLoading(value) {
@@ -170,7 +186,7 @@ export default {
       this.isLoading = true;
       try {
         await this.$store.dispatch("pictures/loadPictures", {
-          classroomID: this.selectedClassroomID,
+          classroomID: this.selectedTabletID,
         });
       } catch (error) {
         this.error = true;
@@ -224,7 +240,7 @@ export default {
       this.isLoadingAddDelete = true;
       try {
         await this.$store.dispatch("pictures/deletePicture", {
-          classroomID: this.selectedClassroomID,
+          classroomID: this.selectedTabletID,
           pictureID: this.selectedPictureID,
           pictures: this.pictures,
         });
@@ -240,7 +256,7 @@ export default {
         this.isLoadingAddDelete = true;
         try {
           await this.$store.dispatch("pictures/addPicture", {
-            classroomID: this.selectedClassroomID,
+            classroomID: this.selectedTabletID,
             picture: this.previewImage,
           });
         } catch (error) {

@@ -1,21 +1,21 @@
 <template>
-  <div v-if="location === locationEnum.Tablet || tvType === tvEnum.Vertical || tvType === tvEnum.Schedule" class="vertical-media-upload-container">
+  <div v-if="contentOrientationType !== contentOrientationEnum.Horizontal" class="vertical-media-upload-container">
     <slot></slot>
   </div>
-  <div v-else-if="tvType === tvEnum.Horizontal" class="horizontal-media-upload-container">
+  <div v-else-if="contentOrientationType === contentOrientationEnum.Horizontal" class="horizontal-media-upload-container">
     <slot></slot>
   </div>
 </template>
 
 <script>
-import { TV } from "./../../enums/tv.js";
+import { ContentOrientation } from "./../../enums/contentOrientation.js";
 import { Location } from "./../../enums/location.js";
 
 export default {
   data() {
     return {
       locationEnum: Location,
-      tvEnum: TV,
+      contentOrientationEnum: ContentOrientation,
     }
   },
   props: {
@@ -23,7 +23,7 @@ export default {
       type: String,
       required: true
     },
-    tvType: {
+    contentOrientationType: {
       type: String,
       required: false
     }

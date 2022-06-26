@@ -5,14 +5,14 @@
 </template>
 
 <script>
-import { TV } from "./../../enums/tv.js";
+import { ContentOrientation } from "../../enums/contentOrientation.js";
 import { Location } from "./../../enums/location.js";
 
 export default {
   data() {
     return {
       location: Location,
-      tv: TV,
+      tv: ContentOrientation,
     }
   },
   props: {

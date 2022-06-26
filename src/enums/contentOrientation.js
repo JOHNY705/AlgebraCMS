@@ -1,4 +1,4 @@
-export const TV = {
+export const ContentOrientation = {
     Vertical: 'Vertical',
     Horizontal: 'Horizontal',
     Schedule: 'Schedule'

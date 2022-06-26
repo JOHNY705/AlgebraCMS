@@ -9,25 +9,26 @@
         :locationTitle="selectedClassroom"
         :cityLocationTitle="selectedCityAndAddress"
         :mediaType="selectedTVMedia"
-        :tvType="selectedTVType"
+        :orientationType="selectedTVContentOrientation"
+        :resolutionType="selectedTVContentResolution"
       >
       </base-titles-container>
       <base-media-and-upload-container
         :locationType="locationType"
-        :tvType="selectedTVType"
+        :tvType="selectedTVContentOrientation"
       >
         <base-media-container
           :locationType="locationType"
           :mediaType="selectedTVMedia"
-          :tvType="selectedTVType"
+          :tvType="selectedTVContentOrientation"
           :pictures="pictures"
           @showDeleteDialog="showDeleteDialog"
           @showMapTVLocations="showMapTVLocations"
         ></base-media-container>
         <base-upload-media-container
-          v-if="selectedTVType === tvEnum.Vertical || selectedTVType === tvEnum.Schedule"
+          v-if="selectedTVContentOrientation === tvEnum.Vertical || selectedTVContentOrientation === tvEnum.Schedule"
           :location="locationType"
-          :tvType="selectedTVType"
+          :contentOrientationType="selectedTVContentOrientation"
         >
           <div class="image-upload-tooltip-label">
             <div class="tooltip-container">
@@ -35,13 +36,13 @@
               <span class="tooltiptext">
                 {{
                   $t(
-                    "tooltipAddingNew" + selectedTVType + locationType + "Media"
+                    "tooltipAddingNew" + selectedTVContentOrientation + locationType + "Media"
                   )
                 }}
               </span>
             </div>
             <label class="choose-image-lbl">
-              {{ $t("addingNew" + selectedTVType + locationType + "Media") }}
+              {{ $t("addingNew" + selectedTVContentOrientation + locationType + "Media") }}
             </label>
           </div>
           <label class="image-upload"
@@ -53,7 +54,7 @@
               @input="pickFile"
               @change="clearFileSelection"
             /><img class="fas fa-image" />{{
-              $t("choose" + selectedTVType + locationType + "Media")
+              $t("choose" + selectedTVContentOrientation + locationType + "Media")
             }}</label
           >
           <div
@@ -118,9 +119,9 @@
           </div>
         </base-upload-media-container>
         <base-upload-media-container
-          v-else-if="selectedTVType === tvEnum.Horizontal"
+          v-else-if="selectedTVContentOrientation === tvEnum.Horizontal"
           :location="locationType"
-          :tvType="selectedTVType"
+          :contentOrientationType="selectedTVContentOrientation"
         >
           <div class="image-upload-tooltip-label">
             <div class="tooltip-container">
@@ -128,13 +129,13 @@
               <span class="tooltiptext">
                 {{
                   $t(
-                    "tooltipAddingNew" + selectedTVType + locationType + "Media"
+                    "tooltipAddingNew" + selectedTVContentOrientation + locationType + "Media"
                   )
                 }}
               </span>
             </div>
             <label class="choose-image-lbl">
-              {{ $t("addingNew" + selectedTVType + locationType + "Media") }}
+              {{ $t("addingNew" + selectedTVContentOrientation + locationType + "Media") }}
             </label>
           </div>
           <label class="image-upload"
@@ -146,7 +147,7 @@
               @input="pickVideo"
               @change="clearFileSelection"
             /><img class="fas fa-image" />{{
-              $t("choose" + selectedTVType + locationType + "Media")
+              $t("choose" + selectedTVContentOrientation + locationType + "Media")
             }}</label
           >
 
@@ -246,16 +247,17 @@
 import i18n from "@/i18n";
 import { Location } from "./../enums/location.js";
 import { Media } from "./../enums/media.js";
-import { TV } from "./../enums/tv.js";
+import { ContentOrientation } from "../enums/contentOrientation.js";
 
 export default {
   data() {
     return {
-      tvEnum: TV,
+      tvEnum: ContentOrientation,
       locationType: Location.TV,
       mediaEnum: Media,
-      tvType: TV.Vertical,
+      tvType: ContentOrientation.Vertical,
       error: false,
+      errorVideo: false,
       dialogTitle: null,
       dialogMessage: null,
       dialogTVMapLocations: false,
@@ -278,8 +280,8 @@ export default {
     locations() {
       return this.$store.getters["tvLocations/tvLocations"];
     },
-    selectedClassroomID() {
-      return parseInt(this.$route.params.classroomID);
+    selectedDeviceID() {
+      return parseInt(this.$route.params.deviceID);
     },
     selectedLocationID() {
       return parseInt(this.$route.params.locationID);
@@ -288,23 +290,28 @@ export default {
       return this.locations.find((l) => l.id === this.selectedLocationID);
     },
     selectedClassroom() {
-      return this.selectedLocation.televisions.find(
-        (tv) => tv.id === this.selectedClassroomID
+      return this.selectedLocation.devices.find(
+        (tv) => tv.id === this.selectedDeviceID
       ).name;
     },
     selectedCityAndAddress() {
       return this.selectedLocation.city + ", " + this.selectedLocation.name;
     },
-    selectedTVType() {
-      return this.selectedLocation.televisions.find(
-        (tv) => tv.id === this.selectedClassroomID
-      ).type;
+    selectedTVContentOrientation() {
+      return this.selectedLocation.devices.find(
+        (tv) => tv.id === this.selectedDeviceID
+      ).contentOrientation;
     },
     selectedTVMedia() {
-      return this.selectedLocation.televisions.find(
-        (tv) => tv.id === this.selectedClassroomID
-      ).media;
+      return this.selectedLocation.devices.find(
+        (tv) => tv.id === this.selectedDeviceID
+      ).contentType;
     },
+    selectedTVContentResolution() {
+      return this.selectedLocation.devices.find(
+        (tv) => tv.id === this.selectedDeviceID
+      ).contentResolution;
+    }
   },
   watch: {
     isLoading(value) {
@@ -321,7 +328,7 @@ export default {
       this.isLoading = true;
       try {
         await this.$store.dispatch("pictures/loadPictures", {
-          classroomID: this.selectedClassroomID,
+          classroomID: this.selectedDeviceID,
         });
       } catch (error) {
         this.error = true;
@@ -407,7 +414,7 @@ export default {
       this.isLoadingAddDelete = true;
       try {
         await this.$store.dispatch("pictures/deletePicture", {
-          classroomID: this.selectedClassroomID,
+          classroomID: this.selectedDeviceID,
           pictureID: this.selectedPictureID,
           pictures: this.pictures,
         });
@@ -423,7 +430,7 @@ export default {
         this.isLoadingAddDelete = true;
         try {
           await this.$store.dispatch("pictures/addPicture", {
-            classroomID: this.selectedClassroomID,
+            classroomID: this.selectedDeviceID,
             picture: this.previewImage,
           });
         } catch (error) {
@@ -445,7 +452,7 @@ export default {
         "image/gif",
       ];
       var requiredWidth, requiredHeight;
-      if (this.selectedTVType === this.tvEnum.Horizontal) {
+      if (this.selectedTVContentOrientation === this.tvEnum.Horizontal) {
         requiredWidth = 1920;
         requiredHeight = 1080;
       } else {
@@ -471,7 +478,7 @@ export default {
                 this.error = true;
                 this.dialogTitle = i18n.global.t("error");
                 this.dialogMessage = i18n.global.t(
-                  "errorWrongContentResolutionFor" + this.selectedTVType + "TV"
+                  "errorWrongContentResolutionFor" + this.selectedTVContentOrientation + "TV"
                 );
               }
             };
@@ -491,7 +498,7 @@ export default {
       let videoTag = document.querySelector("#video-tag");
 
       let requiredWidth, requiredHeight;
-      if (this.selectedTVType === this.tvEnum.Horizontal) {
+      if (this.selectedTVContentOrientation === this.tvEnum.Horizontal) {
         requiredWidth = 1920;
         requiredHeight = 1080;
       } else {
@@ -510,8 +517,9 @@ export default {
           reader.onload = function (e) {
             videoSrc.src = e.target.result;
             videoTag.load();
-            console.log("Reader on load");
           }.bind(this);
+
+          var self = this;
 
           videoTag.addEventListener("loadedmetadata", function () {
             if (this.videoWidth === requiredWidth && this.videoHeight === requiredHeight) {
@@ -519,6 +527,7 @@ export default {
             } else {
               videoSrc.src = "";
               videoTag.load();
+              self.handleVideoError();
             }
           });
 
@@ -533,6 +542,10 @@ export default {
     toggleDropzone() {
       this.isDropzoneActive = !this.isDropzoneActive;
     },
+    handleVideoError() {
+      this.error = true;
+      this.dialogTitle = i18n.global.t("error");
+    }
   },
 };
 </script>

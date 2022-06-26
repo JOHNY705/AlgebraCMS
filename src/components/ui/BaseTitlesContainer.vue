@@ -1,46 +1,28 @@
 <template>
-  <div v-if="locationType === locationEnum.Tablet" class="tablet-titles-container">
+  <div class="tablet-titles-container">
     <h2 class="location-title">{{ $t(locationType) }} {{ locationTitle }}</h2>
     <div class="tablet-details-titles-container">
       <div class="tablet-details-titles-left">
         <h2 class="city-location-title">{{ $t("location")}}: {{ cityLocationTitle }}</h2>
-        <h2 class="tablet-details-title">{{ $t("type") }}: Tablet</h2>
+        <h2 class="tablet-details-title">{{ $t("orientation") }}: {{ orientationType }}</h2>
       </div>
       <div class="tablet-details-titles-right">
-        <h2 class="tablet-details-title">{{ $t("media") }}: {{ $t("Image") }}</h2>
-        <h2 class="tablet-details-title">{{ $t("resolution") }}: 800x1240</h2>
-      </div>
-    </div>
-  </div>
-  <div v-else-if="locationType === locationEnum.TV" class="tv-titles-container">
-    <h2 class="location-title">{{ $t(locationType) }} {{ locationTitle }}</h2>
-    <div class="tv-details-titles-container">
-      <div class="tv-details-titles-left">
-        <h2 class="city-location-title">{{ $t("location")}}: {{ cityLocationTitle }}</h2>
-        <h2 class="tv-details-title">{{ $t("type") }}: {{ $t(tvType) }}</h2>
-      </div>
-      <div class="tv-details-titles-right">
-        <h2 class="tv-details-title">{{ $t("media") }}: {{ $t(mediaType) }}</h2>
-        <h2 v-if="tvType === tvEnum.Horizontal" class="tv-details-title">
-          {{ $t("resolution") }}: 1920x1080
-        </h2>
-        <h2 v-else class="tv-details-title">
-          {{ $t("resolution") }}: 1080x1920
-        </h2>
+        <h2 class="tablet-details-title">{{ $t("media") }}: {{ $t(mediaType) }}</h2>
+        <h2 class="tablet-details-title">{{ $t("resolution") }}: {{ resolutionType }}</h2>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { TV } from "./../../enums/tv.js";
+import { ContentOrientation } from "./../../enums/contentOrientation.js";
 import { Location } from "./../../enums/location.js";
 
 export default {
   data() {
     return {
       locationEnum: Location,
-      tvEnum: TV,
+      contentOrientationEnum: ContentOrientation,
     };
   },
   props: {
@@ -56,14 +38,18 @@ export default {
       type: String,
       required: true,
     },
-    tvType: {
+    orientationType: {
       type: String,
-      required: false,
+      required: true,
     },
     mediaType: {
       type: String,
-      required: false,
+      required: true,
     },
+    resolutionType: {
+      type: String,
+      required: true
+    }
   },
 };
 </script>
