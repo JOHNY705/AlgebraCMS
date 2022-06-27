@@ -64,17 +64,17 @@
               >
                 <div class="modal-tv-map-locations-card-locations">
                   <router-link
-                    :to="'/Media/233/TV/0'"
+                    :to="'/Media/233/TV/43'"
                     active-class="modal-tv-map-locations-card-locations-tv-active"
                     class="modal-tv-map-locations-card-locations-tv-TV010A"
                   ></router-link>
                   <router-link
-                    :to="'/Media/233/TV/4585'"
+                    :to="'/Media/233/TV/96'"
                     active-class="modal-tv-map-locations-card-locations-tv-active"
                     class="modal-tv-map-locations-card-locations-tv-TV0190A1"
                   ></router-link>
                   <router-link
-                    :to="'/Media/233/TV/4587'"
+                    :to="'/Media/233/TV/97'"
                     active-class="modal-tv-map-locations-card-locations-tv-active"
                     class="modal-tv-map-locations-card-locations-tv-TV0190A2"
                   ></router-link>
@@ -90,57 +90,57 @@
               >
                 <div class="modal-tv-map-locations-card-locations">
                   <router-link
-                    :to="'/Media/233/TV/4588'"
+                    :to="'/Media/233/TV/106'"
                     active-class="modal-tv-map-locations-card-locations-tv-active"
                     class="modal-tv-map-locations-card-locations-tv-TV430B1"
                   ></router-link>
                   <router-link
-                    :to="'/Media/233/TV/4589'"
+                    :to="'/Media/233/TV/107'"
                     active-class="modal-tv-map-locations-card-locations-tv-active"
                     class="modal-tv-map-locations-card-locations-tv-TV430B2"
                   ></router-link>
                   <router-link
-                    :to="'/Media/233/TV/4590'"
+                    :to="'/Media/233/TV/108'"
                     active-class="modal-tv-map-locations-card-locations-tv-active"
                     class="modal-tv-map-locations-card-locations-tv-TV430B3"
                   ></router-link>
                   <router-link
-                    :to="'/Media/233/TV/0'"
+                    :to="'/Media/233/TV/43'"
                     active-class="modal-tv-map-locations-card-locations-tv-active"
                     class="modal-tv-map-locations-card-locations-tv-TV430B4"
                   ></router-link>
                   <router-link
-                    :to="'/Media/233/TV/4592'"
+                    :to="'/Media/233/TV/100'"
                     active-class="modal-tv-map-locations-card-locations-tv-active"
                     class="modal-tv-map-locations-card-locations-tv-TV020B1"
                   ></router-link>
                   <router-link
-                    :to="'/Media/233/TV/4593'"
+                    :to="'/Media/233/TV/101'"
                     active-class="modal-tv-map-locations-card-locations-tv-active"
                     class="modal-tv-map-locations-card-locations-tv-TV020B2"
                   ></router-link>
                   <router-link
-                    :to="'/Media/233/TV/4594'"
+                    :to="'/Media/233/TV/102'"
                     active-class="modal-tv-map-locations-card-locations-tv-active"
                     class="modal-tv-map-locations-card-locations-tv-TV020B3"
                   ></router-link>
                   <router-link
-                    :to="'/Media/233/TV/4595'"
+                    :to="'/Media/233/TV/98'"
                     active-class="modal-tv-map-locations-card-locations-tv-active"
                     class="modal-tv-map-locations-card-locations-tv-TV020B4"
                   ></router-link>
                   <router-link
-                    :to="'/Media/233/TV/4596'"
+                    :to="'/Media/233/TV/99'"
                     active-class="modal-tv-map-locations-card-locations-tv-active"
                     class="modal-tv-map-locations-card-locations-tv-TV020B5"
                   ></router-link>
                   <router-link
-                    :to="'/Media/233/TV/4597'"
+                    :to="'/Media/233/TV/103'"
                     active-class="modal-tv-map-locations-card-locations-tv-active"
                     class="modal-tv-map-locations-card-locations-tv-TV470B1"
                   ></router-link>
                   <router-link
-                    :to="'/Media/233/TV/0'"
+                    :to="'/Media/233/TV/43'"
                     active-class="modal-tv-map-locations-card-locations-tv-active"
                     class="modal-tv-map-locations-card-locations-tv-TV470B2"
                   ></router-link>
@@ -156,12 +156,12 @@
               >
                 <div class="modal-tv-map-locations-card-locations">
                   <router-link
-                    :to="'/Media/233/TV/0'"
+                    :to="'/Media/233/TV/43'"
                     active-class="modal-tv-map-locations-card-locations-tv-active"
                     class="modal-tv-map-locations-card-locations-tv-TV180C1"
                   ></router-link>
                   <router-link
-                    :to="'/Media/233/TV/4600'"
+                    :to="'/Media/233/TV/113'"
                     active-class="modal-tv-map-locations-card-locations-tv-active"
                     class="modal-tv-map-locations-card-locations-tv-TV180C2"
                   ></router-link>
@@ -177,12 +177,12 @@
               >
                 <div class="modal-tv-map-locations-card-locations">
                   <router-link
-                    :to="'/Media/233/TV/0'"
+                    :to="'/Media/233/TV/43'"
                     active-class="modal-tv-map-locations-card-locations-tv-active"
                     class="modal-tv-map-locations-card-locations-tv-TV180D1"
                   ></router-link>
                   <router-link
-                    :to="'/Media/233/TV/4602'"
+                    :to="'/Media/233/TV/115'"
                     active-class="modal-tv-map-locations-card-locations-tv-active"
                     class="modal-tv-map-locations-card-locations-tv-TV180D2"
                   ></router-link>
@@ -198,12 +198,12 @@
               >
                 <div class="modal-tv-map-locations-card-locations">
                   <router-link
-                    :to="'/Media/233/TV/0'"
+                    :to="'/Media/233/TV/43'"
                     active-class="modal-tv-map-locations-card-locations-tv-active"
                     class="modal-tv-map-locations-card-locations-tv-TV180E1"
                   ></router-link>
                   <router-link
-                    :to="'/Media/233/TV/4604'"
+                    :to="'/Media/233/TV/117'"
                     active-class="modal-tv-map-locations-card-locations-tv-active"
                     class="modal-tv-map-locations-card-locations-tv-TV180E2"
                   ></router-link>

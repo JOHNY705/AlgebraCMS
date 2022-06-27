@@ -63,7 +63,7 @@
       <ul class="slike-tableti-menu-ul">
         <li v-for="tablet in location.devices" :key="tablet.id">
           <router-link
-            :to="'/Media/' + location.id + '/Classroom/' + tablet.id"
+            :to="'/Media/' + location.id + '/Tablet/' + tablet.id"
           >
             {{ tablet.name }}
           </router-link>

@@ -4,30 +4,6 @@
   </div>
 </template>
 
-<script>
-import { ContentOrientation } from "../../enums/contentOrientation.js";
-import { Location } from "./../../enums/location.js";
-
-export default {
-  data() {
-    return {
-      location: Location,
-      tv: ContentOrientation,
-    }
-  },
-  props: {
-    locationType: {
-      type: String,
-      required: true
-    },
-    tvType: {
-      type: String,
-      required: false
-    }
-  }
-}
-</script>
-
 <style scoped>
 .media-and-upload-container {
   width: 100%;

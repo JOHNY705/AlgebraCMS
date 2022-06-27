@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import LoginPage from "./pages/LoginPage.vue";
 import AccessDeniedPage from "./pages/AccessDeniedPage.vue";
 import HomePage from "./pages/HomePage.vue";
-import ClassroomDetails from "./pages/ClassroomDetails.vue";
+import TabletDetails from "./pages/TabletDetails.vue";
 import TVDetails from './pages/TVDetails.vue';
 import store from "./store/index.js";
 import { Role } from './enums/role.js';
@@ -29,8 +29,8 @@ const router = createRouter({
       meta: { componentsEnabled: true, authorize: [] },
     },
     {
-      path: "/Media/:locationID/Classroom/:deviceID",
-      component: ClassroomDetails,
+      path: "/Media/:locationID/Tablet/:deviceID",
+      component: TabletDetails,
       meta: { componentsEnabled: true, authorize: [Role.CMSAdmin] },
     },
     {
