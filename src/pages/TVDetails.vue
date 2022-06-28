@@ -45,7 +45,20 @@
               {{ $t("addingNewMedia") }}
             </label>
           </div>
-          <label class="image-upload"
+          <label v-if="selectedTVMedia === mediaEnum.Video" class="image-upload"
+            ><input
+              class="image-select"
+              ref="fileInput"
+              type="file"
+              accept="video/*"
+              @input="pickVideo"
+              @change="clearFileSelection"
+            /><img class="fas fa-image" />{{ $t("chooseMedia") }}
+          </label>
+
+          <label
+            v-else-if="selectedTVMedia === mediaEnum.Image"
+            class="image-upload"
             ><input
               class="image-select"
               ref="fileInput"
@@ -53,9 +66,9 @@
               accept="image/jpeg, image/png, image/gif"
               @input="pickFile"
               @change="clearFileSelection"
-            /><img class="fas fa-image" />{{$t("chooseMedia")}}
-            </label
-          >
+            /><img class="fas fa-image" />{{ $t("chooseMedia") }}
+          </label>
+
           <div
             v-if="selectedTVMedia === mediaEnum.Image"
             id="image-preview"
@@ -92,15 +105,35 @@
             </video>
           </div>
 
-          <div class="add-media-btn-container">
+          <div
+            v-if="selectedTV === 'Dijeljene slike' &&
+              selectedTVContentOrientation === contentOrientationEnum.Vertical"
+            class="add-media-btn-container"
+          >
             <button
               class="add-image-btn"
-              :class="{ active: previewImage && pictures.length < 5 }"
+              :class="{ active: previewImage && pictures.length < 4 }"
               @click="uploadPicture"
-              :disabled="!previewImage || pictures.length === 5"
+              :disabled="!previewImage || pictures.length === 4"
             >
               <span
-                v-if="pictures.length === 5"
+                v-if="pictures.length === 4"
+                class="add-image-btn-tooltiptext"
+                >{{ $t("tooltipMaxNumberOfImagesForSharedVerticalTV") }}</span
+              >
+              <img class="fa-solid fa-circle-plus" />{{ $t("addContent") }}
+            </button>
+          </div>
+
+          <div v-else-if="selectedTVMedia === mediaEnum.Image" class="add-media-btn-container">
+            <button
+              class="add-image-btn"
+              :class="{ active: previewImage && pictures.length < 8 }"
+              @click="uploadPicture"
+              :disabled="!previewImage || pictures.length === 8"
+            >
+              <span
+                v-if="pictures.length === 8"
                 class="add-image-btn-tooltiptext"
                 >{{
                   $t(
@@ -116,7 +149,9 @@
           </div>
         </base-upload-media-container>
         <base-upload-media-container
-          v-else-if="selectedTVContentOrientation === contentOrientationEnum.Horizontal"
+          v-else-if="
+            selectedTVContentOrientation === contentOrientationEnum.Horizontal
+          "
           :location="locationType"
           :contentOrientationType="selectedTVContentOrientation"
         >
@@ -132,7 +167,18 @@
               {{ $t("addingNewMedia") }}
             </label>
           </div>
-          <label class="image-upload"
+          <label v-if="selectedTVMedia === mediaEnum.Image" class="image-upload"
+            ><input
+              class="image-select"
+              ref="fileInput"
+              type="file"
+              accept="image/jpeg, image/png, image/gif"
+              @input="pickFile"
+              @change="clearFileSelection"
+            /><img class="fas fa-image" />{{ $t("chooseMedia") }}
+          </label>
+
+          <label v-if="selectedTVMedia === mediaEnum.Video" class="image-upload"
             ><input
               class="image-select"
               ref="fileInput"
@@ -140,9 +186,8 @@
               accept="video/*"
               @input="pickVideo"
               @change="clearFileSelection"
-            /><img class="fas fa-image" />{{$t("chooseMedia")}}
-            </label
-          >
+            /><img class="fas fa-image" />{{ $t("chooseMedia") }}
+          </label>
 
           <div
             v-if="selectedTVMedia === mediaEnum.Video"
@@ -180,15 +225,15 @@
             }"
           ></div>
 
-          <div class="add-media-btn-container">
+          <div v-if="selectedTVMedia === mediaEnum.Image" class="add-media-btn-container">
             <button
               class="add-image-btn"
-              :class="{ active: previewImage && pictures.length < 5 }"
+              :class="{ active: previewImage && pictures.length < 8 }"
               @click="uploadPicture"
-              :disabled="!previewImage || pictures.length === 5"
+              :disabled="!previewImage || pictures.length === 8"
             >
               <span
-                v-if="pictures.length === 5"
+                v-if="pictures.length === 8"
                 class="add-image-btn-tooltiptext"
                 >{{
                   $t(
@@ -246,7 +291,6 @@ export default {
       contentOrientationEnum: ContentOrientation,
       locationType: Location.TV,
       mediaEnum: Media,
-      tvType: ContentOrientation.Vertical,
       error: false,
       errorVideo: false,
       dialogTitle: null,

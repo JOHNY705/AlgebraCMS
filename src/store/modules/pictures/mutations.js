@@ -3,7 +3,7 @@ export default {
         state.pictures = payload;
     },
     addPicture(state, payload) {
-        state.pictures.push(payload.picture);
+        state.pictures.push(payload.content);
     },
     removePicture(state, payload) {
         const pictures = [];

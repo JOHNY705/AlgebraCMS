@@ -111,7 +111,7 @@
 
 <script>
 import i18n from "@/i18n";
-import { Location } from "./../enums/location.js";
+import { Location } from "../enums/location.js";
 
 export default {
   data() {

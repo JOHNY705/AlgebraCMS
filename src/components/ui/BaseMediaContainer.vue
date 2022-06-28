@@ -30,7 +30,7 @@
     </div>
   </div>
   <div
-    v-if="locationType === locationEnum.TV"
+    v-if="locationType === locationEnum.TV  && tvType !== contentOrientationEnum.Horizontal"
     class="vertical-images-container"
   >
     <div class="button-tv-map-title-container">
@@ -66,12 +66,33 @@
   </div>
   <div
     v-else-if="tvType === contentOrientationEnum.Horizontal"
-    class="horizontal-media-container"
+    class="vertical-images-container"
   >
-    <h3 class="images-title">
-      {{ $t("current" + tvType + locationType + "Content") }}
-    </h3>
-    <div class="title-no-images">
+    <div class="button-tv-map-title-container">
+      <button class="tv-map-btn" @click="showMapTVLocations">
+        <img class="fa-solid fa-map  tv-maps-img" />{{ $t("mapWithTVs") }}
+      </button>
+    </div>
+    <div v-if="pictures.length > 0" class="images">
+      <div class="horizontal-image-card" v-for="picture in pictures" :key="picture.id">
+        <div>
+          <img
+            class="tablet-image"
+            :src="`data:image/png;base64,${picture.contentBase64}`"
+          />
+        </div>
+        <div>
+          <a
+            href="#"
+            class="delete-image-btn"
+            @click.prevent="showDeleteDialog(picture.id)"
+          >
+            <img class="far fa-trash-alt delete-icon" />
+          </a>
+        </div>
+      </div>
+    </div>
+    <div v-else class="title-no-images">
       <h2>{{ $t("noContent" + locationType) }}</h2>
     </div>
   </div>
@@ -164,7 +185,7 @@ export default {
   padding-right: 1rem;
 }
 
-.image-card {
+.image-card, .horizontal-image-card {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -175,6 +196,12 @@ export default {
   border-radius: 0.5rem;
   align-items: center;
   margin-right: 2%;
+}
+
+.horizontal-image-card {
+  width: 30%;
+  min-width: 18rem;
+  margin-top: 0.5rem;
 }
 
 .image-card:last-child {
