@@ -449,8 +449,8 @@ export default {
       this.isLoadingAddDelete = true;
       try {
         await this.$store.dispatch("pictures/deletePicture", {
-          classroomID: this.selectedDeviceID,
-          pictureID: this.selectedPictureID,
+          deviceId: this.selectedDeviceID,
+          contentId: this.selectedPictureID,
           pictures: this.pictures,
         });
       } catch (error) {
@@ -465,7 +465,7 @@ export default {
         this.isLoadingAddDelete = true;
         try {
           await this.$store.dispatch("pictures/addPicture", {
-            classroomID: this.selectedDeviceID,
+            deviceId: this.selectedDeviceID,
             picture: this.previewImage,
           });
         } catch (error) {

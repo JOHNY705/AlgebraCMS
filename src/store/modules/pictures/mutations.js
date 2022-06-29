@@ -8,7 +8,7 @@ export default {
     removePicture(state, payload) {
         const pictures = [];
         for (var i = 0; i < payload.pictures.length; i++) {
-            if (payload.pictures[i].id !== payload.pictureID) {
+            if (payload.pictures[i].id !== payload.contentId) {
                 pictures.push(payload.pictures[i])
             }
         }

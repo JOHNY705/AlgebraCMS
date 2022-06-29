@@ -35,7 +35,7 @@ export default {
   },
   async addPicture(context, payload) {
     const data = {
-      deviceId: payload.classroomID,
+      deviceId: payload.deviceId,
       contentType: 1,
       base64Content: payload.picture.split(",")[1],
     }
@@ -56,8 +56,8 @@ export default {
     await axios
       .delete(picturesBaseUrl, {
         data: {
-          deviceId: payload.classroomID,
-          contentId: payload.pictureID,
+          deviceId: payload.deviceId,
+          contentId: payload.contentId,
           contentType: 1
         },
         headers: headers

@@ -240,8 +240,8 @@ export default {
       this.isLoadingAddDelete = true;
       try {
         await this.$store.dispatch("pictures/deletePicture", {
-          classroomID: this.selectedTabletID,
-          pictureID: this.selectedPictureID,
+          deviceId: this.selectedTabletID,
+          contentId: this.selectedPictureID,
           pictures: this.pictures,
         });
       } catch (error) {
@@ -256,7 +256,7 @@ export default {
         this.isLoadingAddDelete = true;
         try {
           await this.$store.dispatch("pictures/addPicture", {
-            classroomID: this.selectedTabletID,
+            deviceId: this.selectedTabletID,
             picture: this.previewImage,
           });
         } catch (error) {

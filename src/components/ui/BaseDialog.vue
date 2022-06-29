@@ -50,6 +50,12 @@
               >
                 {{ $t("floorE") }}
               </button>
+              <button
+                class="btn-tab-floor"
+                @click="openFloor($event, 'Floor F')"
+              >
+                {{ $t("floorF") }}
+              </button>
             </div>
             <div
               id="Floor A"
@@ -107,7 +113,7 @@
                   <router-link
                     :to="'/Media/233/TV/43'"
                     active-class="modal-tv-map-locations-card-locations-tv-active"
-                    class="modal-tv-map-locations-card-locations-tv-TV430B4"
+                    class="modal-tv-map-locations-card-locations-tv-TV430B4R"
                   ></router-link>
                   <router-link
                     :to="'/Media/233/TV/100'"
@@ -143,6 +149,31 @@
                     :to="'/Media/233/TV/43'"
                     active-class="modal-tv-map-locations-card-locations-tv-active"
                     class="modal-tv-map-locations-card-locations-tv-TV470B2"
+                  ></router-link>
+                  <router-link
+                    :to="'/Media/233/TV/0'"
+                    active-class="modal-tv-map-locations-card-locations-tv-active"
+                    class="modal-tv-map-locations-card-locations-tv-TV-Totem"
+                  ></router-link>
+                  <router-link
+                    :to="'/Media/233/TV/0'"
+                    active-class="modal-tv-map-locations-card-locations-tv-active"
+                    class="modal-tv-map-locations-card-locations-tv-TV430B4"
+                  ></router-link>
+                  <router-link
+                    :to="'/Media/233/TV/0'"
+                    active-class="modal-tv-map-locations-card-locations-tv-active"
+                    class="modal-tv-map-locations-card-locations-tv-TV030B1"
+                  ></router-link>
+                  <router-link
+                    :to="'/Media/233/TV/0'"
+                    active-class="modal-tv-map-locations-card-locations-tv-active"
+                    class="modal-tv-map-locations-card-locations-tv-TV031B1"
+                  ></router-link>
+                  <router-link
+                    :to="'/Media/233/TV/0'"
+                    active-class="modal-tv-map-locations-card-locations-tv-active"
+                    class="modal-tv-map-locations-card-locations-tv-TV033B1"
                   ></router-link>
                 </div>
               </div>
@@ -206,6 +237,37 @@
                     :to="'/Media/233/TV/117'"
                     active-class="modal-tv-map-locations-card-locations-tv-active"
                     class="modal-tv-map-locations-card-locations-tv-TV180E2"
+                  ></router-link>
+                  <router-link
+                    :to="'/Media/233/TV/0'"
+                    active-class="modal-tv-map-locations-card-locations-tv-active"
+                    class="modal-tv-map-locations-card-locations-tv-TV180E3"
+                  ></router-link>
+                  <router-link
+                    :to="'/Media/233/TV/0'"
+                    active-class="modal-tv-map-locations-card-locations-tv-active"
+                    class="modal-tv-map-locations-card-locations-tv-TV180E4"
+                  ></router-link>
+                </div>
+              </div>
+            </div>
+            <div id="Floor F" class="modal-tv-map-locations-card-floor">
+              <div
+                class="modal-tv-map-locations-card-locations-image-E"
+                :style="{
+                  'background-image': `url(${require('@/assets/4.jpg')})`,
+                }"
+              >
+                <div class="modal-tv-map-locations-card-locations">
+                  <router-link
+                    :to="'/Media/233/TV/43'"
+                    active-class="modal-tv-map-locations-card-locations-tv-active"
+                    class="modal-tv-map-locations-card-locations-tv-TV190F1"
+                  ></router-link>
+                  <router-link
+                    :to="'/Media/233/TV/0'"
+                    active-class="modal-tv-map-locations-card-locations-tv-active"
+                    class="modal-tv-map-locations-card-locations-tv-TV190F2"
                   ></router-link>
                 </div>
               </div>
@@ -472,78 +534,111 @@ export default {
 
 .modal-tv-map-locations-card-locations-tv-TV010A {
   right: 23rem;
-  top: 19.3rem;
+  top: 19.8rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV0190A1 {
-  right: 42.5rem;
-  bottom: 20.2rem;
+  right: 42.7rem;
+  bottom: 19.5rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV0190A2 {
-  right: 38.4rem;
-  bottom: 20.2rem;
+  right: 38.5rem;
+  bottom: 19.5rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV430B1 {
-  left: 44.2rem;
-  bottom: 22.6rem;
+  left: 46.8rem;
+  bottom: 22.7rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV430B2 {
-  left: 46rem;
-  bottom: 23.7rem;
+  left: 48.7rem;
+  bottom: 23.8rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV430B3 {
   width: 2.6rem;
-  left: 43.3rem;
-  bottom: 23.7rem;
+  left: 46rem;
+  bottom: 23.8rem;
 }
 
-.modal-tv-map-locations-card-locations-tv-TV430B4 {
-  height: 4rem;
+.modal-tv-map-locations-card-locations-tv-TV430B4R {
+  height: 3.5rem;
   width: 1rem;
-  right: 45.3rem;
-  top: 16.2rem;
+  right: 43.3rem;
+  top: 16.8rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV020B1 {
   width: 2.6rem;
-  right: 25.6rem;
+  right: 24.5rem;
   bottom: 26rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV020B2 {
   width: 2.6rem;
-  right: 28.3rem;
+  right: 27.2rem;
   bottom: 26rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV020B3 {
   width: 2.6rem;
-  right: 31rem;
+  right: 29.9rem;
   bottom: 26rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV020B4 {
-  right: 18rem;
+  right: 17rem;
   bottom: 26.9rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV020B5 {
-  right: 22.7rem;
-  top: 17.5rem;
+  right: 21.8rem;
+  top: 17.8rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV470B1 {
-  right: 34.4rem;
+  right: 32.6rem;
   bottom: 23rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV470B2 {
-  right: 38.5rem;
+  right: 36.8rem;
   bottom: 23rem;
+}
+
+.modal-tv-map-locations-card-locations-tv-TV-Totem {
+  left: 1.4rem;
+  top: 10.5rem;
+}
+
+.modal-tv-map-locations-card-locations-tv-TV430B4 {
+  height: 3.5rem;
+  width: 1rem;
+  left: 39.5rem;
+  top: 18.5rem;
+}
+
+.modal-tv-map-locations-card-locations-tv-TV030B1 {
+  height: 3.5rem;
+  width: 1rem;
+  left: 39.5rem;
+  top: 28.3rem;
+}
+
+.modal-tv-map-locations-card-locations-tv-TV031B1 {
+  height: 3.5rem;
+  width: 1rem;
+  left: 51rem;
+  top: 28.7rem;
+}
+
+.modal-tv-map-locations-card-locations-tv-TV033B1 {
+  height: 3.5rem;
+  width: 1rem;
+  left: 62.9rem;
+  top: 28.6rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV180C1 {
@@ -567,13 +662,33 @@ export default {
 }
 
 .modal-tv-map-locations-card-locations-tv-TV180E1 {
-  right: 39.6rem;
-  bottom: 24.6rem;
+  right: 39rem;
+  bottom: 26.8rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV180E2 {
-  right: 35.4rem;
-  bottom: 24.6rem;
+  right: 34.8rem;
+  bottom: 26.8rem;
+}
+
+.modal-tv-map-locations-card-locations-tv-TV180E3 {
+  left: 27rem;
+  bottom: 23.8rem;
+}
+
+.modal-tv-map-locations-card-locations-tv-TV180E4 {
+  left: 31.2rem;
+  bottom: 23.8rem;
+}
+
+.modal-tv-map-locations-card-locations-tv-TV190F1 {
+  right: 38.6rem;
+  bottom: 27.5rem;
+}
+
+.modal-tv-map-locations-card-locations-tv-TV190F2 {
+  right: 34.5rem;
+  bottom: 27.5rem;
 }
 
 .close-icon-container {
