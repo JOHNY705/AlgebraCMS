@@ -156,24 +156,24 @@
                     class="modal-tv-map-locations-card-locations-tv-TV-Totem"
                   ></router-link>
                   <router-link
-                    :to="'/Media/233/TV/0'"
+                    :to="'/Media/233/TV/122'"
                     active-class="modal-tv-map-locations-card-locations-tv-active"
-                    class="modal-tv-map-locations-card-locations-tv-TV430B4"
+                    class="modal-tv-map-locations-card-locations-tv-ULAZ"
                   ></router-link>
                   <router-link
-                    :to="'/Media/233/TV/0'"
+                    :to="'/Media/233/TV/123'"
                     active-class="modal-tv-map-locations-card-locations-tv-active"
-                    class="modal-tv-map-locations-card-locations-tv-TV030B1"
+                    class="modal-tv-map-locations-card-locations-tv-TV210B"
                   ></router-link>
                   <router-link
-                    :to="'/Media/233/TV/0'"
+                    :to="'/Media/233/TV/124'"
                     active-class="modal-tv-map-locations-card-locations-tv-active"
-                    class="modal-tv-map-locations-card-locations-tv-TV031B1"
+                    class="modal-tv-map-locations-card-locations-tv-TV200B"
                   ></router-link>
                   <router-link
-                    :to="'/Media/233/TV/0'"
+                    :to="'/Media/233/TV/125'"
                     active-class="modal-tv-map-locations-card-locations-tv-active"
-                    class="modal-tv-map-locations-card-locations-tv-TV033B1"
+                    class="modal-tv-map-locations-card-locations-tv-TV180B"
                   ></router-link>
                 </div>
               </div>
@@ -231,22 +231,22 @@
                   <router-link
                     :to="'/Media/233/TV/43'"
                     active-class="modal-tv-map-locations-card-locations-tv-active"
-                    class="modal-tv-map-locations-card-locations-tv-TV180E1"
+                    class="modal-tv-map-locations-card-locations-tv-TV200E1"
                   ></router-link>
                   <router-link
                     :to="'/Media/233/TV/117'"
                     active-class="modal-tv-map-locations-card-locations-tv-active"
-                    class="modal-tv-map-locations-card-locations-tv-TV180E2"
+                    class="modal-tv-map-locations-card-locations-tv-TV200E2"
                   ></router-link>
                   <router-link
                     :to="'/Media/233/TV/0'"
                     active-class="modal-tv-map-locations-card-locations-tv-active"
-                    class="modal-tv-map-locations-card-locations-tv-TV180E3"
+                    class="modal-tv-map-locations-card-locations-tv-TV260E1"
                   ></router-link>
                   <router-link
                     :to="'/Media/233/TV/0'"
                     active-class="modal-tv-map-locations-card-locations-tv-active"
-                    class="modal-tv-map-locations-card-locations-tv-TV180E4"
+                    class="modal-tv-map-locations-card-locations-tv-TV260E2"
                   ></router-link>
                 </div>
               </div>
@@ -262,12 +262,12 @@
                   <router-link
                     :to="'/Media/233/TV/43'"
                     active-class="modal-tv-map-locations-card-locations-tv-active"
-                    class="modal-tv-map-locations-card-locations-tv-TV190F1"
+                    class="modal-tv-map-locations-card-locations-tv-TV0170F1"
                   ></router-link>
                   <router-link
                     :to="'/Media/233/TV/127'"
                     active-class="modal-tv-map-locations-card-locations-tv-active"
-                    class="modal-tv-map-locations-card-locations-tv-TV190F2"
+                    class="modal-tv-map-locations-card-locations-tv-TV0170F2"
                   ></router-link>
                 </div>
               </div>
@@ -548,97 +548,95 @@ export default {
 }
 
 .modal-tv-map-locations-card-locations-tv-TV430B1 {
-  left: 46.8rem;
-  bottom: 22.7rem;
+  left: 47.2rem;
+  bottom: 21rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV430B2 {
-  left: 48.7rem;
-  bottom: 23.8rem;
+  left: 49.1rem;
+  bottom: 22.1rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV430B3 {
   width: 2.6rem;
-  left: 46rem;
-  bottom: 23.8rem;
+  left: 46.3rem;
+  bottom: 22.1rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV430B4R {
   height: 3.5rem;
   width: 1rem;
-  right: 43.3rem;
-  top: 16.8rem;
+  right: 43.1rem;
+  top: 18.6rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV020B1 {
   width: 2.6rem;
-  right: 24.5rem;
-  bottom: 26rem;
+  right: 24.2rem;
+  bottom: 24.2rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV020B2 {
   width: 2.6rem;
-  right: 27.2rem;
-  bottom: 26rem;
+  right: 26.9rem;
+  bottom: 24.2rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV020B3 {
   width: 2.6rem;
-  right: 29.9rem;
-  bottom: 26rem;
+  right: 29.6rem;
+  bottom: 24.2rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV020B4 {
   right: 17rem;
-  bottom: 26.9rem;
+  bottom: 25.1rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV020B5 {
-  right: 21.8rem;
-  top: 17.8rem;
+  right: 21.5rem;
+  top: 19.6rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV470B1 {
-  right: 32.6rem;
-  bottom: 23rem;
+  right: 32.3rem;
+  bottom: 21.5rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV470B2 {
-  right: 36.8rem;
-  bottom: 23rem;
+  right: 36.5rem;
+  bottom: 21.5rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV-Totem {
-  left: 1.4rem;
-  top: 10.5rem;
+  left: 1.8rem;
+  top: 12.3rem;
 }
 
-.modal-tv-map-locations-card-locations-tv-TV430B4 {
-  height: 3.5rem;
-  width: 1rem;
-  left: 39.5rem;
-  top: 18.5rem;
+.modal-tv-map-locations-card-locations-tv-ULAZ {
+  left: 57.8rem;
+  top: 15.2rem;
 }
 
-.modal-tv-map-locations-card-locations-tv-TV030B1 {
+.modal-tv-map-locations-card-locations-tv-TV210B {
   height: 3.5rem;
   width: 1rem;
-  left: 39.5rem;
-  top: 28.3rem;
+  left: 39.8rem;
+  top: 30rem;
 }
 
-.modal-tv-map-locations-card-locations-tv-TV031B1 {
+.modal-tv-map-locations-card-locations-tv-TV200B {
   height: 3.5rem;
   width: 1rem;
-  left: 51rem;
-  top: 28.7rem;
+  left: 51.2rem;
+  top: 30.4rem;
 }
 
-.modal-tv-map-locations-card-locations-tv-TV033B1 {
+.modal-tv-map-locations-card-locations-tv-TV180B {
   height: 3.5rem;
   width: 1rem;
-  left: 62.9rem;
-  top: 28.6rem;
+  left: 63.1rem;
+  top: 30.3rem;
 }
 
 .modal-tv-map-locations-card-locations-tv-TV180C1 {
@@ -661,32 +659,32 @@ export default {
   bottom: 24.6rem;
 }
 
-.modal-tv-map-locations-card-locations-tv-TV180E1 {
-  right: 39rem;
-  bottom: 26.8rem;
+.modal-tv-map-locations-card-locations-tv-TV200E1 {
+  right: 38.9rem;
+  bottom: 27rem;
 }
 
-.modal-tv-map-locations-card-locations-tv-TV180E2 {
-  right: 34.8rem;
-  bottom: 26.8rem;
+.modal-tv-map-locations-card-locations-tv-TV200E2 {
+  right: 34.7rem;
+  bottom: 27rem;
 }
 
-.modal-tv-map-locations-card-locations-tv-TV180E3 {
+.modal-tv-map-locations-card-locations-tv-TV260E1 {
   left: 27rem;
-  bottom: 23.8rem;
+  bottom: 24.1rem;
 }
 
-.modal-tv-map-locations-card-locations-tv-TV180E4 {
+.modal-tv-map-locations-card-locations-tv-TV260E2 {
   left: 31.2rem;
-  bottom: 23.8rem;
+  bottom: 24.1rem;
 }
 
-.modal-tv-map-locations-card-locations-tv-TV190F1 {
+.modal-tv-map-locations-card-locations-tv-TV0170F1 {
   right: 38.6rem;
   bottom: 27.5rem;
 }
 
-.modal-tv-map-locations-card-locations-tv-TV190F2 {
+.modal-tv-map-locations-card-locations-tv-TV0170F2 {
   right: 34.5rem;
   bottom: 27.5rem;
 }
