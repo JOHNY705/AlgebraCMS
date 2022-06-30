@@ -151,7 +151,7 @@
                     class="modal-tv-map-locations-card-locations-tv-TV470B2"
                   ></router-link>
                   <router-link
-                    :to="'/Media/233/TV/0'"
+                    :to="'/Media/233/TV/121'"
                     active-class="modal-tv-map-locations-card-locations-tv-active"
                     class="modal-tv-map-locations-card-locations-tv-TV-Totem"
                   ></router-link>
@@ -265,7 +265,7 @@
                     class="modal-tv-map-locations-card-locations-tv-TV190F1"
                   ></router-link>
                   <router-link
-                    :to="'/Media/233/TV/0'"
+                    :to="'/Media/233/TV/127'"
                     active-class="modal-tv-map-locations-card-locations-tv-active"
                     class="modal-tv-map-locations-card-locations-tv-TV190F2"
                   ></router-link>

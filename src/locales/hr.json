@@ -72,5 +72,6 @@
   "mapWithTVs": "Mapa s televizorima",
   "errorWrongVideoFileFormat": "Odabrana datoteka nije dobrog formata! Molimo Vas odaberite datoteku formata .mp4 ili .avi.",
   "orientation": "Orijentacija",
-  "content_existing_for_device": "Nije moguće dodati sadržaj. Sadržaj već postoji za odabrani udređaj."
+  "content_existing_for_device": "Nije moguće dodati sadržaj. Sadržaj već postoji za odabrani udređaj.",
+  "errorWrongVideoResolution": "Odabrani sadržaj nije ispravne rezolucije! Molimo Vas odaberite sadržaj rezolucije "
 }

@@ -568,7 +568,9 @@ export default {
             } else {
               videoSrc.src = "";
               videoTag.load();
-              self.handleVideoError();
+              self.error = true;
+              self.dialogTitle = i18n.global.t("error");
+              self.dialogMessage = i18n.global.t("errorWrongVideoResolution") + self.selectedTVContentResolution + ".";
             }
           });
 
@@ -582,10 +584,6 @@ export default {
     },
     toggleDropzone() {
       this.isDropzoneActive = !this.isDropzoneActive;
-    },
-    handleVideoError() {
-      this.error = true;
-      this.dialogTitle = i18n.global.t("error");
     },
   },
 };

@@ -71,5 +71,6 @@
   "location": "Location",
   "mapWithTVs": "Map with TVs",
   "orientation": "Orientation",
-  "content_existing_for_device": "Cannot add content. Content already exists for selected device."
+  "content_existing_for_device": "Cannot add content. Content already exists for selected device.",
+  "errorWrongVideoResolution": "Selected media does not have the required resolution! Please select media with a resolution of "
 }
