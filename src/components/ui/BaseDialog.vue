@@ -156,12 +156,12 @@
                     class="modal-tv-map-locations-card-locations-tv-TV-Totem"
                   ></router-link>
                   <router-link
-                    :to="'/Media/233/TV/122'"
+                    :to="'/Media/233/TV/105'"
                     active-class="modal-tv-map-locations-card-locations-tv-active"
                     class="modal-tv-map-locations-card-locations-tv-ULAZ"
                   ></router-link>
                   <router-link
-                    :to="'/Media/233/TV/123'"
+                    :to="'/Media/233/TV/111'"
                     active-class="modal-tv-map-locations-card-locations-tv-active"
                     class="modal-tv-map-locations-card-locations-tv-TV210B"
                   ></router-link>
@@ -239,12 +239,12 @@
                     class="modal-tv-map-locations-card-locations-tv-TV200E2"
                   ></router-link>
                   <router-link
-                    :to="'/Media/233/TV/0'"
+                    :to="'/Media/233/TV/128'"
                     active-class="modal-tv-map-locations-card-locations-tv-active"
                     class="modal-tv-map-locations-card-locations-tv-TV260E1"
                   ></router-link>
                   <router-link
-                    :to="'/Media/233/TV/0'"
+                    :to="'/Media/233/TV/129'"
                     active-class="modal-tv-map-locations-card-locations-tv-active"
                     class="modal-tv-map-locations-card-locations-tv-TV260E2"
                   ></router-link>
