@@ -1,4 +1,11 @@
-# vue-algebra-cms
+# AlgebraCMS
+
+AlgebraCMS is a web application for managing media content for specific devices on different campuses.
+
+## Technologies used
+
+- Application: Vue.js
+
 
 ## Project setup
 ```
